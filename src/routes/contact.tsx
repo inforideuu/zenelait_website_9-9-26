@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Mail, MapPin, Phone, Send, Sparkles, CheckCircle } from "lucide-react";
+import { Check, Mail, MapPin, Phone, Send, Sparkles, CheckCircle, Instagram, Linkedin, Facebook } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -187,6 +187,40 @@ function Contact() {
                   </div>
                 </li>
               </ul>
+
+              {/* Social Media Links under Send us your inquiry details */}
+              <div className="mt-8 pt-6 border-t border-border/60">
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Connect With Us</p>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://www.instagram.com/zenelait_infotech/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-all duration-300 hover:scale-110 hover:border-rose-500 hover:bg-rose-500 hover:text-white shadow-xs"
+                  >
+                    <Instagram className="size-4" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/zenelatit-info-tech/?originalSubdomain=in"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-all duration-300 hover:scale-110 hover:border-sky-500 hover:bg-sky-500 hover:text-white shadow-xs"
+                  >
+                    <Linkedin className="size-4" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/p/Zenelait-Info-Tech-61582899936644/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-all duration-300 hover:scale-110 hover:border-blue-600 hover:bg-blue-600 hover:text-white shadow-xs"
+                  >
+                    <Facebook className="size-4" />
+                  </a>
+                </div>
+              </div>
             </Reveal>
           </div>
 

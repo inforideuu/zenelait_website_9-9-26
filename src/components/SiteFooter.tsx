@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Linkedin, Facebook } from "lucide-react";
 import { itProducts, nonItProducts } from "@/data/products";
 
 export function SiteFooter() {
@@ -60,24 +60,24 @@ export function SiteFooter() {
                       p.short === "SEM"
                         ? "/search-engine-marketing"
                         : p.short === "Paid Ads"
-                        ? "/paid-advertising"
-                        : p.short === "Social" || p.short === "SMM"
-                        ? "/social-media-marketing"
-                        : p.short === "Content"
-                        ? "/content-marketing"
-                        : p.short === "Direct"
-                        ? "/direct-marketing"
-                        : p.short === "Leads"
-                        ? "/lead-generation"
-                        : p.short === "Brand" || p.short === "Branding"
-                        ? "/brand-management"
-                        : p.short === "Analytics" || p.short === "Reporting"
-                        ? "/analytics-reporting"
-                        : p.short === "Video" || p.short === "Video Production"
-                        ? "/video-production"
-                        : p.short === "Design" || p.short === "Graphic Design"
-                        ? "/graphic-design"
-                        : "/marketing"
+                          ? "/paid-advertising"
+                          : p.short === "Social" || p.short === "SMM"
+                            ? "/social-media-marketing"
+                            : p.short === "Content"
+                              ? "/content-marketing"
+                              : p.short === "Direct"
+                                ? "/direct-marketing"
+                                : p.short === "Leads"
+                                  ? "/lead-generation"
+                                  : p.short === "Brand" || p.short === "Branding"
+                                    ? "/brand-management"
+                                    : p.short === "Analytics" || p.short === "Reporting"
+                                      ? "/analytics-reporting"
+                                      : p.short === "Video" || p.short === "Video Production"
+                                        ? "/video-production"
+                                        : p.short === "Design" || p.short === "Graphic Design"
+                                          ? "/graphic-design"
+                                          : "/marketing"
                     }
                     className="story-link text-sm transition-colors hover:text-white"
                   >
@@ -116,8 +116,40 @@ export function SiteFooter() {
 
       {/* Horizontal Line & Bottom Copyright Section with Changed Background Color */}
       <div className="relative z-10 border-t border-white/15 bg-black/40 py-6 backdrop-blur-md">
-        <div className="container-x flex flex-col items-center justify-between gap-3 text-sm text-ink-foreground/60 sm:flex-row">
+        <div className="container-x flex flex-col items-center justify-between gap-4 text-sm text-ink-foreground/60 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} Zenelait Infotech. All rights reserved.</p>
+
+          {/* Social Media Icons */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/zenelait_infotech/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink-foreground/80 transition-all duration-300 hover:scale-110 hover:border-rose-500 hover:bg-rose-500 hover:text-white"
+            >
+              <Instagram className="size-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/zenelatit-info-tech/?originalSubdomain=in"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink-foreground/80 transition-all duration-300 hover:scale-110 hover:border-sky-500 hover:bg-sky-500 hover:text-white"
+            >
+              <Linkedin className="size-4" />
+            </a>
+            <a
+              href="https://www.facebook.com/p/Zenelait-Info-Tech-61582899936644/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-ink-foreground/80 transition-all duration-300 hover:scale-110 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+            >
+              <Facebook className="size-4" />
+            </a>
+          </div>
+
           <p className="text-xs text-ink-foreground/50">Built with care in India.</p>
         </div>
       </div>
