@@ -31,6 +31,7 @@ import {
   Activity,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { getTestimonials } from "@/lib/api";
 import { TestimonialSection } from "@/components/TestimonialSection";
 import { itProducts, Product } from "@/data/products";
 
@@ -380,6 +381,25 @@ function ItProducts() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [apiTestimonials, setApiTestimonials] = useState<{ quote: string; name: string; role: string; company?: string; industry?: string }[]>([]);
+
+  useEffect(() => {
+    getTestimonials('it_products')
+      .then((data) => {
+        if (data && data.length > 0) {
+          setApiTestimonials(
+            data.map((t) => ({
+              quote: t.content,
+              name: t.author,
+              role: t.role,
+              company: t.company || '',
+              industry: t.industry || 'IT Products & Engineering',
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Sync state with URL search param `?product=crm` or `?id=crm`
   useEffect(() => {
@@ -818,23 +838,33 @@ function ItProducts() {
               <div className="lg:col-span-7">
                 <Reveal delay={150} direction="zoom">
                   {(() => {
-                    const testimonialsList = Object.values(productDetailsData).map((p) => p.testimonial);
-                    const currentTestimonial = testimonialsList[testimonialIndex % testimonialsList.length] || activeProduct.testimonial;
+                    const fallbackList = Object.values(productDetailsData).map((p) => ({
+                      quote: p.testimonial.quote,
+                      name: p.testimonial.name,
+                      role: p.testimonial.role,
+                      company: p.testimonial.company,
+                      industry: "IT Products & Engineering",
+                    }));
+
+                    const displayList = apiTestimonials.length > 0 ? apiTestimonials : fallbackList;
+                    const currentTestimonial = displayList[testimonialIndex % displayList.length];
 
                     const handlePrev = () => {
-                      setTestimonialIndex((prev) => (prev === 0 ? testimonialsList.length - 1 : prev - 1));
+                      setTestimonialIndex((prev) => (prev === 0 ? displayList.length - 1 : prev - 1));
                     };
 
                     const handleNext = () => {
-                      setTestimonialIndex((prev) => (prev + 1) % testimonialsList.length);
+                      setTestimonialIndex((prev) => (prev + 1) % displayList.length);
                     };
+
+                    if (!currentTestimonial) return null;
 
                     return (
                       <div className="relative rounded-3xl bg-white dark:bg-card p-8 border border-slate-100 dark:border-border/60 shadow-xl space-y-6 transition-all duration-300">
                         <div className="flex items-center justify-between">
                           <Quote className="size-8 text-[#ff5252]/40" />
                           <span className="text-[11px] font-extrabold text-[#ff5252] bg-rose-50 dark:bg-rose-950/60 px-3 py-1 rounded-full border border-rose-100 dark:border-rose-900/40">
-                            {testimonialIndex + 1} / {testimonialsList.length}
+                            {testimonialIndex + 1} / {displayList.length}
                           </span>
                         </div>
 
@@ -843,20 +873,18 @@ function ItProducts() {
                         </p>
 
                         <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-border/60">
-                          <div className="flex items-center gap-3">
-                            <img
-                              src={currentTestimonial.avatar}
-                              alt={currentTestimonial.name}
-                              className="size-11 rounded-full object-cover border-2 border-[#ff5252]/30 shadow-xs"
-                            />
-                            <div>
-                              <p className="font-extrabold text-slate-900 dark:text-white text-sm">
-                                {currentTestimonial.name}
+                          <div>
+                            <p className="font-extrabold text-slate-900 dark:text-white text-sm">
+                              {currentTestimonial.name}
+                            </p>
+                            <p className="text-xs font-bold text-[#ff5252]">
+                              {currentTestimonial.role}
+                            </p>
+                            {currentTestimonial.company && (
+                              <p className="text-[11px] font-semibold text-slate-400 mt-0.5">
+                                {currentTestimonial.company}
                               </p>
-                              <p className="text-xs text-slate-500 dark:text-slate-400">
-                                {currentTestimonial.role}
-                              </p>
-                            </div>
+                            )}
                           </div>
 
                           {/* Interactive Carousel Control Buttons */}

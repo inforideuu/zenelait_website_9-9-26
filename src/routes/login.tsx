@@ -23,15 +23,22 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg("");
     setSubmitting(true);
+
     setTimeout(() => {
       setSubmitting(false);
-      navigate({ to: "/admin" });
+      // Admin Credential Check
+      if (email.trim().toLowerCase() === "admin@zenelait.com" && password === "admin123") {
+        navigate({ to: "/admin" });
+      } else {
+        setErrorMsg("Invalid admin credentials. Please check your email and password.");
+      }
     }, 600);
   };
 
@@ -80,8 +87,15 @@ function LoginPage() {
               Sign in to access your admin dashboard and manage your platform.
             </p>
 
+            {/* Error Message Alert */}
+            {errorMsg && (
+              <div className="mt-4 p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-bold animate-shake">
+                ⚠️ {errorMsg}
+              </div>
+            )}
+
             {/* Login Form */}
-            <form onSubmit={handleLogin} className="mt-7 space-y-4">
+            <form onSubmit={handleLogin} className="mt-5 space-y-4">
               
               {/* Email Address Field */}
               <div>
@@ -120,29 +134,7 @@ function LoginPage() {
                 </div>
               </div>
 
-              {/* Remember Me & Forgot Password Row */}
-              <div className="flex items-center justify-between text-xs font-semibold pt-1">
-                <label className="flex items-center gap-2 cursor-pointer select-none text-slate-700 dark:text-slate-300">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className="size-4 rounded-md border-slate-300 text-[#ff2a38] focus:ring-[#ff2a38] accent-[#ff2a38]"
-                  />
-                  <span>Remember me</span>
-                </label>
-
-                <a
-                  href="#forgot"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("Password reset instructions sent to your email.");
-                  }}
-                  className="text-[#ff2a38] hover:underline font-bold"
-                >
-                  Forgot password?
-                </a>
-              </div>
+              
 
               {/* Main Red Login Submit Button */}
               <button

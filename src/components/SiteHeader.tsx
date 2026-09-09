@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sparkles, UserCog } from "lucide-react";
 import logo from "@/assets/zenelait-logo.png.asset.json";
 import { DemoModal } from "@/components/DemoModal";
 
@@ -11,7 +11,6 @@ const nav = [
   { to: "/marketing", label: "Marketing Services" },
   { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
-  { to: "/login", label: "Admin Login" },
 ] as const;
 
 export function SiteHeader() {
@@ -93,6 +92,14 @@ export function SiteHeader() {
               <span>Get a Demo</span>
               <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
+
+            <Link
+              to="/login"
+              title="Admin Control Center"
+              className="flex size-10 items-center justify-center rounded-lg border border-border bg-card/80 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary/10 hover:text-primary active:scale-95 shadow-xs"
+            >
+              <UserCog className="size-5" />
+            </Link>
           </nav>
 
           {/* Mobile Hamburger */}
@@ -130,17 +137,28 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  setIsDemoModalOpen(true);
-                }}
-                className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-primary py-3 text-center font-semibold text-primary-foreground shadow-md transition-transform active:scale-95 cursor-pointer w-full"
-              >
-                <Sparkles className="size-4" />
-                <span>Get a Demo</span>
-              </button>
+              <div className="flex items-center gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    setIsDemoModalOpen(true);
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-primary py-3 text-center font-semibold text-primary-foreground shadow-md transition-transform active:scale-95 cursor-pointer"
+                >
+                  <Sparkles className="size-4" />
+                  <span>Get a Demo</span>
+                </button>
+
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  title="Admin Control Center"
+                  className="flex size-12 items-center justify-center rounded-lg border border-border bg-card text-foreground hover:bg-primary/10 hover:text-primary transition-all active:scale-95"
+                >
+                  <UserCog className="size-5" />
+                </Link>
+              </div>
             </div>
           </nav>
         )}

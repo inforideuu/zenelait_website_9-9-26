@@ -116,19 +116,38 @@ function Home() {
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [statsData, setStatsData] = useState(defaultStats);
   const [homeIntro, setHomeIntro] = useState<PageSectionContent | null>(null);
+  const [showIntroSection, setShowIntroSection] = useState(true);
+  const [showStatsSection, setShowStatsSection] = useState(true);
 
   useEffect(() => {
     getPageSections().then(sections => {
       const intro = sections.find(s => s.section_key === 'home_intro');
-      if (intro) setHomeIntro(intro);
+      if (intro) {
+        if (intro.extra_json?.is_active === false) {
+          setShowIntroSection(false);
+        } else {
+          setShowIntroSection(true);
+          setHomeIntro(intro);
+        }
+      }
 
       const statsSec = sections.find(s => s.section_key === 'home_stats');
-      if (statsSec && Array.isArray(statsSec.extra_json)) {
-        const mapped = statsSec.extra_json.map((st: any) => ({
-          value: st.value || "100%",
-          label: st.label || "Metric"
-        }));
-        setStatsData(mapped);
+      if (statsSec) {
+        if (statsSec.extra_json?.is_active === false) {
+          setShowStatsSection(false);
+        } else {
+          setShowStatsSection(true);
+          const list = Array.isArray(statsSec.extra_json?.stats) 
+            ? statsSec.extra_json.stats 
+            : (Array.isArray(statsSec.extra_json) ? statsSec.extra_json : null);
+          if (list && list.length > 0) {
+            const mapped = list.map((st: any) => ({
+              value: st.value || "100%",
+              label: st.label || "Metric"
+            }));
+            setStatsData(mapped);
+          }
+        }
       }
     }).catch(() => {});
   }, []);
@@ -245,89 +264,108 @@ function Home() {
       </section> 
       
       {/* Creative Company Introduction Section - Matches User Reference Image */}
-      <section className="relative overflow-hidden bg-[#fafafa] dark:bg-background py-20 lg:py-28 border-t border-slate-100 dark:border-border/40">
-        {/* Background SVG Decorative Elements */}
-        {/* Top-Left Radial Glow & Curved Arcs */}
-        <div className="pointer-events-none absolute -left-20 -top-20 size-[420px] opacity-40 dark:opacity-15">
-          <svg className="w-full h-full" viewBox="0 0 400 400" fill="none">
-            <circle cx="100" cy="100" r="280" stroke="#ff758c" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-            <circle cx="100" cy="100" r="200" stroke="#ff758c" strokeWidth="1" opacity="0.5" />
-            <circle cx="100" cy="100" r="120" stroke="#ff758c" strokeWidth="1.2" />
-            <circle cx="100" cy="100" r="50" fill="#ff5252" fillOpacity="0.15" />
-          </svg>
-        </div>
+      {showIntroSection && (
+        <section className="relative overflow-hidden bg-[#fafafa] dark:bg-background py-20 lg:py-28 border-t border-slate-100 dark:border-border/40">
+          {/* Background SVG Decorative Elements */}
+          {/* Top-Left Radial Glow & Curved Arcs */}
+          <div className="pointer-events-none absolute -left-20 -top-20 size-[420px] opacity-40 dark:opacity-15">
+            <svg className="w-full h-full" viewBox="0 0 400 400" fill="none">
+              <circle cx="100" cy="100" r="280" stroke="#ff758c" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
+              <circle cx="100" cy="100" r="200" stroke="#ff758c" strokeWidth="1" opacity="0.5" />
+              <circle cx="100" cy="100" r="120" stroke="#ff758c" strokeWidth="1.2" />
+              <circle cx="100" cy="100" r="50" fill="#ff5252" fillOpacity="0.15" />
+            </svg>
+          </div>
 
-        {/* Top-Right Matrix Dots Pattern */}
-        <div className="pointer-events-none absolute right-6 top-8 opacity-30 dark:opacity-15">
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-            {Array.from({ length: 5 }).map((_, r) =>
-              Array.from({ length: 5 }).map((_, c) => (
-                <circle key={`${r}-${c}`} cx={15 + c * 22} cy={15 + r * 22} r="2" fill="#cbd5e1" />
-              ))
-            )}
-          </svg>
-        </div>
+          {/* Top-Right Matrix Dots Pattern */}
+          <div className="pointer-events-none absolute right-6 top-8 opacity-30 dark:opacity-15">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              {Array.from({ length: 5 }).map((_, r) =>
+                Array.from({ length: 5 }).map((_, c) => (
+                  <circle key={`${r}-${c}`} cx={15 + c * 22} cy={15 + r * 22} r="2" fill="#cbd5e1" />
+                ))
+              )}
+            </svg>
+          </div>
 
-        <div className="container-x relative z-10 grid gap-12 lg:grid-cols-12 items-center max-w-7xl mx-auto">
-          {/* Left Column: Story & Vision */}
-          <div className="lg:col-span-6">
-            {/* WHO WE ARE Pill Tag */}
-            <Reveal direction="down">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="h-[1.5px] w-4 bg-[#ff5252]" />
-                <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/40 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[#ff5252]">
-                  <Pin className="size-3.5 text-[#ff5252]" />
-                  <span>WHO WE ARE</span>
+          <div className="container-x relative z-10 grid gap-12 lg:grid-cols-12 items-center max-w-7xl mx-auto">
+            {/* Left Column: Story & Vision */}
+            <div className="lg:col-span-6">
+              {/* WHO WE ARE Pill Tag */}
+              <Reveal direction="down">
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <span className="h-[1.5px] w-4 bg-[#ff5252]" />
+                  <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/40 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[#ff5252]">
+                    <Pin className="size-3.5 text-[#ff5252]" />
+                    <span>{homeIntro?.subtitle || homeIntro?.extra_json?.badge || "WHO WE ARE"}</span>
+                  </div>
+                  <span className="h-[1.5px] w-4 bg-[#ff5252]" />
                 </div>
-                <span className="h-[1.5px] w-4 bg-[#ff5252]" />
-              </div>
-            </Reveal>
+              </Reveal>
 
-            {/* Headline */}
-            <Reveal delay={100} direction="up">
-              <h2 className="text-4xl font-black text-slate-900 dark:text-white sm:text-5xl lg:text-[52px] tracking-tight leading-[1.08]">
-                We Engineer Software & Scale Growth Under <br />
-                <span className="text-[#ff5252] italic font-black">One Unified Umbrella</span>
-              </h2>
-            </Reveal>
+              {/* Headline */}
+              <Reveal delay={100} direction="up">
+                <h2 className="text-4xl font-black text-slate-900 dark:text-white sm:text-5xl lg:text-[52px] tracking-tight leading-[1.08]">
+                  {(() => {
+                    const rawTitle = homeIntro?.title || "We Engineer Software & Scale Growth Under One Unified Umbrella";
+                    const highlightText = homeIntro?.extra_json?.highlightText || "One Unified Umbrella";
+                    
+                    if (rawTitle.includes(highlightText)) {
+                      const parts = rawTitle.split(highlightText);
+                      return (
+                        <>
+                          {parts[0]} <br className="hidden sm:inline" />
+                          <span className="text-[#ff5252] italic font-black">{highlightText}</span>
+                          {parts[1]}
+                        </>
+                      );
+                    }
+                    return rawTitle;
+                  })()}
+                </h2>
+              </Reveal>
 
-            {/* Description Paragraph */}
-            <Reveal delay={200} direction="up">
-              <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal text-justify">
-                Zenelait Infotech bridges the gap between technology engineering and market acquisition. Where traditional agencies treat software build and marketing as separate silos, we integrate code, architecture, design, and growth strategy into one accountable delivery machine.
-              </p>
-            </Reveal>
+              {/* Description Paragraph */}
+              <Reveal delay={200} direction="up">
+                <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal text-justify">
+                  {homeIntro?.body || "Zenelait Infotech bridges the gap between technology engineering and market acquisition. Where traditional agencies treat software build and marketing as separate silos, we integrate code, architecture, design, and growth strategy into one accountable delivery machine."}
+                </p>
+              </Reveal>
 
-            {/* 2 Sub-Cards: In-House Engineering & Data-Driven Growth */}
-            <Reveal delay={300} direction="up">
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Sub-Card 1 */}
-                <div className="group/sub flex items-start gap-3.5 p-4 rounded-2xl border border-rose-100 dark:border-border/60 bg-white dark:bg-slate-900/60 shadow-xs transition-all duration-300 hover:border-rose-300 hover:shadow-md">
-                  <div className="size-10 rounded-full bg-rose-50 dark:bg-rose-950/50 text-[#ff5252] flex items-center justify-center shrink-0">
-                    <Code2 className="size-5 stroke-[2.2]" />
+              {/* 2 Sub-Cards: In-House Engineering & Data-Driven Growth */}
+              <Reveal delay={300} direction="up">
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Sub-Card 1 */}
+                  <div className="group/sub flex items-start gap-3.5 p-4 rounded-2xl border border-rose-100 dark:border-border/60 bg-white dark:bg-slate-900/60 shadow-xs transition-all duration-300 hover:border-rose-300 hover:shadow-md">
+                    <div className="size-10 rounded-full bg-rose-50 dark:bg-rose-950/50 text-[#ff5252] flex items-center justify-center shrink-0">
+                      <Code2 className="size-5 stroke-[2.2]" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
+                        {homeIntro?.extra_json?.subCard1Title || "In-House Engineering"}
+                      </h4>
+                      <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {homeIntro?.extra_json?.subCard1Desc || "Custom CRM, ERP, LMS & AI built directly by our core software team."}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">In-House Engineering</h4>
-                    <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      Custom CRM, ERP, LMS & AI built directly by our core software team.
-                    </p>
+
+                  {/* Sub-Card 2 */}
+                  <div className="group/sub flex items-start gap-3.5 p-4 rounded-2xl border border-rose-100 dark:border-border/60 bg-white dark:bg-slate-900/60 shadow-xs transition-all duration-300 hover:border-rose-300 hover:shadow-md">
+                    <div className="size-10 rounded-full bg-rose-50 dark:bg-rose-950/50 text-[#ff5252] flex items-center justify-center shrink-0">
+                      <BarChart3 className="size-5 stroke-[2.2]" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
+                        {homeIntro?.extra_json?.subCard2Title || "Data-Driven Growth"}
+                      </h4>
+                      <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {homeIntro?.extra_json?.subCard2Desc || "SEO, paid ads, content & branding engineered for ROI."}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Sub-Card 2 */}
-                <div className="group/sub flex items-start gap-3.5 p-4 rounded-2xl border border-rose-100 dark:border-border/60 bg-white dark:bg-slate-900/60 shadow-xs transition-all duration-300 hover:border-rose-300 hover:shadow-md">
-                  <div className="size-10 rounded-full bg-rose-50 dark:bg-rose-950/50 text-[#ff5252] flex items-center justify-center shrink-0">
-                    <BarChart3 className="size-5 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Data-Driven Growth</h4>
-                    <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      SEO, paid ads, content & branding engineered for ROI.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+              </Reveal>
 
             {/* Bottom Link */}
             <Reveal delay={400} direction="up">
@@ -362,6 +400,7 @@ function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Product Suite Grid - Creative High Aesthetics (Displaying 3 Cards) */}
       <section className="container-x py-20 lg:py-28 relative">
@@ -548,21 +587,23 @@ function Home() {
       </Reveal>
 
       {/* Animated Stats Section */}
-      <section className="relative overflow-hidden border-y border-border bg-surface/50 py-16 lg:py-20">
-        <div className="pointer-events-none absolute -top-20 left-1/3 size-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="container-x relative z-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {statsData.map((s, i) => (
-            <Reveal key={`${s.label}-${i}`} delay={i * 90} direction="up" className="text-center">
-              <SpotlightCard className="p-8 text-center bg-card border border-border/80 shadow-sm" enableTilt={false}>
-                <p className="text-4xl text-primary lg:text-5xl font-extrabold">
-                  <AnimatedCounter value={s.value} />
-                </p>
-                <p className="mt-3 font-semibold text-foreground">{s.label}</p>
-              </SpotlightCard>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {showStatsSection && statsData.length > 0 && (
+        <section className="relative overflow-hidden border-y border-border bg-surface/50 py-16 lg:py-20">
+          <div className="pointer-events-none absolute -top-20 left-1/3 size-96 rounded-full bg-primary/10 blur-3xl" />
+          <div className="container-x relative z-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {statsData.map((s, i) => (
+              <Reveal key={`${s.label}-${i}`} delay={i * 90} direction="up" className="text-center">
+                <SpotlightCard className="p-8 text-center bg-card border border-border/80 shadow-sm" enableTilt={false}>
+                  <p className="text-4xl text-primary lg:text-5xl font-extrabold">
+                    <AnimatedCounter value={s.value} />
+                  </p>
+                  <p className="mt-3 font-semibold text-foreground">{s.label}</p>
+                </SpotlightCard>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
 
 

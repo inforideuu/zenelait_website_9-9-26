@@ -68,12 +68,12 @@ export function TestimonialSection({ page = "home" }: { page?: "home" | "it_prod
             id: String(t.id),
             name: t.author,
             role: t.role,
-            company: t.company || "Enterprise Client",
+            company: t.company || "",
             rating: t.rating || 5,
             quote: t.content,
-            metric: "Verified Client Impact",
-            industry: t.page === "home" ? "Growth & Engineering" : "IT Product",
-            avatar: t.avatar_url || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+            metric: t.metric || "Verified Client Impact",
+            industry: t.industry || (t.page === "home" ? "Growth & Engineering" : "IT Product"),
+            avatar: t.avatar_url || ""
           }));
           setList(mapped);
         }
@@ -196,12 +196,7 @@ export function TestimonialSection({ page = "home" }: { page?: "home" | "it_prod
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center gap-3 border-t border-slate-800/60 pt-4">
-                <img
-                  src={prevTestimonial.avatar}
-                  alt={prevTestimonial.name}
-                  className="size-10 rounded-full object-cover border border-slate-700"
-                />
+              <div className="mt-6 flex items-center justify-between border-t border-slate-800/60 pt-4">
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white truncate">{prevTestimonial.name}</p>
                   <p className="text-[11px] text-slate-400 truncate">{prevTestimonial.role}</p>
@@ -239,24 +234,19 @@ export function TestimonialSection({ page = "home" }: { page?: "home" | "it_prod
 
               {/* Client Profile Footer */}
               <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={activeTestimonial.avatar}
-                    alt={activeTestimonial.name}
-                    className="size-12 rounded-full object-cover border-2 border-rose-200 shadow-sm"
-                  />
-                  <div>
-                    <h3 className="text-base font-extrabold text-slate-900 leading-snug">{activeTestimonial.name}</h3>
-                    <p className="text-xs font-bold text-rose-500">{activeTestimonial.role}</p>
-                    <p className="text-xs font-semibold text-slate-400 flex items-center gap-1 mt-0.5">
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-900 leading-snug">{activeTestimonial.name}</h3>
+                  <p className="text-xs font-bold text-rose-500">{activeTestimonial.role}</p>
+                  {activeTestimonial.company && (
+                    <p className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mt-0.5">
                       <Building2 className="size-3 text-slate-400" />
                       <span>{activeTestimonial.company}</span>
                     </p>
-                  </div>
+                  )}
                 </div>
 
-                <span className="rounded-full bg-rose-50 border border-rose-100 px-3.5 py-1 text-xs font-bold text-rose-600">
-                  {activeTestimonial.industry}
+                <span className="rounded-full bg-rose-50 border border-rose-100 px-4 py-1.5 text-xs font-extrabold text-rose-600">
+                  {activeTestimonial.industry || "Growth & Engineering"}
                 </span>
               </div>
 
@@ -281,12 +271,7 @@ export function TestimonialSection({ page = "home" }: { page?: "home" | "it_prod
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center gap-3 border-t border-slate-800/60 pt-4">
-                <img
-                  src={nextTestimonial.avatar}
-                  alt={nextTestimonial.name}
-                  className="size-10 rounded-full object-cover border border-slate-700"
-                />
+              <div className="mt-6 flex items-center justify-between border-t border-slate-800/60 pt-4">
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white truncate">{nextTestimonial.name}</p>
                   <p className="text-[11px] text-slate-400 truncate">{nextTestimonial.role}</p>

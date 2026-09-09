@@ -22,7 +22,8 @@ import {
   FileText, 
   Sparkles,
   Volume2,
-  ExternalLink
+  ExternalLink,
+  Info
 } from "lucide-react";
 import { playNotificationBell } from "@/lib/sound";
 import {
@@ -34,7 +35,9 @@ import {
   getJobApplications,
   deleteJobApplication,
   getPageSections,
+  createPageSection,
   updatePageSection,
+  deletePageSection,
   getTestimonials,
   createTestimonial,
   updateTestimonial,
@@ -218,7 +221,7 @@ function handleDownloadResume(app: JobApplication) {
 
 function AdminDashboardPage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"demos" | "applications" | "page_content" | "testimonials" | "careers">("demos");
+  const [activeTab, setActiveTab] = useState<"demos" | "applications" | "home_sections" | "about_sections" | "testimonials" | "careers">("demos");
 
   // Live Data States
   const [demos, setDemos] = useState<DemoRequest[]>([]);
@@ -233,7 +236,6 @@ function AdminDashboardPage() {
 
   // Modal / Form States
   const [viewAppModal, setViewAppModal] = useState<JobApplication | null>(null);
-  const [editingSection, setEditingSection] = useState<PageSectionContent | null>(null);
   const [editingTestimonial, setEditingTestimonial] = useState<Partial<Testimonial> | null>(null);
   const [editingPosition, setEditingPosition] = useState<Partial<OpenPosition> | null>(null);
   const [reqInputText, setReqInputText] = useState<string>("");
@@ -336,20 +338,6 @@ function AdminDashboardPage() {
     }
   };
 
-  // Section Save Handler
-  const handleSaveSection = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editingSection) return;
-    try {
-      await updatePageSection(editingSection.section_key, editingSection);
-      setEditingSection(null);
-      loadData();
-      alert("Page section updated successfully!");
-    } catch (err) {
-      alert("Error saving section content");
-    }
-  };
-
   // Testimonial Save/Delete
   const handleSaveTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -417,7 +405,7 @@ function AdminDashboardPage() {
                 Zenelait Admin
               </span>
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ff2a38] block -mt-1">
-                Django & MySQL Backend
+                Chennai, Tamil Nadu
               </span>
             </div>
           </Link>
@@ -429,11 +417,11 @@ function AdminDashboardPage() {
           {/* Bell Notification Button */}
           <div className="relative">
             <button 
-              onClick={() => setShowNotifMenu(!showNotifMenu)}
+              onClick={triggerBellSound}
               title="Notifications"
-              className="relative p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+              className="relative p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-rose-400 transition-colors cursor-pointer active:scale-95"
             >
-              <Bell className="size-4" />
+              <Bell className="size-4 text-slate-700 dark:text-slate-200" />
               {unreadCount > 0 && (
                 <span className="absolute top-1.5 right-1.5 size-2.5 rounded-full bg-[#ff2a38] animate-pulse" />
               )}
@@ -546,13 +534,23 @@ function AdminDashboardPage() {
             </button>
 
             <button 
-              onClick={() => setActiveTab("page_content")}
+              onClick={() => setActiveTab("home_sections")}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                activeTab === "page_content" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                activeTab === "home_sections" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
               }`}
             >
               <Edit3 className="size-4" />
-              <span>Page Sections (Home & About)</span>
+              <span>Home Page Sections</span>
+            </button>
+
+            <button 
+              onClick={() => setActiveTab("about_sections")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                activeTab === "about_sections" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+              }`}
+            >
+              <Info className="size-4" />
+              <span>About Us Page Sections</span>
             </button>
 
             <button 
@@ -795,11 +793,21 @@ function AdminDashboardPage() {
             </div>
           )}
 
-          {/* TAB 3: Edit Page Sections */}
-          {activeTab === "page_content" && (
-            <PageSectionsAdminSubtab 
+
+
+          {/* TAB 3: Home Page Sections Editor */}
+          {activeTab === "home_sections" && (
+            <HomePageSectionsAdminSubtab 
               sections={sections} 
-              setEditingSection={setEditingSection} 
+              loadData={loadData}
+            />
+          )}
+
+          {/* TAB 3.5: About Us Page Sections Editor */}
+          {activeTab === "about_sections" && (
+            <AboutUsPageSectionsAdminSubtab 
+              sections={sections} 
+              loadData={loadData}
             />
           )}
 
@@ -878,47 +886,7 @@ function AdminDashboardPage() {
         </main>
       </div>
 
-      {/* Edit Section Modal */}
-      {editingSection && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="w-full max-w-xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-2xl">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Edit {editingSection.section_key}</h3>
-            <form onSubmit={handleSaveSection} className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Title</label>
-                <input 
-                  type="text" 
-                  value={editingSection.title} 
-                  onChange={e => setEditingSection({...editingSection, title: e.target.value})}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Subtitle</label>
-                <input 
-                  type="text" 
-                  value={editingSection.subtitle || ''} 
-                  onChange={e => setEditingSection({...editingSection, subtitle: e.target.value})}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Body Content</label>
-                <textarea 
-                  rows={4}
-                  value={editingSection.body} 
-                  onChange={e => setEditingSection({...editingSection, body: e.target.value})}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
-                />
-              </div>
-              <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setEditingSection(null)} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">Cancel</button>
-                <button type="submit" className="px-4 py-2 rounded-xl bg-[#ff2a38] text-white font-bold">Save Changes</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+
 
       {/* Edit Testimonial Modal */}
       {editingTestimonial && (
@@ -946,31 +914,82 @@ function AdminDashboardPage() {
                     value={editingTestimonial.author || ''} 
                     onChange={e => setEditingTestimonial({...editingTestimonial, author: e.target.value})}
                     className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                    placeholder="e.g. Anita Sundaram"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Role & Company</label>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Role Title</label>
                   <input 
                     type="text" 
                     required
                     value={editingTestimonial.role || ''} 
                     onChange={e => setEditingTestimonial({...editingTestimonial, role: e.target.value})}
                     className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                    placeholder="e.g. Head of Marketing"
                   />
                 </div>
               </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Company / Organization</label>
+                  <input 
+                    type="text" 
+                    value={editingTestimonial.company || ''} 
+                    onChange={e => setEditingTestimonial({...editingTestimonial, company: e.target.value})}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                    placeholder="e.g. Vanguard Retail Systems"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Rating (1 to 5 Stars)</label>
+                  <input 
+                    type="number" 
+                    min={1}
+                    max={5}
+                    value={editingTestimonial.rating ?? 5} 
+                    onChange={e => setEditingTestimonial({...editingTestimonial, rating: parseInt(e.target.value) || 5})}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Impact Badge / Metric Tag</label>
+                  <input 
+                    type="text" 
+                    value={editingTestimonial.metric || ''} 
+                    onChange={e => setEditingTestimonial({...editingTestimonial, metric: e.target.value})}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                    placeholder="e.g. Verified Client Impact"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Category / Practice Tag</label>
+                  <input 
+                    type="text" 
+                    value={editingTestimonial.industry || ''} 
+                    onChange={e => setEditingTestimonial({...editingTestimonial, industry: e.target.value})}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                    placeholder="e.g. Growth & Engineering"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Testimonial Content</label>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Testimonial Quote Content</label>
                 <textarea 
                   rows={3}
                   required
                   value={editingTestimonial.content || ''} 
                   onChange={e => setEditingTestimonial({...editingTestimonial, content: e.target.value})}
                   className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+                  placeholder="Enter quote content..."
                 />
               </div>
               <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setEditingTestimonial(null)} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">Cancel</button>
+                <button type="button" onClick={() => setEditingTestimonial(null)} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-bold">Cancel</button>
                 <button type="submit" className="px-4 py-2 rounded-xl bg-[#ff2a38] text-white font-bold">Save Testimonial</button>
               </div>
             </form>
@@ -1295,9 +1314,16 @@ function TestimonialsAdminSubtab({
                 </div>
               </div>
               <p className="text-xs italic text-slate-700 dark:text-slate-300">"{t.content}"</p>
-              <div className="pt-1">
-                <p className="text-xs font-bold text-slate-900 dark:text-white">{t.author}</p>
-                <p className="text-[10px] text-slate-500">{t.role} • {t.company}</p>
+              <div className="pt-1 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">{t.author}</p>
+                  <p className="text-[10px] text-slate-500 font-semibold">{t.role} {t.company ? `• ${t.company}` : ''}</p>
+                </div>
+                {t.industry && (
+                  <span className="text-[10px] font-bold text-rose-500 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded-full border border-rose-100 dark:border-rose-900">
+                    {t.industry}
+                  </span>
+                )}
               </div>
             </div>
           ))
@@ -1307,77 +1333,881 @@ function TestimonialsAdminSubtab({
   );
 }
 
-function PageSectionsAdminSubtab({
+function HomePageSectionsAdminSubtab({
   sections,
-  setEditingSection
+  loadData
 }: {
   sections: PageSectionContent[];
-  setEditingSection: (s: PageSectionContent) => void;
+  loadData: () => void;
 }) {
-  const [selectedPage, setSelectedPage] = useState<"home" | "about">("home");
+  const introSec = sections.find(s => s.section_key === 'home_intro');
+  const statsSec = sections.find(s => s.section_key === 'home_stats');
 
-  const homeKeys = ["home_intro", "home_stats"];
-  const aboutKeys = ["about_who_we_are", "about_mission", "about_vision", "about_values"];
+  // Intro State
+  const [introActive, setIntroActive] = useState<boolean>(introSec?.extra_json?.is_active ?? true);
+  const [introBadge, setIntroBadge] = useState<string>(introSec?.subtitle || introSec?.extra_json?.badge || "WHO WE ARE");
+  const [introTitle, setIntroTitle] = useState<string>(introSec?.title || "We Engineer Software & Scale Growth Under One Unified Umbrella");
+  const [introBody, setIntroBody] = useState<string>(introSec?.body || "Zenelait Infotech bridges the gap between technology engineering and market acquisition. Where traditional agencies treat software build and marketing as separate silos, we integrate code, architecture, design, and growth strategy into one accountable delivery machine.");
+  const [sub1Title, setSub1Title] = useState<string>(introSec?.extra_json?.subCard1Title || "In-House Engineering");
+  const [sub1Desc, setSub1Desc] = useState<string>(introSec?.extra_json?.subCard1Desc || "Custom CRM, ERP, LMS & AI built directly by our core software team.");
+  const [sub2Title, setSub2Title] = useState<string>(introSec?.extra_json?.subCard2Title || "Data-Driven Growth");
+  const [sub2Desc, setSub2Desc] = useState<string>(introSec?.extra_json?.subCard2Desc || "SEO, paid ads, content & branding engineered for ROI.");
 
-  const filteredSections = sections.filter(s => {
-    if (selectedPage === "home") return homeKeys.includes(s.section_key);
-    return aboutKeys.includes(s.section_key);
-  });
+  // Stats State
+  const initialStats = Array.isArray(statsSec?.extra_json?.stats) 
+    ? statsSec!.extra_json.stats 
+    : (Array.isArray(statsSec?.extra_json) ? statsSec!.extra_json : [
+        { value: "16+", label: "Products & Services" },
+        { value: "2", label: "Practices: IT & Growth" },
+        { value: "100%", label: "In-house Delivery" },
+        { value: "24/7", label: "Support Coverage" }
+      ]);
+
+  const [statsActive, setStatsActive] = useState<boolean>(statsSec?.extra_json?.is_active ?? true);
+  const [statsTitle, setStatsTitle] = useState<string>(statsSec?.title || "Platform Growth Metrics");
+  const [statsList, setStatsList] = useState<{ value: string; label: string }[]>(initialStats);
+
+  // Sync state if API sections update
+  useEffect(() => {
+    if (introSec) {
+      setIntroActive(introSec.extra_json?.is_active ?? true);
+      setIntroBadge(introSec.subtitle || introSec.extra_json?.badge || "WHO WE ARE");
+      setIntroTitle(introSec.title || "We Engineer Software & Scale Growth Under One Unified Umbrella");
+      setIntroBody(introSec.body || "Zenelait Infotech bridges the gap between technology engineering and market acquisition. Where traditional agencies treat software build and marketing as separate silos, we integrate code, architecture, design, and growth strategy into one accountable delivery machine.");
+      setSub1Title(introSec.extra_json?.subCard1Title || "In-House Engineering");
+      setSub1Desc(introSec.extra_json?.subCard1Desc || "Custom CRM, ERP, LMS & AI built directly by our core software team.");
+      setSub2Title(introSec.extra_json?.subCard2Title || "Data-Driven Growth");
+      setSub2Desc(introSec.extra_json?.subCard2Desc || "SEO, paid ads, content & branding engineered for ROI.");
+    }
+    if (statsSec) {
+      setStatsActive(statsSec.extra_json?.is_active ?? true);
+      setStatsTitle(statsSec.title || "Platform Growth Metrics");
+      const list = Array.isArray(statsSec.extra_json?.stats) ? statsSec.extra_json.stats : (Array.isArray(statsSec.extra_json) ? statsSec.extra_json : null);
+      if (list) setStatsList(list);
+    }
+  }, [sections]);
+
+  // Save Intro Handler
+  const handleSaveIntro = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload: Partial<PageSectionContent> = {
+      section_key: 'home_intro',
+      title: introTitle,
+      subtitle: introBadge,
+      body: introBody,
+      extra_json: {
+        badge: introBadge,
+        subCard1Title: sub1Title,
+        subCard1Desc: sub1Desc,
+        subCard2Title: sub2Title,
+        subCard2Desc: sub2Desc,
+        is_active: introActive,
+      }
+    };
+    try {
+      try {
+        await updatePageSection('home_intro', payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+      alert("Creative Introduction Section updated & synced to Home page!");
+    } catch (err) {
+      alert("Error saving section content");
+    }
+  };
+
+  // Delete / Clear Intro Handler
+  const handleDeleteIntro = async () => {
+    if (!confirm("Are you sure you want to delete the Creative Company Introduction Section from the Home page?")) return;
+    try {
+      try {
+        await deletePageSection('home_intro');
+      } catch {
+        await updatePageSection('home_intro', {
+          section_key: 'home_intro',
+          title: '',
+          body: '',
+          extra_json: { is_active: false }
+        });
+      }
+      setIntroActive(false);
+      loadData();
+      alert("Creative Introduction Section deleted!");
+    } catch (err) {
+      alert("Error deleting section");
+    }
+  };
+
+  // Save Stats Handler
+  const handleSaveStats = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload: Partial<PageSectionContent> = {
+      section_key: 'home_stats',
+      title: statsTitle,
+      subtitle: 'Platform Growth Metrics',
+      body: 'Metrics tracked across live client systems.',
+      extra_json: {
+        stats: statsList,
+        is_active: statsActive,
+      }
+    };
+    try {
+      try {
+        await updatePageSection('home_stats', payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+      alert("Animated Stats Section updated & synced to Home page!");
+    } catch (err) {
+      alert("Error saving stats content");
+    }
+  };
+
+  // Delete Stats Handler
+  const handleDeleteStats = async () => {
+    if (!confirm("Are you sure you want to delete the Animated Stats Section from the Home page?")) return;
+    try {
+      try {
+        await deletePageSection('home_stats');
+      } catch {
+        await updatePageSection('home_stats', {
+          section_key: 'home_stats',
+          title: '',
+          body: '',
+          extra_json: { stats: [], is_active: false }
+        });
+      }
+      setStatsActive(false);
+      loadData();
+      alert("Animated Stats Section deleted!");
+    } catch (err) {
+      alert("Error deleting section");
+    }
+  };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Page Sections Copy Editor</h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Edit titles, subtitles, and body text strictly separated by page</p>
-        </div>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Home Page Sections Editor</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400">Edit content or delete/hide sections on the Home page in real-time</p>
       </div>
 
-      {/* Page Selector Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
-        <button 
-          onClick={() => setSelectedPage("home")}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-            selectedPage === "home" ? "bg-[#ff2a38] text-white shadow-sm" : "text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
-          }`}
-        >
-          Home Page Sections ({sections.filter(s => homeKeys.includes(s.section_key)).length})
-        </button>
-        <button 
-          onClick={() => setSelectedPage("about")}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-            selectedPage === "about" ? "bg-[#ff2a38] text-white shadow-sm" : "text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
-          }`}
-        >
-          About Us Page Sections ({sections.filter(s => aboutKeys.includes(s.section_key)).length})
-        </button>
-      </div>
+      {/* SECTION 1: Creative Company Introduction Section */}
+      <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 space-y-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 gap-3">
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#ff2a38] px-2.5 py-1 rounded-md bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-900">
+              Creative Company Introduction Section
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">Section 1: Who We Are</h3>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredSections.length === 0 ? (
-          <p className="text-xs text-slate-400 py-6">No page sections found for this page.</p>
-        ) : (
-          filteredSections.map(s => (
-            <div key={s.id} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 space-y-3 shadow-2xs">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase text-[#ff2a38] tracking-widest px-2.5 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-900">
-                  {s.section_key}
-                </span>
-                <button 
-                  onClick={() => setEditingSection(s)}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-[#ff2a38] hover:text-white transition-colors"
-                >
-                  <Edit3 className="size-3.5" />
-                  <span>Edit Content</span>
-                </button>
-              </div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">{s.title}</h3>
-              {s.subtitle && <p className="text-xs font-semibold text-[#ff2a38]">{s.subtitle}</p>}
-              <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3">{s.body}</p>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="intro_active_check" 
+                checked={introActive} 
+                onChange={e => setIntroActive(e.target.checked)}
+                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
+              />
+              <label htmlFor="intro_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+                Section Visible on Home Page
+              </label>
             </div>
-          ))
-        )}
+
+            <button
+              type="button"
+              onClick={handleDeleteIntro}
+              className="px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/40 text-xs font-bold text-[#ff2a38] hover:bg-rose-500 hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <Trash2 className="size-3.5" />
+              <span>Delete Section</span>
+            </button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSaveIntro} className="space-y-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Badge / Tagline Pill Text</label>
+              <input 
+                type="text" 
+                required
+                value={introBadge} 
+                onChange={e => setIntroBadge(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-semibold"
+                placeholder="e.g. WHO WE ARE"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Main Headline</label>
+              <input 
+                type="text" 
+                required
+                value={introTitle} 
+                onChange={e => setIntroTitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Introduction Body Paragraph</label>
+            <textarea 
+              rows={3}
+              required
+              value={introBody} 
+              onChange={e => setIntroBody(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 space-y-2">
+              <span className="text-[10px] font-bold uppercase text-[#ff2a38]">Sub Card 1 (Engineering)</span>
+              <div>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Title</label>
+                <input 
+                  type="text" 
+                  value={sub1Title} 
+                  onChange={e => setSub1Title(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Description</label>
+                <textarea 
+                  rows={2}
+                  value={sub1Desc} 
+                  onChange={e => setSub1Desc(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white"
+                />
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 space-y-2">
+              <span className="text-[10px] font-bold uppercase text-[#ff2a38]">Sub Card 2 (Growth)</span>
+              <div>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Title</label>
+                <input 
+                  type="text" 
+                  value={sub2Title} 
+                  onChange={e => setSub2Title(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Description</label>
+                <textarea 
+                  rows={2}
+                  value={sub2Desc} 
+                  onChange={e => setSub2Desc(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button type="submit" className="px-6 py-2.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-colors shadow-md">
+              Save Creative Intro Section
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* SECTION 2: Animated Stats Section */}
+      <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 space-y-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 gap-3">
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-900">
+              Animated Counter Metrics
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">Section 2: Animated Stats Bar</h3>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="stats_active_check" 
+                checked={statsActive} 
+                onChange={e => setStatsActive(e.target.checked)}
+                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
+              />
+              <label htmlFor="stats_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+                Section Visible on Home Page
+              </label>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDeleteStats}
+              className="px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/40 text-xs font-bold text-[#ff2a38] hover:bg-rose-500 hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <Trash2 className="size-3.5" />
+              <span>Delete Section</span>
+            </button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSaveStats} className="space-y-4 text-xs">
+          <div>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Internal Title</label>
+            <input 
+              type="text" 
+              value={statsTitle} 
+              onChange={e => setStatsTitle(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="font-bold text-slate-700 dark:text-slate-300">Animated Stat Items</label>
+              <button 
+                type="button"
+                onClick={() => setStatsList([...statsList, { value: "100+", label: "New Metric" }])}
+                className="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 hover:bg-[#ff2a38] hover:text-white transition-colors"
+              >
+                <Plus className="size-3.5" />
+                <span>Add Stat Metric</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {statsList.map((st, idx) => (
+                <div key={idx} className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 flex items-center gap-3">
+                  <div className="w-28 shrink-0">
+                    <label className="text-[10px] font-bold text-slate-400 block">Value / Counter</label>
+                    <input 
+                      type="text" 
+                      value={st.value} 
+                      onChange={e => {
+                        const updated = [...statsList];
+                        if (updated[idx]) {
+                          updated[idx] = { ...updated[idx], value: e.target.value };
+                          setStatsList(updated);
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 text-slate-900 dark:text-white font-black text-center"
+                    />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[10px] font-bold text-slate-400 block">Label Description</label>
+                    <input 
+                      type="text" 
+                      value={st.label} 
+                      onChange={e => {
+                        const updated = [...statsList];
+                        if (updated[idx]) {
+                          updated[idx] = { ...updated[idx], label: e.target.value };
+                          setStatsList(updated);
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 text-slate-900 dark:text-white font-semibold"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setStatsList(statsList.filter((_, i) => i !== idx))}
+                    className="p-2 text-slate-400 hover:text-rose-500 self-end"
+                    title="Delete Metric"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button type="submit" className="px-6 py-2.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-colors shadow-md">
+              Save Animated Stats Section
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
 }
+
+function AboutUsPageSectionsAdminSubtab({
+  sections,
+  loadData
+}: {
+  sections: PageSectionContent[];
+  loadData: () => void;
+}) {
+  const whoSec = sections.find(s => s.section_key === 'about_who_we_are');
+  const misSec = sections.find(s => s.section_key === 'about_mission');
+  const visSec = sections.find(s => s.section_key === 'about_vision');
+  const valSec = sections.find(s => s.section_key === 'about_values');
+
+  // Who We Are State
+  const [whoActive, setWhoActive] = useState<boolean>(whoSec?.extra_json?.is_active ?? true);
+  const [whoBadge, setWhoBadge] = useState<string>(whoSec?.subtitle || whoSec?.extra_json?.badge || "WHO WE ARE");
+  const [whoHeaderTitle, setWhoHeaderTitle] = useState<string>(whoSec?.extra_json?.headerTitle || "Who We Are & What We Stand For");
+  const [whoHeaderSub, setWhoHeaderSub] = useState<string>(whoSec?.extra_json?.headerSub || "Innovation-driven. People-focused. Built for a smarter tomorrow.");
+  const [whoTitle, setWhoTitle] = useState<string>(whoSec?.title || "IT Products & Digital Growth");
+  const [whoBody1, setWhoBody1] = useState<string>(whoSec?.body || "Zenelait Infotech is a leading technology and growth enterprise headquartered in India, bringing the gap between high-precision software engineering and data-driven marketing execution.");
+  const [whoBody2, setWhoBody2] = useState<string>(whoSec?.extra_json?.body2 || "We empower companies with production-ready software systems — from custom ERP, ERP, and LMS platforms to performance advertising, technical search strategy, and 4K media production.");
+  const [sub1Title, setSub1Title] = useState<string>(whoSec?.extra_json?.subCard1Title || "In-House IT Engineering");
+  const [sub1Desc, setSub1Desc] = useState<string>(whoSec?.extra_json?.subCard1Desc || "Developing robust, scalable, and customized software solutions.");
+  const [sub2Title, setSub2Title] = useState<string>(whoSec?.extra_json?.subCard2Title || "Data-Driven Campaigns");
+  const [sub2Desc, setSub2Desc] = useState<string>(whoSec?.extra_json?.subCard2Desc || "Performance-led strategies for measurable business growth.");
+
+  // Mission Vision Creed State
+  const [mvActive, setMvActive] = useState<boolean>(misSec?.extra_json?.is_active ?? visSec?.extra_json?.is_active ?? valSec?.extra_json?.is_active ?? true);
+  const [mvHeaderTitle, setMvHeaderTitle] = useState<string>(misSec?.extra_json?.mvHeaderTitle || "Mission, Vision & Engineering Creed");
+  const [mvHeaderSub, setMvHeaderSub] = useState<string>(misSec?.extra_json?.mvHeaderSub || "The innovative architectural principles driving our software engineering and digital growth matrices.");
+
+  const [missionTitle, setMissionTitle] = useState<string>(misSec?.title || "MISSION");
+  const [missionBody, setMissionBody] = useState<string>(misSec?.body || "To architect scalable, high-performance digital matrices that empower global enterprises through precision software engineering and data-driven growth.");
+
+  const [visionTitle, setVisionTitle] = useState<string>(visSec?.title || "VISION");
+  const [visionBody, setVisionBody] = useState<string>(visSec?.body || "To set the absolute global standard for immersive, highly kinetic web applications, intelligent automation, and transformative digital experiences.");
+
+  const [valuesTitle, setValuesTitle] = useState<string>(valSec?.title || "PRODUCT VALUES");
+  const [valuesBody, setValuesBody] = useState<string>(valSec?.body || "Engineered with bulletproof safety, high concurrency, clean procedural pipelines, and high-fidelity aesthetics across every system.");
+
+  // Sync state if API sections update
+  useEffect(() => {
+    if (whoSec) {
+      setWhoActive(whoSec.extra_json?.is_active ?? true);
+      setWhoBadge(whoSec.subtitle || whoSec.extra_json?.badge || "WHO WE ARE");
+      setWhoHeaderTitle(whoSec.extra_json?.headerTitle || "Who We Are & What We Stand For");
+      setWhoHeaderSub(whoSec.extra_json?.headerSub || "Innovation-driven. People-focused. Built for a smarter tomorrow.");
+      setWhoTitle(whoSec.title || "IT Products & Digital Growth");
+      setWhoBody1(whoSec.body || "Zenelait Infotech is a leading technology and growth enterprise headquartered in India, bringing the gap between high-precision software engineering and data-driven marketing execution.");
+      setWhoBody2(whoSec.extra_json?.body2 || "We empower companies with production-ready software systems — from custom ERP, ERP, and LMS platforms to performance advertising, technical search strategy, and 4K media production.");
+      setSub1Title(whoSec.extra_json?.subCard1Title || "In-House IT Engineering");
+      setSub1Desc(whoSec.extra_json?.subCard1Desc || "Developing robust, scalable, and customized software solutions.");
+      setSub2Title(whoSec.extra_json?.subCard2Title || "Data-Driven Campaigns");
+      setSub2Desc(whoSec.extra_json?.subCard2Desc || "Performance-led strategies for measurable business growth.");
+    }
+
+    if (misSec || visSec || valSec) {
+      setMvActive(misSec?.extra_json?.is_active ?? visSec?.extra_json?.is_active ?? valSec?.extra_json?.is_active ?? true);
+      if (misSec) {
+        setMvHeaderTitle(misSec.extra_json?.mvHeaderTitle || "Mission, Vision & Engineering Creed");
+        setMvHeaderSub(misSec.extra_json?.mvHeaderSub || "The innovative architectural principles driving our software engineering and digital growth matrices.");
+        setMissionTitle(misSec.title || "MISSION");
+        setMissionBody(misSec.body || "To architect scalable, high-performance digital matrices that empower global enterprises through precision software engineering and data-driven growth.");
+      }
+      if (visSec) {
+        setVisionTitle(visSec.title || "VISION");
+        setVisionBody(visSec.body || "To set the absolute global standard for immersive, highly kinetic web applications, intelligent automation, and transformative digital experiences.");
+      }
+      if (valSec) {
+        setValuesTitle(valSec.title || "PRODUCT VALUES");
+        setValuesBody(valSec.body || "Engineered with bulletproof safety, high concurrency, clean procedural pipelines, and high-fidelity aesthetics across every system.");
+      }
+    }
+  }, [sections]);
+
+  // Save Who We Are Handler
+  const handleSaveWhoWeAre = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload: Partial<PageSectionContent> = {
+      section_key: 'about_who_we_are',
+      title: whoTitle,
+      subtitle: whoBadge,
+      body: whoBody1,
+      extra_json: {
+        badge: whoBadge,
+        headerTitle: whoHeaderTitle,
+        headerSub: whoHeaderSub,
+        body2: whoBody2,
+        subCard1Title: sub1Title,
+        subCard1Desc: sub1Desc,
+        subCard2Title: sub2Title,
+        subCard2Desc: sub2Desc,
+        is_active: whoActive,
+      }
+    };
+    try {
+      try {
+        await updatePageSection('about_who_we_are', payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+      alert("Who We Are & What We Stand For Section updated & synced to About Us page!");
+    } catch (err) {
+      alert("Error saving Who We Are section content");
+    }
+  };
+
+  // Delete Who We Are Handler
+  const handleDeleteWhoWeAre = async () => {
+    if (!confirm("Are you sure you want to delete / hide the Who We Are Section from the About Us page?")) return;
+    try {
+      try {
+        await deletePageSection('about_who_we_are');
+      } catch {
+        await updatePageSection('about_who_we_are', {
+          section_key: 'about_who_we_are',
+          title: '',
+          body: '',
+          extra_json: { is_active: false }
+        });
+      }
+      setWhoActive(false);
+      loadData();
+      alert("Who We Are Section deleted!");
+    } catch (err) {
+      alert("Error deleting section");
+    }
+  };
+
+  // Save Mission, Vision & Values Handler
+  const handleSaveMissionVision = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const misPayload: Partial<PageSectionContent> = {
+        section_key: 'about_mission',
+        title: missionTitle,
+        subtitle: 'Core Operational Pillars',
+        body: missionBody,
+        extra_json: {
+          mvHeaderTitle,
+          mvHeaderSub,
+          is_active: mvActive,
+        }
+      };
+
+      const visPayload: Partial<PageSectionContent> = {
+        section_key: 'about_vision',
+        title: visionTitle,
+        subtitle: 'Core Operational Pillars',
+        body: visionBody,
+        extra_json: {
+          is_active: mvActive,
+        }
+      };
+
+      const valPayload: Partial<PageSectionContent> = {
+        section_key: 'about_values',
+        title: valuesTitle,
+        subtitle: 'Core Operational Pillars',
+        body: valuesBody,
+        extra_json: {
+          is_active: mvActive,
+        }
+      };
+
+      try { await updatePageSection('about_mission', misPayload); } catch { await createPageSection(misPayload); }
+      try { await updatePageSection('about_vision', visPayload); } catch { await createPageSection(visPayload); }
+      try { await updatePageSection('about_values', valPayload); } catch { await createPageSection(valPayload); }
+
+      loadData();
+      alert("Mission, Vision & Product Values Section updated & synced to About Us page!");
+    } catch (err) {
+      alert("Error saving Mission, Vision & Values content");
+    }
+  };
+
+  // Delete Mission, Vision & Values Handler
+  const handleDeleteMissionVision = async () => {
+    if (!confirm("Are you sure you want to delete / hide the Mission, Vision & Product Values Section from the About Us page?")) return;
+    try {
+      await Promise.all([
+        deletePageSection('about_mission').catch(() => updatePageSection('about_mission', { section_key: 'about_mission', title: '', body: '', extra_json: { is_active: false } })),
+        deletePageSection('about_vision').catch(() => updatePageSection('about_vision', { section_key: 'about_vision', title: '', body: '', extra_json: { is_active: false } })),
+        deletePageSection('about_values').catch(() => updatePageSection('about_values', { section_key: 'about_values', title: '', body: '', extra_json: { is_active: false } })),
+      ]);
+      setMvActive(false);
+      loadData();
+      alert("Mission, Vision & Product Values Section deleted!");
+    } catch (err) {
+      alert("Error deleting section");
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">About Us Page Sections Editor</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400">Edit content or delete/hide sections on the About Us page in real-time</p>
+      </div>
+
+      {/* SECTION 1: Who We Are & What We Stand For Section */}
+      <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 space-y-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 gap-3">
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#ff2a38] px-2.5 py-1 rounded-md bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-900">
+              Company Background & Sub-Cards
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">Section 1: Who We Are & What We Stand For</h3>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="who_active_check" 
+                checked={whoActive} 
+                onChange={e => setWhoActive(e.target.checked)}
+                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
+              />
+              <label htmlFor="who_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+                Section Visible on About Us Page
+              </label>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDeleteWhoWeAre}
+              className="px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/40 text-xs font-bold text-[#ff2a38] hover:bg-rose-500 hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <Trash2 className="size-3.5" />
+              <span>Delete Section</span>
+            </button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSaveWhoWeAre} className="space-y-4 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Badge Tag</label>
+              <input 
+                type="text" 
+                value={whoBadge} 
+                onChange={e => setWhoBadge(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Main Header Title</label>
+              <input 
+                type="text" 
+                value={whoHeaderTitle} 
+                onChange={e => setWhoHeaderTitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Main Header Subtitle</label>
+            <input 
+              type="text" 
+              value={whoHeaderSub} 
+              onChange={e => setWhoHeaderSub(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-medium"
+            />
+          </div>
+
+          <div>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Right Card Main Headline</label>
+            <input 
+              type="text" 
+              value={whoTitle} 
+              onChange={e => setWhoTitle(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-black"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Primary Description Paragraph</label>
+              <textarea 
+                rows={3}
+                value={whoBody1} 
+                onChange={e => setWhoBody1(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-medium"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Secondary Description Paragraph</label>
+              <textarea 
+                rows={3}
+                value={whoBody2} 
+                onChange={e => setWhoBody2(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-medium"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+            {/* Sub-Card 1 */}
+            <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+              <span className="text-[10px] font-extrabold uppercase text-[#ff2a38]">Sub-Card 1 (Engineering)</span>
+              <input 
+                type="text" 
+                value={sub1Title} 
+                onChange={e => setSub1Title(e.target.value)}
+                placeholder="Sub Card 1 Title"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-bold"
+              />
+              <textarea 
+                rows={2}
+                value={sub1Desc} 
+                onChange={e => setSub1Desc(e.target.value)}
+                placeholder="Sub Card 1 Description"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-normal"
+              />
+            </div>
+
+            {/* Sub-Card 2 */}
+            <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+              <span className="text-[10px] font-extrabold uppercase text-[#ff2a38]">Sub-Card 2 (Campaigns)</span>
+              <input 
+                type="text" 
+                value={sub2Title} 
+                onChange={e => setSub2Title(e.target.value)}
+                placeholder="Sub Card 2 Title"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-bold"
+              />
+              <textarea 
+                rows={2}
+                value={sub2Desc} 
+                onChange={e => setSub2Desc(e.target.value)}
+                placeholder="Sub Card 2 Description"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-normal"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button type="submit" className="px-6 py-2.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-colors shadow-md">
+              Save Who We Are Section
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* SECTION 2: Mission, Vision & Product Values Section */}
+      <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 space-y-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 gap-3">
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-900">
+              3 Capsule Pillar Cards
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">Section 2: Mission, Vision & Product Values</h3>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="mv_active_check" 
+                checked={mvActive} 
+                onChange={e => setMvActive(e.target.checked)}
+                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
+              />
+              <label htmlFor="mv_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+                Section Visible on About Us Page
+              </label>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDeleteMissionVision}
+              className="px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/40 text-xs font-bold text-[#ff2a38] hover:bg-rose-500 hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <Trash2 className="size-3.5" />
+              <span>Delete Section</span>
+            </button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSaveMissionVision} className="space-y-4 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Heading Title</label>
+              <input 
+                type="text" 
+                value={mvHeaderTitle} 
+                onChange={e => setMvHeaderTitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-bold"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Subtitle Description</label>
+              <input 
+                type="text" 
+                value={mvHeaderSub} 
+                onChange={e => setMvHeaderSub(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white font-medium"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+            {/* Card 1: MISSION */}
+            <div className="p-4 rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 space-y-2">
+              <span className="text-[10px] font-extrabold uppercase text-rose-600">Card 1: MISSION</span>
+              <input 
+                type="text" 
+                value={missionTitle} 
+                onChange={e => setMissionTitle(e.target.value)}
+                placeholder="Mission Title"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-bold"
+              />
+              <textarea 
+                rows={4}
+                value={missionBody} 
+                onChange={e => setMissionBody(e.target.value)}
+                placeholder="Mission Description"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-normal"
+              />
+            </div>
+
+            {/* Card 2: VISION */}
+            <div className="p-4 rounded-2xl bg-sky-50/50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-900/40 space-y-2">
+              <span className="text-[10px] font-extrabold uppercase text-sky-600">Card 2: VISION</span>
+              <input 
+                type="text" 
+                value={visionTitle} 
+                onChange={e => setVisionTitle(e.target.value)}
+                placeholder="Vision Title"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-bold"
+              />
+              <textarea 
+                rows={4}
+                value={visionBody} 
+                onChange={e => setVisionBody(e.target.value)}
+                placeholder="Vision Description"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-normal"
+              />
+            </div>
+
+            {/* Card 3: VALUES */}
+            <div className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 space-y-2">
+              <span className="text-[10px] font-extrabold uppercase text-emerald-600">Card 3: PRODUCT VALUES</span>
+              <input 
+                type="text" 
+                value={valuesTitle} 
+                onChange={e => setValuesTitle(e.target.value)}
+                placeholder="Values Title"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-bold"
+              />
+              <textarea 
+                rows={4}
+                value={valuesBody} 
+                onChange={e => setValuesBody(e.target.value)}
+                placeholder="Values Description"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-slate-900 dark:text-white font-normal"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button type="submit" className="px-6 py-2.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-colors shadow-md">
+              Save Mission, Vision & Product Values Section
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+

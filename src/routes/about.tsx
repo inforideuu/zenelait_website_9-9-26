@@ -330,6 +330,7 @@ function About() {
 </section>
 
       {/* Who We Are & What We Stand For Section - Matches User Image */}
+      {(whoWeAre?.extra_json?.is_active ?? true) && (
       <section className="relative overflow-hidden bg-[#fafafa] dark:bg-background py-20 lg:py-28 border-t border-slate-100 dark:border-border/40">
         {/* Background SVG Decorative Elements */}
         {/* Top-Left Radial Glow & Curved Arcs */}
@@ -370,17 +371,19 @@ function About() {
               <span className="h-[1.5px] w-4 bg-[#ff5252]" />
               <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/40 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[#ff5252]">
                 <Users className="size-3.5 text-[#ff5252]" />
-                <span>WHO WE ARE</span>
+                <span>{whoWeAre?.subtitle || whoWeAre?.extra_json?.badge || "WHO WE ARE"}</span>
               </div>
               <span className="h-[1.5px] w-4 bg-[#ff5252]" />
             </div>
 
             <h2 className="text-4xl font-black text-slate-900 dark:text-white sm:text-5xl lg:text-6xl tracking-tight">
-              Who We Are & What <span className="text-[#ff5252]">We Stand For</span>
+              {whoWeAre?.extra_json?.headerTitle ? whoWeAre.extra_json.headerTitle : (
+                <>Who We Are & What <span className="text-[#ff5252]">We Stand For</span></>
+              )}
             </h2>
 
             <p className="mx-auto mt-4 max-w-2xl text-slate-500 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
-              Innovation-driven. People-focused. Built for a smarter tomorrow.
+              {whoWeAre?.extra_json?.headerSub || "Innovation-driven. People-focused. Built for a smarter tomorrow."}
             </p>
           </Reveal>
 
@@ -475,7 +478,7 @@ function About() {
                   </p>
 
                   <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
-                    We empower companies with production-ready software systems — from custom ERP, ERP, and LMS platforms to performance advertising, technical search strategy, and 4K media production.
+                    {whoWeAre?.extra_json?.body2 ? whoWeAre.extra_json.body2 : "We empower companies with production-ready software systems — from custom ERP, ERP, and LMS platforms to performance advertising, technical search strategy, and 4K media production."}
                   </p>
 
                   {/* 2 Interactive Sub-Cards */}
@@ -488,11 +491,11 @@ function About() {
                             <Cpu className="size-4 stroke-[2.2]" />
                           </div>
                           <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm leading-snug">
-                            In-House IT Engineering
+                            {whoWeAre?.extra_json?.subCard1Title || "In-House IT Engineering"}
                           </h4>
                         </div>
                         <p className="mt-2.5 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                          Developing robust, scalable, and customized software solutions.
+                          {whoWeAre?.extra_json?.subCard1Desc || "Developing robust, scalable, and customized software solutions."}
                         </p>
                       </div>
                       <div className="mt-3 flex justify-end">
@@ -510,11 +513,11 @@ function About() {
                             <Target className="size-4 stroke-[2.2]" />
                           </div>
                           <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm leading-snug">
-                            Data-Driven Campaigns
+                            {whoWeAre?.extra_json?.subCard2Title || "Data-Driven Campaigns"}
                           </h4>
                         </div>
                         <p className="mt-2.5 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                          Performance-led strategies for measurable business growth.
+                          {whoWeAre?.extra_json?.subCard2Desc || "Performance-led strategies for measurable business growth."}
                         </p>
                       </div>
                       <div className="mt-3 flex justify-end">
@@ -530,8 +533,10 @@ function About() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Mission, Vision & Product Values Section */}
+      {((missionSec?.extra_json?.is_active ?? true) || (visionSec?.extra_json?.is_active ?? true) || (valuesSec?.extra_json?.is_active ?? true)) && (
       <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-background via-surface/40 to-background border-y border-border/80">
         {/* Subtle Background Glows */}
         <div className="pointer-events-none absolute top-0 left-1/4 size-96 rounded-full bg-primary/10 blur-3xl" />
@@ -544,10 +549,10 @@ function About() {
               <span>Core Operational Pillars</span>
             </div>
             <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl lg:text-5xl">
-              Mission, Vision & Engineering Creed
+              {missionSec?.extra_json?.mvHeaderTitle || "Mission, Vision & Engineering Creed"}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg">
-              The innovative architectural principles driving our software engineering and digital growth matrices.
+              {missionSec?.extra_json?.mvHeaderSub || "The innovative architectural principles driving our software engineering and digital growth matrices."}
             </p>
           </Reveal>
 
@@ -695,6 +700,7 @@ function About() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Principles Section */}
       <section className="ink-panel relative overflow-hidden border-y border-white/10 py-16 lg:py-24">

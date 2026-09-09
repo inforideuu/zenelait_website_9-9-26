@@ -148,10 +148,23 @@ export async function getPageSections() {
   return fetchApi<PageSectionContent[]>('/page-sections/');
 }
 
+export async function createPageSection(data: Partial<PageSectionContent>) {
+  return fetchApi<PageSectionContent>('/page-sections/', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
 export async function updatePageSection(section_key: string, data: Partial<PageSectionContent>) {
   return fetchApi<PageSectionContent>(`/page-sections/${section_key}/`, {
     method: 'PUT',
     body: JSON.stringify(data),
+  });
+}
+
+export async function deletePageSection(section_key: string) {
+  return fetchApi<void>(`/page-sections/${section_key}/`, {
+    method: 'DELETE',
   });
 }
 
@@ -164,6 +177,8 @@ export interface Testimonial {
   company?: string;
   content: string;
   rating: number;
+  metric?: string;
+  industry?: string;
   avatar_url?: string;
   created_at?: string;
 }
