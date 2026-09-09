@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { ArrowRight, ArrowUpRight, HeartHandshake, Lightbulb, ShieldCheck, Timer, Sparkles, CheckCircle2, Target, Eye, Cpu, Zap, Workflow, Layers, Search, PenTool, Code2, TrendingUp, BarChart3, MapPin, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, HeartHandshake, Lightbulb, ShieldCheck, Timer, Sparkles, CheckCircle2, Target, Eye, Cpu, Zap, Workflow, Layers, Search, PenTool, Code2, TrendingUp, BarChart3, MapPin, Users, Rocket, Globe, Gem, Star } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -535,164 +535,160 @@ function About() {
       </section>
       )}
 
-      {/* Mission, Vision & Product Values Section */}
+      {/* Mission, Vision & Product Values Section - Matches User Reference Image */}
       {((missionSec?.extra_json?.is_active ?? true) || (visionSec?.extra_json?.is_active ?? true) || (valuesSec?.extra_json?.is_active ?? true)) && (
-      <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-background via-surface/40 to-background border-y border-border/80">
-        {/* Subtle Background Glows */}
-        <div className="pointer-events-none absolute top-0 left-1/4 size-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-1/4 size-96 rounded-full bg-primary/5 blur-3xl" />
+      <section className="relative overflow-hidden py-20 lg:py-28 bg-[#fafafa] dark:bg-background border-t border-slate-100 dark:border-border/40">
+        {/* Top-Right Decorative Red 3D Polygon & Black Semi-circle Elements (as seen in background top right of image) */}
+        <div className="pointer-events-none absolute right-0 top-0 hidden lg:block overflow-hidden w-[480px] h-[360px] opacity-90">
+          <div className="absolute right-36 top-0 w-36 h-full bg-[#e01e37] clip-triangle-top-right" style={{ clipPath: "polygon(100% 0, 0 0, 100% 100%)" }} />
+          <div className="absolute right-0 top-12 w-64 h-64 rounded-full bg-black translate-x-1/3" />
+        </div>
+
+        {/* Bottom-Left Decorative Red 3D Shape & Black Circle (bottom left background accent) */}
+        <div className="pointer-events-none absolute -bottom-24 -left-20 w-80 h-80 opacity-90">
+          <div className="absolute inset-0 bg-[#e01e37] rounded-full" />
+          <div className="absolute bottom-0 left-0 w-56 h-56 bg-black rounded-full" />
+        </div>
 
         <div className="container-x relative z-10">
-          <Reveal className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-primary backdrop-blur-md">
-              <Sparkles className="size-3.5" />
-              <span>Core Operational Pillars</span>
+          {/* Section Header - OUR PURPOSE */}
+          <Reveal className="mb-14 lg:mb-16 max-w-2xl">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-[#e01e37]">OUR PURPOSE</span>
+              <span className="h-[2px] w-8 bg-[#e01e37]" />
             </div>
-            <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl lg:text-5xl">
-              {missionSec?.extra_json?.mvHeaderTitle || "Mission, Vision & Engineering Creed"}
+
+            <h2 className="text-4xl font-black text-slate-900 dark:text-white sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]">
+              {missionSec?.extra_json?.mvHeaderTitle ? missionSec.extra_json.mvHeaderTitle : (
+                <>Building a Smarter <br /><span className="text-[#e01e37]">Digital Future</span></>
+              )}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg">
-              {missionSec?.extra_json?.mvHeaderSub || "The innovative architectural principles driving our software engineering and digital growth matrices."}
+
+            <p className="mt-4 text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed font-medium">
+              {missionSec?.extra_json?.mvHeaderSub || "We are driven by a clear purpose — to empower businesses with innovative technology, meaningful solutions and long-term support."}
             </p>
           </Reveal>
 
-          {/* 3 Pill Capsule Cards: Mission, Vision & Values */}
-          <div className="mt-16 grid gap-8 lg:gap-10 md:grid-cols-3">
+          {/* 3 Distinct Column Cards Matching User Reference Image */}
+          <div className="grid gap-7 md:grid-cols-3 items-stretch max-w-7xl mx-auto">
             
-            {/* Card 1: MISSION */}
+            {/* CARD 1: Our Mission (White Card with Red Target Icon & Bottom Red/Black 3D Accent) */}
             <Reveal direction="up" delay={100} className="h-full">
-              <div className="group relative flex h-full flex-col items-center text-center rounded-[50px] sm:rounded-[60px] border border-rose-200/80 dark:border-rose-900/40 bg-gradient-to-b from-white via-rose-50/30 to-rose-100/40 dark:from-slate-900 dark:via-slate-900/90 dark:to-rose-950/30 p-7 pt-12 pb-16 shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(244,63,94,0.25)] hover:border-rose-400 overflow-hidden">
-                
-                {/* Background Ambient Glow & Animated Orb */}
-                <div className="absolute -top-24 -left-24 size-48 rounded-full bg-rose-400/20 blur-3xl group-hover:bg-rose-500/35 transition-all duration-700 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="relative group h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card p-8 border border-slate-200/80 dark:border-border/60 shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(224,30,55,0.12)] hover:-translate-y-1 overflow-hidden">
+                <div className="relative z-10 space-y-5">
+                  {/* Circular Red Target Icon Disc */}
+                  <div className="size-12 rounded-full bg-rose-50 dark:bg-rose-950/60 border border-rose-100 dark:border-rose-900/50 flex items-center justify-center text-[#e01e37]">
+                    <Target className="size-6 stroke-[2]" />
+                  </div>
 
-                {/* Animated Outer Orbit Ring with Rotating Dotted Border */}
-                <div className="relative flex items-center justify-center p-3 rounded-full">
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-rose-400/60 animate-[spin_12s_linear_infinite] group-hover:border-rose-500 group-hover:scale-110 transition-all duration-500" />
-                  
-                  {/* Glowing 3D Disc Badge */}
-                  <div className="relative flex items-center justify-center rounded-full p-2 bg-gradient-to-tr from-rose-500 to-rose-400 shadow-[0_8px_25px_rgba(244,63,94,0.4)] transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(244,63,94,0.7)]">
-                    <div className="flex size-32 sm:size-36 items-center justify-center rounded-full bg-white dark:bg-slate-950 shadow-inner transition-transform duration-700 ease-out group-hover:rotate-12 group-hover:scale-105">
-                      <svg className="size-16 text-rose-500 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(244,63,94,0.9)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="9" className="stroke-rose-200 dark:stroke-rose-900 group-hover:stroke-rose-400 transition-colors" />
-                        <circle cx="12" cy="12" r="5" className="stroke-rose-400 group-hover:stroke-rose-500 transition-colors" />
-                        <circle cx="12" cy="12" r="2.5" className="fill-rose-500 stroke-rose-500 animate-pulse" />
-                        <path d="M14.5 9.5L20 4M20 4H16M20 4V8" className="stroke-rose-600 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" strokeWidth="2" />
-                      </svg>
+                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                    {missionSec?.title ? missionSec.title : <>Our <span className="text-[#e01e37]">Mission</span></>}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+                    {missionSec?.body ? missionSec.body : "To deliver innovative and reliable IT solutions that help our clients streamline operations, improve efficiency and achieve sustainable growth in a digital world."}
+                  </p>
+
+                  {/* Inner Pill Tag: Technology for a better tomorrow */}
+                  <div className="pt-2">
+                    <div className="inline-flex items-center gap-2.5 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100 dark:border-rose-900/40 px-4 py-2 text-[11px] font-bold text-slate-700 dark:text-slate-300">
+                      <div className="size-6 rounded-full bg-[#e01e37] text-white flex items-center justify-center shrink-0">
+                        <Rocket className="size-3" />
+                      </div>
+                      <span>Technology for a better tomorrow</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Title & Floating Pill Badge */}
-                <div className="mt-8 flex flex-col items-center gap-2.5">
-                  <span className="inline-block text-[10px] font-black tracking-widest text-rose-600 bg-rose-100 dark:bg-rose-950/80 px-3 py-1 rounded-full uppercase border border-rose-200 dark:border-rose-800 shadow-sm">
-                    Goal Matrix
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-widest text-rose-600 dark:text-rose-400 transition-transform duration-500 group-hover:scale-105">
-                    {missionSec?.title ? missionSec.title : "MISSION"}
-                  </h3>
+                {/* Bottom 3D Red Triangular Wedge & Black Circle Graphic Accent */}
+                <div className="relative mt-12 pt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80 z-10">
+                  <span className="text-xs font-mono font-bold text-slate-400">01</span>
+                  <span className="h-[1.5px] w-28 bg-slate-200 dark:bg-slate-800" />
                 </div>
 
-                <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium px-2 sm:px-4">
-                  {missionSec?.body ? missionSec.body : "To architect scalable, high-performance digital matrices that empower global enterprises through precision software engineering and data-driven growth."}
-                </p>
-
-                {/* Bottom Kinetic Spark Bar */}
-                <div className="mt-auto pt-6 w-full flex justify-center">
-                  <div className="h-1 w-12 rounded-full bg-rose-200 dark:bg-rose-900/60 transition-all duration-500 group-hover:w-28 group-hover:bg-rose-500" />
+                {/* Background 3D Geometry In Card Bottom Corner */}
+                <div className="pointer-events-none absolute right-0 bottom-0 w-44 h-32 overflow-hidden">
+                  <div className="absolute right-6 bottom-0 w-28 h-28 bg-[#e01e37]" style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }} />
+                  <div className="absolute right-0 bottom-0 w-20 h-20 bg-black rounded-t-full" />
                 </div>
               </div>
             </Reveal>
 
-            {/* Card 2: VISION */}
+            {/* CARD 2: Our Vision (Sleek Dark Black Card with Red Glowing 3D Shapes) */}
             <Reveal direction="up" delay={200} className="h-full">
-              <div className="group relative flex h-full flex-col items-center text-center rounded-[50px] sm:rounded-[60px] border border-sky-200/80 dark:border-sky-900/40 bg-gradient-to-b from-white via-sky-50/30 to-sky-100/40 dark:from-slate-900 dark:via-slate-900/90 dark:to-sky-950/30 p-7 pt-12 pb-16 shadow-[0_15px_40px_rgba(14,165,233,0.08)] transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(14,165,233,0.25)] hover:border-sky-400 overflow-hidden">
-                
-                {/* Background Ambient Glow & Animated Orb */}
-                <div className="absolute -top-24 -left-24 size-48 rounded-full bg-sky-400/20 blur-3xl group-hover:bg-sky-500/35 transition-all duration-700 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="relative group h-full flex flex-col justify-between rounded-3xl bg-[#0d090c] text-white p-8 border border-slate-800 shadow-2xl transition-all duration-500 hover:shadow-[0_20px_60px_rgba(224,30,55,0.25)] hover:-translate-y-1 overflow-hidden">
+                {/* Background Ambient Red Radial Glow inside Vision Card */}
+                <div className="pointer-events-none absolute top-0 right-0 size-64 bg-[#e01e37]/20 rounded-full blur-3xl" />
 
-                {/* Animated Outer Orbit Ring with Rotating Dotted Border */}
-                <div className="relative flex items-center justify-center p-3 rounded-full">
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-sky-400/60 animate-[spin_15s_linear_infinite_reverse] group-hover:border-sky-500 group-hover:scale-110 transition-all duration-500" />
-                  
-                  {/* Glowing 3D Disc Badge */}
-                  <div className="relative flex items-center justify-center rounded-full p-2 bg-gradient-to-tr from-sky-500 to-sky-400 shadow-[0_8px_25px_rgba(14,165,233,0.4)] transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(14,165,233,0.7)]">
-                    <div className="flex size-32 sm:size-36 items-center justify-center rounded-full bg-white dark:bg-slate-950 shadow-inner transition-transform duration-700 ease-out group-hover:-rotate-12 group-hover:scale-105">
-                      <svg className="size-16 text-sky-500 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(14,165,233,0.9)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" className="stroke-sky-300 dark:stroke-sky-800 group-hover:stroke-sky-400 transition-colors" />
-                        <circle cx="12" cy="12" r="4" className="stroke-sky-500 fill-sky-500/20 group-hover:fill-sky-500/50 transition-all" />
-                        <circle cx="12" cy="12" r="1.5" className="fill-sky-500 animate-ping" />
-                      </svg>
+                <div className="relative z-10 space-y-5">
+                  {/* Circular Dark Red Eye Icon Disc */}
+                  <div className="size-12 rounded-full bg-rose-950/80 border border-rose-900/60 flex items-center justify-center text-[#e01e37]">
+                    <Eye className="size-6 stroke-[2]" />
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                    {visionSec?.title ? visionSec.title : <>Our <span className="text-[#e01e37]">Vision</span></>}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed text-justify font-normal">
+                    {visionSec?.body ? visionSec.body : "To be a globally trusted IT partner, recognized for our innovation, excellence and the positive impact we create for businesses and communities worldwide."}
+                  </p>
+
+                  {/* Inner Pill Tag: Global Impact Through Innovation */}
+                  <div className="pt-2">
+                    <div className="inline-flex items-center gap-2.5 rounded-full bg-white/10 border border-white/15 px-4 py-2 text-[11px] font-bold text-white backdrop-blur-md">
+                      <div className="size-6 rounded-full bg-[#e01e37] text-white flex items-center justify-center shrink-0">
+                        <Globe className="size-3" />
+                      </div>
+                      <span>Global Impact Through Innovation</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Title & Floating Pill Badge */}
-                <div className="mt-8 flex flex-col items-center gap-2.5">
-                  <span className="inline-block text-[10px] font-black tracking-widest text-sky-600 bg-sky-100 dark:bg-sky-950/80 px-3 py-1 rounded-full uppercase border border-sky-200 dark:border-sky-800 shadow-sm">
-                    Future Horizon
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-widest text-sky-600 dark:text-sky-400 transition-transform duration-500 group-hover:scale-105">
-                    {visionSec?.title ? visionSec.title : "VISION"}
-                  </h3>
+                {/* Bottom Number Line */}
+                <div className="relative mt-12 pt-6 flex items-center justify-between border-t border-white/10 z-10">
+                  <span className="text-xs font-mono font-bold text-slate-400">02</span>
+                  <span className="h-[1.5px] w-28 bg-white/10" />
                 </div>
 
-                <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium px-2 sm:px-4">
-                  {visionSec?.body ? visionSec.body : "To set the absolute global standard for immersive, highly kinetic web applications, intelligent automation, and transformative digital experiences."}
-                </p>
-
-                {/* Bottom Kinetic Spark Bar */}
-                <div className="mt-auto pt-6 w-full flex justify-center">
-                  <div className="h-1 w-12 rounded-full bg-sky-200 dark:bg-sky-900/60 transition-all duration-500 group-hover:w-28 group-hover:bg-sky-500" />
+                {/* Background Red 3D Geometry in Card Right Area (as seen in dark middle card of image) */}
+                <div className="pointer-events-none absolute right-0 bottom-0 w-48 h-48">
+                  <div className="absolute right-0 bottom-6 w-36 h-36 bg-[#e01e37]" style={{ clipPath: "polygon(100% 0, 0 50%, 100% 100%)" }} />
+                  <div className="absolute right-4 bottom-0 w-28 h-28 bg-black rounded-t-full border-t border-white/10" />
                 </div>
               </div>
             </Reveal>
 
-            {/* Card 3: VALUES */}
+            {/* CARD 3: Our Values (White Card with 4 Icon List Items: Integrity, Innovation, Collaboration, Excellence) */}
             <Reveal direction="up" delay={300} className="h-full">
-              <div className="group relative flex h-full flex-col items-center text-center rounded-[50px] sm:rounded-[60px] border border-emerald-200/80 dark:border-emerald-900/40 bg-gradient-to-b from-white via-emerald-50/30 to-emerald-100/40 dark:from-slate-900 dark:via-slate-900/90 dark:to-emerald-950/30 p-7 pt-12 pb-16 shadow-[0_15px_40px_rgba(16,185,129,0.08)] transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(16,185,129,0.25)] hover:border-emerald-400 overflow-hidden">
-                
-                {/* Background Ambient Glow & Animated Orb */}
-                <div className="absolute -top-24 -left-24 size-48 rounded-full bg-emerald-400/20 blur-3xl group-hover:bg-emerald-500/35 transition-all duration-700 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-                {/* Animated Outer Orbit Ring with Rotating Dotted Border */}
-                <div className="relative flex items-center justify-center p-3 rounded-full">
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-emerald-400/60 animate-[spin_10s_linear_infinite] group-hover:border-emerald-500 group-hover:scale-110 transition-all duration-500" />
-                  
-                  {/* Glowing 3D Disc Badge */}
-                  <div className="relative flex items-center justify-center rounded-full p-2 bg-gradient-to-tr from-emerald-500 to-emerald-400 shadow-[0_8px_25px_rgba(16,185,129,0.4)] transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.7)]">
-                    <div className="flex size-32 sm:size-36 items-center justify-center rounded-full bg-white dark:bg-slate-950 shadow-inner transition-transform duration-700 ease-out group-hover:rotate-12 group-hover:scale-105">
-                      <svg className="size-16 text-emerald-500 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(16,185,129,0.9)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 3h12l4 6-10 12L2 9z" className="stroke-emerald-300 dark:stroke-emerald-800 group-hover:stroke-emerald-400 transition-colors" />
-                        <path d="M11 3l-3 6 4 12" className="stroke-emerald-400" />
-                        <path d="M13 3l3 6-4 12" className="stroke-emerald-400" />
-                        <path d="M2 9h20" className="stroke-emerald-300" />
-                        <path d="M18 2l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" className="fill-emerald-500 stroke-emerald-500 animate-bounce" />
-                      </svg>
-                    </div>
+              <div className="relative group h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card p-8 border border-slate-200/80 dark:border-border/60 shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(224,30,55,0.12)] hover:-translate-y-1 overflow-hidden">
+                <div className="relative z-10 space-y-5">
+                  {/* Circular Red Diamond Icon Disc */}
+                  <div className="size-12 rounded-full bg-rose-50 dark:bg-rose-950/60 border border-rose-100 dark:border-rose-900/50 flex items-center justify-center text-[#e01e37]">
+                    <Gem className="size-6 stroke-[2]" />
                   </div>
-                </div>
 
-                {/* Title & Floating Pill Badge */}
-                <div className="mt-8 flex flex-col items-center gap-2.5">
-                  <span className="inline-block text-[10px] font-black tracking-widest text-emerald-600 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-full uppercase border border-emerald-200 dark:border-emerald-800 shadow-sm">
-                    Core Standards
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 transition-transform duration-500 group-hover:scale-105">
-                    {valuesSec?.title ? valuesSec.title : "PRODUCT VALUES"}
+                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                    {valuesSec?.title ? valuesSec.title : <>Our <span className="text-[#e01e37]">Values</span></>}
                   </h3>
+
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                    {valuesSec?.body ? valuesSec.body : "We are guided by integrity, innovation, collaboration and a commitment to excellence in everything we do."}
+                  </p>
+
+                  
                 </div>
 
-                <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium px-2 sm:px-4">
-                  {valuesSec?.body ? valuesSec.body : "Engineered with bulletproof safety, high concurrency, clean procedural pipelines, and high-fidelity aesthetics across every system."}
-                </p>
+                {/* Bottom Number Line */}
+                <div className="relative mt-8 pt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80 z-10">
+                  <span className="text-xs font-mono font-bold text-slate-400">03</span>
+                  <span className="h-[1.5px] w-28 bg-slate-200 dark:bg-slate-800" />
+                </div>
 
-                {/* Bottom Kinetic Spark Bar */}
-                <div className="mt-auto pt-6 w-full flex justify-center">
-                  <div className="h-1 w-12 rounded-full bg-emerald-200 dark:bg-emerald-900/60 transition-all duration-500 group-hover:w-28 group-hover:bg-emerald-500" />
+                {/* Background 3D Red Geometry & Black Semi-circle in Card Corner */}
+                <div className="pointer-events-none absolute right-0 bottom-0 w-44 h-32 overflow-hidden">
+                  <div className="absolute right-8 bottom-0 w-28 h-28 bg-[#e01e37]" style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }} />
+                  <div className="absolute right-0 bottom-0 w-20 h-20 bg-black rounded-t-full" />
                 </div>
               </div>
             </Reveal>
