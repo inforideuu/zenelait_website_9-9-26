@@ -37,7 +37,7 @@ export function SiteFooter() {
           <div>
             <h3 className="text-lg font-bold text-primary">IT Products</h3>
             <ul className="mt-4 space-y-2.5 text-ink-foreground/80">
-              {itProducts.map((p) => (
+              {itProducts.slice(0, 6).map((p) => (
                 <li key={p.short}>
                   <Link
                     to="/it-products"
@@ -53,7 +53,7 @@ export function SiteFooter() {
           <div>
             <h3 className="text-lg font-bold text-primary">Marketing Services</h3>
             <ul className="mt-4 space-y-2.5 text-ink-foreground/80">
-              {nonItProducts.slice(0, 7).map((p) => (
+              {nonItProducts.slice(0, 6).map((p) => (
                 <li key={p.short}>
                   <Link
                     to={

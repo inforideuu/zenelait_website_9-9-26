@@ -29,6 +29,10 @@ import {
   UserCheck,
   CheckCircle2,
   Activity,
+  Code2,
+  Smartphone,
+  Cpu,
+  FileText,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { getTestimonials } from "@/lib/api";
@@ -372,6 +376,206 @@ const productDetailsData: Record<string, ProductDetail> = {
       { title: "Handed over to Support", time: "2 hours ago" },
     ],
   },
+
+  "custom-software": {
+    id: "custom-software",
+    name: "Customized Software For All Fields",
+    short: "Custom Software",
+    tag: "Bespoke Enterprise Solutions",
+    headline: "Tailored software solutions. Built for your unique workflows.",
+    subtext:
+      "We design, build, and deploy bespoke enterprise software solutions engineered specifically around your industry operations and business processes.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "customize dash.png",
+    heroPills: [
+      { icon: Code2, label: "Bespoke Architecture" },
+      { icon: Layers, label: "API & Legacy Sync" },
+      { icon: ShieldCheck, label: "Enterprise Security" },
+      { icon: TrendingUp, label: "Cloud Scalability" },
+    ],
+    features: [
+      { icon: Code2, title: "Bespoke Architecture", desc: "Customized module design built precisely around your operational workflows." },
+      { icon: Layers, title: "Legacy Integration", desc: "Seamless bi-directional syncing with existing ERP, CRM, and databases." },
+      { icon: ShieldCheck, title: "Enterprise Security", desc: "Role-based access control, SOC-2 compliance, and end-to-end data encryption." },
+      { icon: Sliders, title: "Custom Dashboards", desc: "Interactive executive reporting dashboards with real-time KPI tracking." },
+      { icon: Zap, title: "Automated Workflows", desc: "Eliminate repetitive manual entry with automated task routing and triggers." },
+      { icon: TrendingUp, title: "Cloud Elasticity", desc: "High-performance backend engineered for seamless scaling as you grow." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "100% Custom IP", desc: "Full ownership of source code, IP rights, and architecture." },
+      { icon: ShieldCheck, title: "High Reliability", desc: "99.99% system uptime guarantee with continuous health monitoring." },
+      { icon: Headset, title: "Dedicated Support", desc: "Assigned technical team for onboarding, maintenance, and feature expansions." },
+      { icon: TrendingUp, title: "Process Efficiency", desc: "Reduces operational bottlenecks and speeds up task execution by up to 60%." },
+      { icon: Layers, title: "Cross-Platform Access", desc: "Responsive web portals and tablet-friendly interfaces for field teams." },
+      { icon: DollarSign, title: "Lower Long-Term TCO", desc: "Eliminate recurring seat-license fees with bespoke owned software." },
+    ],
+    testimonial: {
+      quote:
+        "Zenelait built a custom logistics management suite for us from scratch. It replaced 4 legacy tools and increased our daily dispatch efficiency by 50%.",
+      name: "Siddharth Mehta",
+      role: "CTO, TransLogistics Solutions",
+      company: "TransLogistics Solutions",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "99.8%", revenue: "$2,100,000", totalLeads: "3,400", dealsWon: "2,850" },
+    mockupUser: { name: "Rohan Gupta", email: "rohan@translog.com", phone: "+91 98112 33445", location: "Delhi, India" },
+    activityTimeline: [
+      { title: "Custom Module Deployed", time: "30 mins ago" },
+      { title: "Database Migration Completed", time: "2 hours ago" },
+      { title: "API Endpoint Verified", time: "1 day ago" },
+      { title: "User Acceptance Test Passed", time: "3 days ago" },
+    ],
+  },
+
+  hrms: {
+    id: "hrms",
+    name: "Human Resource Management System",
+    short: "HRMS",
+    tag: "Workforce & HR Automation",
+    headline: "Simplify HR operations. Empower your workforce.",
+    subtext:
+      "Zenelait HRMS digitizes the full employee lifecycle — from biometric attendance and automated payroll processing to performance appraisals and leave management.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "hrms_dash.jpeg",
+    heroPills: [
+      { icon: UserCheck, label: "Attendance & Shift Sync" },
+      { icon: DollarSign, label: "Automated Payroll" },
+      { icon: FileText, label: "Statutory Compliance" },
+      { icon: Users, label: "Self-Service Portal" },
+    ],
+    features: [
+      { icon: UserCheck, title: "Attendance & Rosters", desc: "Biometric integration, GPS geo-fencing, and automated shift scheduling." },
+      { icon: DollarSign, title: "One-Click Payroll", desc: "Calculate salaries, deductions, PF/ESI, and generate payslips automatically." },
+      { icon: FileText, title: "Compliance Management", desc: "Statutory compliance reporting, tax withholding, and Form 16 generation." },
+      { icon: Users, title: "Self-Service Portal", desc: "Employee portal for leave applications, reimbursement claims, and tax declarations." },
+      { icon: TrendingUp, title: "Performance Appraisals", desc: "360-degree feedback, OKR tracking, and appraisal review cycles." },
+      { icon: ShieldCheck, title: "Document Vault", desc: "Encrypted storage for employee contracts, identity proofs, and credentials." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "Zero Payroll Errors", desc: "Automate complex salary computations and eliminate manual spreadsheets." },
+      { icon: ShieldCheck, title: "Data Security", desc: "Role-based visibility ensuring sensitive salary data remains confidential." },
+      { icon: Headset, title: "Fast Employee Onboarding", desc: "Digital onboarding workflows reduce HR paperwork by 80%." },
+      { icon: TrendingUp, title: "Employee Satisfaction", desc: "Instant mobile access to payslips, leave balances, and company announcements." },
+      { icon: Layers, title: "Biometric Hardware Sync", desc: "Supports direct integration with ZKeco, Essl, and RFID biometric devices." },
+      { icon: DollarSign, title: "Cost Effective", desc: "Scalable per-employee pricing with zero hidden infrastructure costs." },
+    ],
+    testimonial: {
+      quote:
+        "Zenelait HRMS simplified our multi-branch payroll from 5 days down to 10 minutes. The attendance and mobile self-service app is loved by all 600 employees.",
+      name: "Pooja Sharma",
+      role: "Head of HR, Zenith Enterprises",
+      company: "Zenith Enterprises",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "99.4%", revenue: "$1,850,000", totalLeads: "5,100", dealsWon: "4,600" },
+    mockupUser: { name: "Kavita Nair", email: "kavita@zenith.com", phone: "+91 99887 76655", location: "Bengaluru, India" },
+    activityTimeline: [
+      { title: "Monthly Payroll Processed", time: "1 hour ago" },
+      { title: "Leave Request Approved", time: "3 hours ago" },
+      { title: "Biometric Logs Synced", time: "5 hours ago" },
+      { title: "New Employee Onboarded", time: "1 day ago" },
+    ],
+  },
+
+  "ai-factory": {
+    id: "ai-factory",
+    name: "AI Software Factory",
+    short: "AI Factory",
+    tag: "Autonomous AI Engine",
+    headline: "Accelerated AI software development. Built for speed.",
+    subtext:
+      "Transform your product pipeline with custom fine-tuned LLM agents, automated code generation, smart workflow orchestrations, and private AI guardrails.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "ai_software.png",
+    heroPills: [
+      { icon: Cpu, label: "Custom Fine-tuned LLMs" },
+      { icon: Bot, label: "Autonomous Agents" },
+      { icon: Zap, label: "Automated Code Generation" },
+      { icon: ShieldCheck, label: "Private Data Isolation" },
+    ],
+    features: [
+      { icon: Cpu, title: "Private LLM Models", desc: "Fine-tune open-source and proprietary models on your internal data safely." },
+      { icon: Bot, title: "Autonomous Agents", desc: "Multi-agent systems executing complex multi-step technical tasks autonomously." },
+      { icon: Zap, title: "AI Code Engine", desc: "Generate clean, production-ready full-stack boilerplate and component code." },
+      { icon: ShieldCheck, title: "Enterprise Guardrails", desc: "Strict privacy layers preventing data leaks to public AI endpoints." },
+      { icon: Sliders, title: "Workflow Orchestrator", desc: "Visual pipeline builder connecting LLM outputs to your APIs and databases." },
+      { icon: BarChart3, title: "Model Performance", desc: "Track token usage, response latency, accuracy scores, and API costs." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "10x Development Speed", desc: "Ship software features and AI capabilities in days instead of months." },
+      { icon: ShieldCheck, title: "Private Cloud Deployment", desc: "Deploy AI infrastructure on AWS, Azure, or private on-prem servers." },
+      { icon: Headset, title: "Full System Auditability", desc: "Log every AI agent decision and output for compliance and security." },
+      { icon: TrendingUp, title: "Scalable Inference", desc: "Engineered for low-latency batch processing and high-throughput queries." },
+      { icon: Layers, title: "Seamless SDK Integrations", desc: "Simple REST and GraphQL APIs for frontend and backend consumption." },
+      { icon: DollarSign, title: "Cost Optimization", desc: "Smart model routing reduces LLM token expenses by up to 45%." },
+    ],
+    testimonial: {
+      quote:
+        "The AI Software Factory by Zenelait allowed us to build custom AI workflow automation for our legal team in 2 weeks. It slashed processing times by 70%.",
+      name: "David Sterling",
+      role: "VP of Product, LegalTech Global",
+      company: "LegalTech Global",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "97.6%", revenue: "$3,400,000", totalLeads: "2,900", dealsWon: "1,820" },
+    mockupUser: { name: "Jason Vance", email: "jason@legaltech.io", phone: "+1 415 670 9922", location: "Austin, USA" },
+    activityTimeline: [
+      { title: "Agent Task Execution Completed", time: "15 mins ago" },
+      { title: "Fine-tuned Model Synced", time: "2 hours ago" },
+      { title: "Security Guardrail Audit Passed", time: "1 day ago" },
+      { title: "API Pipeline Benchmark Passed", time: "2 days ago" },
+    ],
+  },
+
+  "mobile-apps": {
+    id: "mobile-apps",
+    name: "Zenelait Mobile Applications (APPS)",
+    short: "Mobile Apps",
+    tag: "iOS & Android Solutions",
+    headline: "Engaging Mobile Experiences. Built for iOS & Android.",
+    subtext:
+      "We design and build high-performance mobile apps for iOS and Android with intuitive UI, real-time push notifications, offline support, and cloud backends.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "rideuu.png",
+    heroPills: [
+      { icon: Smartphone, label: "iOS & Android" },
+      { icon: Zap, label: "Offline-First Sync" },
+      { icon: ShieldCheck, label: "Biometric Security" },
+      { icon: Layers, label: "Cloud API Backend" },
+    ],
+    features: [
+      { icon: Smartphone, title: "Native & Cross-Platform", desc: "Swift, Kotlin, React Native, and Flutter apps tailored for speed and smooth UX." },
+      { icon: Zap, title: "Offline Data Sync", desc: "Store data locally and synchronize automatically when connectivity restores." },
+      { icon: ShieldCheck, title: "Biometric Auth", desc: "FaceID, TouchID, and secure hardware key storage for sensitive user data." },
+      { icon: Layers, title: "Push Notifications", desc: "Targeted push notification engine for user engagement and transaction alerts." },
+      { icon: DollarSign, title: "In-App Payments", desc: "Integrated Apple Pay, Google Pay, Razorpay, and Stripe checkout." },
+      { icon: BarChart3, title: "App Analytics", desc: "Track active users, retention rates, session duration, and crash reports." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "Pixel-Perfect UI/UX", desc: "Designed following Apple Human Interface Guidelines and Google Material Design." },
+      { icon: ShieldCheck, title: "App Store Publishing", desc: "Complete management of App Store and Google Play Store submissions." },
+      { icon: Headset, title: "Continuous Maintenance", desc: "Regular OS updates, bug fixes, and performance optimizations." },
+      { icon: TrendingUp, title: "High Engagement", desc: "Intuitive navigation drives higher daily active user retention rates." },
+      { icon: Layers, title: "Scalable Microservices", desc: "Supported by robust cloud APIs capable of handling millions of API calls." },
+      { icon: DollarSign, title: "Flexible Licensing", desc: "Custom app ownership model with zero platform lock-in." },
+    ],
+    testimonial: {
+      quote:
+        "Zenelait delivered our iOS and Android mobile app on time with a stunning user interface. Our active user base grew 3x within 3 months of launch.",
+      name: "Rachel Miller",
+      role: "Product Lead, FitPulse App",
+      company: "FitPulse",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "98.9%", revenue: "$1,250,000", totalLeads: "7,800", dealsWon: "6,400" },
+    mockupUser: { name: "Chloe Adams", email: "chloe@fitpulse.app", phone: "+1 212 400 9811", location: "New York, USA" },
+    activityTimeline: [
+      { title: "App Store Version 2.4 Live", time: "1 hour ago" },
+      { title: "Push Campaign Sent", time: "3 hours ago" },
+      { title: "Google Play Build Approved", time: "1 day ago" },
+      { title: "Offline DB Synced", time: "2 days ago" },
+    ],
+  },
 };
 
 const categories = ["All", "Sales & Customers", "Operations & Finance", "Education & AI"];
@@ -427,9 +631,9 @@ function ItProducts() {
 
   const filteredProducts = itProducts.filter((p) => {
     if (selectedCategory === "All") return true;
-    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website";
-    if (selectedCategory === "Operations & Finance") return p.short === "ERP" || p.short === "Billing";
-    if (selectedCategory === "Education & AI") return p.short === "LMS" || p.short === "AI Chatbot";
+    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website" || p.short === "Mobile Apps";
+    if (selectedCategory === "Operations & Finance") return p.short === "ERP" || p.short === "Billing" || p.short === "HRMS" || p.short === "Custom Software";
+    if (selectedCategory === "Education & AI") return p.short === "LMS" || p.short === "AI Chatbot" || p.short === "AI Factory";
     return true;
   });
 

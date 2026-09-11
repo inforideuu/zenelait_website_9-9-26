@@ -86,6 +86,58 @@ export const itProducts: Product[] = [
       "Human handover with conversation history",
     ],
   },
+  {
+    name: "Customized Software For All Fields",
+    short: "Custom Software",
+    tag: "Custom Solutions",
+    image: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=1200&auto=format&fit=crop&q=80",
+    description:
+      "Tailor-made enterprise software solutions designed to digitize and automate workflows across healthcare, logistics, manufacturing, retail, and finance.",
+    points: [
+      "Bespoke architecture tailored to unique workflow requirements",
+      "Scalable, cloud-native enterprise systems with API integration",
+      "End-to-end development, legacy migration, and ongoing support",
+    ],
+  },
+  {
+    name: "Human Resource Management System (HRMS)",
+    short: "HRMS",
+    tag: "Workforce & HR",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80",
+    description:
+      "Complete HR and workforce software for automated attendance, biometric sync, multi-tier payroll processing, leave management, and employee self-service.",
+    points: [
+      "Biometric, GPS attendance and flexible shift rosters",
+      "Automated payroll calculation, statutory compliance & payslips",
+      "Employee self-service portal, leave requests & appraisals",
+    ],
+  },
+  {
+    name: "AI Software Factory",
+    short: "AI Factory",
+    tag: "Autonomous AI Engine",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&auto=format&fit=crop&q=80",
+    description:
+      "Accelerated AI engineering factory powered by fine-tuned LLM agents, automated code generation, smart workflow pipelines, and private data guardrails.",
+    points: [
+      "Custom fine-tuned LLMs and autonomous agent workflows",
+      "Automated code production and rapid prototyping engine",
+      "Private enterprise data isolation with SOC-2 security",
+    ],
+  },
+  {
+    name: "Zenelait Mobile Applications (APPS)",
+    short: "Mobile Apps",
+    tag: "iOS & Android Apps",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&auto=format&fit=crop&q=80",
+    description:
+      "High-performance native and cross-platform mobile apps for iOS and Android featuring modern UX, offline access, real-time push notifications, and payment gateways.",
+    points: [
+      "Native iOS/Android and Flutter / React Native solutions",
+      "Offline sync, push notification triggers & biometrics",
+      "Seamless API connectivity with cloud & enterprise backends",
+    ],
+  },
 ];
 
 export const nonItProducts: Product[] = [
