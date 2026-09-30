@@ -1,4 +1,5 @@
 export type Product = {
+  id?: string;
   name: string;
   short: string;
   tag?: string;
@@ -25,7 +26,7 @@ export const itProducts: Product[] = [
     name: "Enterprise Resource Planning (ERP)",
     short: "ERP",
     tag: "Enterprise System",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&auto=format&fit=crop&q=80",
+    image: "/erp_card_image.jpg",
     description:
       "One connected system for inventory, purchase, production, finance and people — designed for growing Indian businesses.",
     points: [
@@ -126,16 +127,31 @@ export const itProducts: Product[] = [
     ],
   },
   {
-    name: "Zenelait Mobile Applications (APPS)",
-    short: "Mobile Apps",
-    tag: "iOS & Android Apps",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&auto=format&fit=crop&q=80",
+    id: "rideuu-app",
+    name: "Rideuu App",
+    short: "Rideuu App",
+    tag: "Auto & Bike Ride Booking",
+    image: "/rideuu_app_card.jpg",
     description:
-      "High-performance native and cross-platform mobile apps for iOS and Android featuring modern UX, offline access, real-time push notifications, and payment gateways.",
+      "On-demand auto rickshaw and bike taxi booking mobile application with real-time GPS tracking, fare estimation, instant driver matching, and cash/UPI payments.",
     points: [
-      "Native iOS/Android and Flutter / React Native solutions",
-      "Offline sync, push notification triggers & biometrics",
-      "Seamless API connectivity with cloud & enterprise backends",
+      "Instant auto rickshaw & bike taxi booking",
+      "Live GPS route navigation & real-time tracking",
+      "Seamless UPI, wallet, and cash payments",
+    ],
+  },
+  {
+    id: "school-college-cab",
+    name: "School College Cab",
+    short: "School Cab",
+    tag: "Student Transport & Safety",
+    image: "/school_college_cab_card.jpg",
+    description:
+      "Dedicated school and college cab booking mobile app offering safe student commutes, live route tracking, automated parent alerts, and driver verification.",
+    points: [
+      "Scheduled daily school & college pickup / drop",
+      "Parent live tracking & real-time ETA alerts",
+      "Verified drivers & emergency SOS button",
     ],
   },
 ];

@@ -527,14 +527,14 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
   },
 
-  "mobile-apps": {
-    id: "mobile-apps",
-    name: "Zenelait Mobile Applications (APPS)",
-    short: "Mobile Apps",
-    tag: "iOS & Android Solutions",
-    headline: "Engaging Mobile Experiences. Built for iOS & Android.",
+  "rideuu-app": {
+    id: "rideuu-app",
+    name: "Rideuu App",
+    short: "Rideuu App",
+    tag: "Auto & Bike Ride Booking",
+    headline: "On-demand Auto & Bike Taxi Booking. Urban Mobility Redefined.",
     subtext:
-      "We design and build high-performance mobile apps for iOS and Android with intuitive UI, real-time push notifications, offline support, and cloud backends.",
+      "Rideuu App connects commuters with nearby auto rickshaws and bike taxis instantly with live GPS route navigation, upfront fare estimation, and seamless UPI payments.",
     heroBgImage: "IT_product_detail.png",
     featureDashboardImage: "rideuu.png",
     heroPills: [
@@ -576,9 +576,59 @@ const productDetailsData: Record<string, ProductDetail> = {
       { title: "Offline DB Synced", time: "2 days ago" },
     ],
   },
+
+  "school-college-cab": {
+    id: "school-college-cab",
+    name: "School College Cab",
+    short: "School Cab",
+    tag: "Student Transport & Safety",
+    headline: "Safe & Reliable Student Transport. Built for Peace of Mind.",
+    subtext:
+      "A dedicated school and college cab booking mobile platform with live GPS tracking, verified drivers, automated parent notifications, and instant SOS safety features.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "scl_clg_cab.png",
+    heroPills: [
+      { icon: Smartphone, label: "Live GPS Tracking" },
+      { icon: ShieldCheck, label: "Verified Drivers" },
+      { icon: Zap, label: "Parent Alerts" },
+      { icon: Layers, label: "Scheduled Rides" },
+    ],
+    features: [
+      { icon: Smartphone, title: "Daily Scheduled Rides", desc: "Automated recurring pickup and drop-off schedules for students." },
+      { icon: Zap, title: "Parent Live Tracking", desc: "Real-time location updates and trip progress shared directly with parents." },
+      { icon: ShieldCheck, title: "Verified Drivers", desc: "Background-checked driver profiles with photo ID and vehicle details." },
+      { icon: Layers, title: "Emergency SOS", desc: "One-tap panic button broadcasting live coordinates to parents and authorities." },
+      { icon: DollarSign, title: "Pass & Monthly Subscriptions", desc: "Flexible daily pass, weekly, or monthly student commute plans." },
+      { icon: BarChart3, title: "Attendance & Trip Logs", desc: "Digital boarding verification and automated trip status reports." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "Student Safety First", desc: "Comprehensive safety protocols with camera sync and speed alerts." },
+      { icon: ShieldCheck, title: "Real-Time Notifications", desc: "Instant SMS & app alerts when students board and arrive at destination." },
+      { icon: Headset, title: "24/7 Transport Desk", desc: "Dedicated support team monitoring active routes around the clock." },
+      { icon: TrendingUp, title: "Optimized Route Planning", desc: "AI route optimization reducing student commute time by up to 30%." },
+      { icon: Layers, title: "School & College Portals", desc: "Dedicated admin dashboards for educational institutions to track fleets." },
+      { icon: DollarSign, title: "Transparent Billing", desc: "Simple fixed monthly pricing per student with zero hidden fees." },
+    ],
+    testimonial: {
+      quote:
+        "School College Cab gave our institution and parents 100% peace of mind. Daily student pick-ups are punctual and safety tracking is top notch.",
+      name: "Dr. Anita Desai",
+      role: "Principal, Sunrise International Academy",
+      company: "Sunrise Academy",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "99.6%", revenue: "$850,000", totalLeads: "4,200", dealsWon: "3,800" },
+    mockupUser: { name: "Priya Sharma", email: "priya@sunrise.edu", phone: "+91 98765 12345", location: "Delhi, India" },
+    activityTimeline: [
+      { title: "Morning Pickup Completed", time: "30 mins ago" },
+      { title: "Parent ETA Alert Sent", time: "1 hour ago" },
+      { title: "Route Safety Audit Passed", time: "1 day ago" },
+      { title: "Monthly Commute Renewed", time: "2 days ago" },
+    ],
+  },
 };
 
-const categories = ["All", "Sales & Customers", "Operations & Finance", "Education & AI"];
+const categories = ["All", "Sales & Customers", "Operations & Finance", "Education & AI", "Apps"];
 
 function ItProducts() {
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
@@ -631,9 +681,10 @@ function ItProducts() {
 
   const filteredProducts = itProducts.filter((p) => {
     if (selectedCategory === "All") return true;
-    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website" || p.short === "Mobile Apps";
+    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website";
     if (selectedCategory === "Operations & Finance") return p.short === "ERP" || p.short === "Billing" || p.short === "HRMS" || p.short === "Custom Software";
     if (selectedCategory === "Education & AI") return p.short === "LMS" || p.short === "AI Chatbot" || p.short === "AI Factory";
+    if (selectedCategory === "Apps") return p.id === "rideuu-app" || p.id === "school-college-cab" || p.short === "Rideuu App" || p.short === "School Cab";
     return true;
   });
 
@@ -1172,13 +1223,33 @@ function ItProducts() {
         </div>
       </section>
 
+      {/* Category Filter Pills */}
+      <section className="container-x mb-10">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-300 cursor-pointer ${
+                selectedCategory === cat
+                  ? "bg-[#ff5252] text-white shadow-lg shadow-rose-500/25 scale-105"
+                  : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-rose-50 hover:text-[#ff5252] dark:hover:bg-slate-800 dark:hover:text-[#ff5252]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
+
       {/* Product Cards Grid */}
       <section className="container-x pt-4">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((p, i) => {
-            const productKey = p.short.toLowerCase().replace(/\s+/g, "-");
+            const productKey = (p.id || p.short).toLowerCase().replace(/\s+/g, "-");
             return (
-              <Reveal key={p.short} delay={(i % 3) * 90} direction="up" className="h-full">
+              <Reveal key={p.id || p.name} delay={(i % 3) * 90} direction="up" className="h-full">
                 <div
                   onClick={() => openProductDetail(productKey)}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
