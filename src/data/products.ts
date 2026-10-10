@@ -159,7 +159,7 @@ export const itProducts: Product[] = [
     name: "Hospital CRM HMS",
     short: "Hospital HMS",
     tag: "Healthcare & Patient Management",
-    image: "/hospital_hms_crm.png",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80",
     description:
       "Hospital Management System (HMS) designed to streamline healthcare administration and patient relationship management.",
     points: [
@@ -173,7 +173,7 @@ export const itProducts: Product[] = [
     name: "AI Integrated CRM",
     short: "AI CRM",
     tag: "AI Sales & Intelligence",
-    image: "/ai_crm.jpeg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80",
     description:
       "Next-generation CRM supercharged with artificial intelligence to predict lead conversions, automate sales outreach, transcribe calls, and auto-score deals.",
     points: [
