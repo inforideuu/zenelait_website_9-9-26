@@ -154,6 +154,34 @@ export const itProducts: Product[] = [
       "Verified drivers & emergency SOS button",
     ],
   },
+  {
+    id: "hospital-hms-crm",
+    name: "Hospital CRM HMS",
+    short: "Hospital HMS",
+    tag: "Healthcare & Patient Management",
+    image: "/hospital_hms_crm.png",
+    description:
+      "Hospital Management System (HMS) designed to streamline healthcare administration and patient relationship management.",
+    points: [
+      "Multi-tenant dual architecture for Platform Admin & Hospital Operations",
+      "Patient registration, EMR, OPD/IPD & appointment scheduling",
+      "Doctor rosters, staff management, lab integration & medical billing",
+    ],
+  },
+  {
+    id: "ai-integrated-crm",
+    name: "AI Integrated CRM",
+    short: "AI CRM",
+    tag: "AI Sales & Intelligence",
+    image: "/ai_crm.jpeg",
+    description:
+      "Next-generation CRM supercharged with artificial intelligence to predict lead conversions, automate sales outreach, transcribe calls, and auto-score deals.",
+    points: [
+      "Predictive AI lead scoring & win probability analytics",
+      "Autonomous email sequence generation & smart WhatsApp replies",
+      "Real-time call transcription, sentiment analysis & deal insights",
+    ],
+  },
 ];
 
 export const nonItProducts: Product[] = [

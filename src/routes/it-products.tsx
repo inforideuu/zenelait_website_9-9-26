@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   ArrowLeft,
@@ -626,7 +626,113 @@ const productDetailsData: Record<string, ProductDetail> = {
       { title: "Monthly Commute Renewed", time: "2 days ago" },
     ],
   },
+
+  "hospital-hms-crm": {
+    id: "hospital-hms-crm",
+    name: "Hospital CRM HMS",
+    short: "Hospital HMS",
+    tag: "Healthcare & Patient Management",
+    headline: "Streamline Healthcare Administration & Patient Relationship Management.",
+    subtext:
+      "A complete Hospital Management System (HMS) built on a dual-application architecture to seamlessly connect platform administration with day-to-day clinical, operational, and patient workflows.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "hospital_hms_crm.png",
+    heroPills: [
+      { icon: Activity, label: "Clinical Workflows" },
+      { icon: Users, label: "Dual Architecture" },
+      { icon: ShieldCheck, label: "EMR & Health Records" },
+      { icon: FileText, label: "Medical Billing" },
+    ],
+    features: [
+      { icon: Layers, title: "Dual-Application Platform", desc: "Multi-tenant architecture with separate Platform Admin and Hospital HMS modules." },
+      { icon: Users, title: "Patient Registration & EMR", desc: "Digital patient onboarding, medical history, clinical notes, and prescription management." },
+      { icon: Activity, title: "OPD & IPD Management", desc: "Streamlined outpatient appointments, bed allocation, and inpatient admission workflows." },
+      { icon: FileText, title: "Medical Billing & Insurance", desc: "Automated GST healthcare billing, pharmacy sync, and insurance claim processing." },
+      { icon: UserCheck, title: "Doctor & Staff Rosters", desc: "Shift scheduling, doctor consultation queues, and department duty management." },
+      { icon: ShieldCheck, title: "Platform Administration", desc: "Centralized hospital onboarding, subscription licensing, and global system oversight." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "Multi-Tenant Scalability", desc: "Onboard multiple hospital branches under unified central governance." },
+      { icon: ShieldCheck, title: "HIPAA & Data Security", desc: "Role-based access security protecting sensitive patient healthcare data." },
+      { icon: Headset, title: "24/7 Clinical Uptime", desc: "High-availability cloud infrastructure ensuring zero-downtime hospital operations." },
+      { icon: TrendingUp, title: "Faster Patient Care", desc: "Reduces patient waiting times and streamlines doctor consultation workflows." },
+      { icon: Layers, title: "Lab & Pharmacy Sync", desc: "Integrated lab test ordering, sample tracking, and automated pharmacy inventory." },
+      { icon: DollarSign, title: "Transparent Billing ROI", desc: "Eliminates billing leakage and automates revenue cycle management." },
+    ],
+    testimonial: {
+      quote:
+        "Zenelait Hospital CRM HMS transformed our multi-specialty hospital's operations. Patient registration time dropped by 60% and billing accuracy reached 100%.",
+      name: "Dr. Vikram Sethi",
+      role: "Medical Director, CarePlus Super Specialty Hospital",
+      company: "CarePlus Hospital",
+      avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "99.7%", revenue: "$2,850,000", totalLeads: "5,400", dealsWon: "4,600" },
+    mockupUser: { name: "Dr. Meera Nambiar", email: "meera@careplus.health", phone: "+91 98450 11223", location: "Bengaluru, India" },
+    activityTimeline: [
+      { title: "EMR Record Updated", time: "10 mins ago" },
+      { title: "OPD Token #104 Issued", time: "25 mins ago" },
+      { title: "Lab Results Synced to Patient Portal", time: "1 hour ago" },
+      { title: "IPD Discharge Summary Approved", time: "3 hours ago" },
+    ],
+  },
+
+  "ai-integrated-crm": {
+    id: "ai-integrated-crm",
+    name: "AI Integrated CRM",
+    short: "AI CRM",
+    tag: "AI Sales & Intelligence",
+    headline: "Supercharge Sales Pipelines with Predictive AI Intelligence.",
+    subtext:
+      "Zenelait's AI Integrated CRM combines intelligent customer relationship management with autonomous sales outreach agents, predictive lead scoring, call sentiment analysis, and automated deal forecasting.",
+    heroBgImage: "IT_product_detail.png",
+    featureDashboardImage: "ai_crm.jpeg",
+    heroPills: [
+      { icon: Bot, label: "Predictive Lead Scoring" },
+      { icon: Sparkles, label: "Autonomous Follow-ups" },
+      { icon: TrendingUp, label: "Revenue Forecasting" },
+      { icon: Zap, label: "Call Sentiment Analysis" },
+    ],
+    features: [
+      { icon: Bot, title: "Predictive Lead Scoring", desc: "Machine learning algorithms rank leads automatically based on engagement, behavior, and deal fit." },
+      { icon: Sparkles, title: "AI Email & Script Generation", desc: "Auto-generate hyper-personalized sales emails, WhatsApp follow-ups, and call scripts." },
+      { icon: Zap, title: "Call Sentiment Analysis", desc: "Transcribe sales calls automatically and detect prospect buying intent and objections." },
+      { icon: TrendingUp, title: "Automated Revenue Forecasting", desc: "Predict monthly revenue and deal win probabilities using real-time machine learning." },
+      { icon: Users, title: "Smart Contact Enrichment", desc: "Automatically pull company size, revenue, LinkedIn profiles, and decision-maker data." },
+      { icon: ShieldCheck, title: "Enterprise Integrations", desc: "Sync seamlessly with WhatsApp API, Gmail, Outlook, Zoom, and custom ERP systems." },
+    ],
+    benefits: [
+      { icon: Sliders, title: "3x Faster Deal Closures", desc: "Automate repetitive follow-ups so your sales team focuses strictly on closing qualified deals." },
+      { icon: ShieldCheck, title: "Data Security Guardrails", desc: "Enterprise data encryption protecting proprietary client interaction records." },
+      { icon: Headset, title: "24/7 AI Sales Assistant", desc: "Continuous lead nurturing and engagement even outside business hours." },
+      { icon: TrendingUp, title: "Higher Win Rates", desc: "AI-driven action recommendations guide reps on the best next steps to close." },
+      { icon: Layers, title: "Multi-Channel Auto-Sync", desc: "Consolidate call transcripts, WhatsApp chats, and email threads in one timeline." },
+      { icon: DollarSign, title: "Predictable Revenue Growth", desc: "Eliminate pipeline guesswork with data-backed win forecasting." },
+    ],
+    testimonial: {
+      quote:
+        "Zenelait AI Integrated CRM revolutionized our sales team's productivity. The predictive lead scoring helped us prioritize high-value prospects and increased our close rate by 45%.",
+      name: "Alexander Thorne",
+      role: "Chief Commercial Officer, Veloce Cloud",
+      company: "Veloce Cloud",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+    },
+    stats: { conversionRate: "48.2%", revenue: "$4,120,000", totalLeads: "18,900", dealsWon: "8,450" },
+    mockupUser: { name: "Sophia Martinez", email: "sophia@velocecloud.com", phone: "+1 415 890 2234", location: "San Jose, USA" },
+    activityTimeline: [
+      { title: "AI Lead Score updated to 94 (Hot)", time: "5 mins ago" },
+      { title: "Call Transcript & Sentiment Analyzed", time: "20 mins ago" },
+      { title: "Personalized Follow-up Drafted", time: "1 hour ago" },
+      { title: "Forecast Win Probability Increased", time: "3 hours ago" },
+    ],
+  },
 };
+
+// Aliases
+productDetailsData["hospital-crm-hms"] = productDetailsData["hospital-hms-crm"]!;
+productDetailsData["hms"] = productDetailsData["hospital-hms-crm"]!;
+productDetailsData["ai-crm"] = productDetailsData["ai-integrated-crm"]!;
+productDetailsData["aicrm"] = productDetailsData["ai-integrated-crm"]!;
 
 const categories = ["All", "Sales & Customers", "Operations & Finance", "Education & AI", "Apps"];
 
@@ -636,6 +742,8 @@ function ItProducts() {
   const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [apiTestimonials, setApiTestimonials] = useState<{ quote: string; name: string; role: string; company?: string; industry?: string }[]>([]);
+  const [showWebsiteVideo, setShowWebsiteVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     getTestimonials('it_products')
@@ -673,6 +781,15 @@ function ItProducts() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleProductCardClick = (id: string) => {
+    const key = id.toLowerCase();
+    if (key === "website" || key === "website-development") {
+      setShowWebsiteVideo(true);
+    } else {
+      openProductDetail(key);
+    }
+  };
+
   const backToCatalog = () => {
     setActiveProductId(null);
     window.history.pushState({}, "", `/it-products`);
@@ -681,9 +798,9 @@ function ItProducts() {
 
   const filteredProducts = itProducts.filter((p) => {
     if (selectedCategory === "All") return true;
-    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website";
-    if (selectedCategory === "Operations & Finance") return p.short === "ERP" || p.short === "Billing" || p.short === "HRMS" || p.short === "Custom Software";
-    if (selectedCategory === "Education & AI") return p.short === "LMS" || p.short === "AI Chatbot" || p.short === "AI Factory";
+    if (selectedCategory === "Sales & Customers") return p.short === "CRM" || p.short === "Website" || p.short === "Hospital HMS" || p.short === "AI CRM";
+    if (selectedCategory === "Operations & Finance") return p.short === "ERP" || p.short === "Billing" || p.short === "HRMS" || p.short === "Custom Software" || p.short === "Hospital HMS";
+    if (selectedCategory === "Education & AI") return p.short === "LMS" || p.short === "AI Chatbot" || p.short === "AI Factory" || p.short === "AI CRM";
     if (selectedCategory === "Apps") return p.id === "rideuu-app" || p.id === "school-college-cab" || p.short === "Rideuu App" || p.short === "School Cab";
     return true;
   });
@@ -707,13 +824,13 @@ function ItProducts() {
             </button>
 
             <div className="flex items-center gap-1.5 overflow-x-auto py-1">
-              {Object.values(productDetailsData).map((p) => (
+              {Array.from(new Map(Object.values(productDetailsData).map((p) => [p.id, p])).values()).map((p) => (
                 <button
                   key={p.id}
                   type="button"
                   onClick={() => openProductDetail(p.id)}
                   className={`px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                    activeProductId === p.id
+                    activeProductId === p.id || (activeProduct && activeProduct.id === p.id)
                       ? "bg-[#ff5252] text-white shadow-xs scale-105"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-rose-50 hover:text-[#ff5252]"
                   }`}
@@ -754,9 +871,9 @@ function ItProducts() {
 
               {/* Main Headline */}
               <Reveal delay={100} direction="up">
-                <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
-                  {activeProduct.name} <br />
-                  <span className="text-[#ff5252]">({activeProduct.short})</span>
+                <h1 className="text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
+                  <span className="block sm:inline-block sm:whitespace-nowrap">{activeProduct.name}</span>{" "}
+                  <span className="text-[#ff5252] inline-block whitespace-nowrap">({activeProduct.short})</span>
                 </h1>
               </Reveal>
 
@@ -1196,7 +1313,7 @@ function ItProducts() {
 
         {/* Content */}
         <div className="container-x relative z-10 flex min-h-[580px] items-center py-16 lg:min-h-[640px]">
-          <div className="max-w-[620px]">
+          <div className="max-w-[720px]">
             {/* Label */}
             <Reveal direction="down">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/50 bg-black/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
@@ -1207,9 +1324,10 @@ function ItProducts() {
 
             {/* Heading */}
             <Reveal delay={100} direction="up">
-              <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
-                Software & Digital Products <br />
-                <span className="text-[#ff5252]">Built for Scale</span>
+              <h1 className="mt-6 text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[66px]">
+                <span className="block sm:inline-block sm:whitespace-nowrap">Software & Digital Products</span>{" "}
+                <br className="hidden sm:block" />
+                <span className="text-primary block sm:inline-block sm:whitespace-nowrap">Built for Scale</span>
               </h1>
             </Reveal>
 
@@ -1251,7 +1369,7 @@ function ItProducts() {
             return (
               <Reveal key={p.id || p.name} delay={(i % 3) * 90} direction="up" className="h-full">
                 <div
-                  onClick={() => openProductDetail(productKey)}
+                  onClick={() => handleProductCardClick(productKey)}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
                 >
                   {/* 3D Tech Header Image Container */}
@@ -1302,7 +1420,7 @@ function ItProducts() {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          openProductDetail(productKey);
+                          handleProductCardClick(productKey);
                         }}
                         className="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#ff5252] hover:text-[#e03e3e] transition-colors group/link cursor-pointer"
                       >
@@ -1378,7 +1496,47 @@ function ItProducts() {
         </div>
       )}
 
-     
+      {/* Fullscreen Video Overlay for Website Development */}
+      {showWebsiteVideo && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 animate-in fade-in duration-300">
+          <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-4 sm:p-6 bg-gradient-to-b from-black/90 via-black/50 to-transparent">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ff5252] px-3.5 py-1 text-xs font-black text-white uppercase tracking-wider shadow-md">
+                Zenelait Showcase
+              </span>
+              <span className="text-white text-xs sm:text-sm font-bold tracking-wide hidden sm:inline-block">
+                Website Development & Architecture
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setShowWebsiteVideo(false);
+                openProductDetail("website");
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-[#ff5252] border border-white/20 px-5 py-2 text-xs font-black text-white transition-all duration-300 cursor-pointer backdrop-blur-md shadow-lg hover:scale-105 active:scale-95"
+            >
+              <span>Skip Video</span>
+              <ArrowRight className="size-4" />
+            </button>
+          </div>
+
+          <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-6 max-w-6xl">
+            <video
+              ref={videoRef}
+              src="/website_development.mp4"
+              autoPlay
+              playsInline
+              controls
+              className="w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain bg-black border border-white/10"
+              onEnded={() => {
+                setShowWebsiteVideo(false);
+                openProductDetail("website");
+              }}
+            />
+          </div>
+        </div>
+      )}
 
     </div>
   );

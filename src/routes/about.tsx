@@ -191,7 +191,7 @@ function About() {
   {/* Content */}
   <div className="container-x relative z-10 flex min-h-[620px] items-center py-16 lg:min-h-[680px]">
 
-    <div className="max-w-[600px]">
+    <div className="max-w-[720px]">
 
       {/* Label */}
       <Reveal direction="down">
@@ -225,21 +225,19 @@ function About() {
         <h1
           className="
             mt-6
-            text-4xl
+            text-3xl
             font-black
-            leading-[1.03]
+            leading-[1.05]
             tracking-tight
             text-white
             sm:text-5xl
             md:text-6xl
-            lg:text-[72px]
+            lg:text-[66px]
           "
         >
-          The Living
-          <br />
-          Foundations
-          <br />
-          <span className="text-primary">
+          <span className="block sm:inline-block sm:whitespace-nowrap">The Living Foundations</span>{" "}
+          <br className="hidden sm:block" />
+          <span className="text-primary block sm:inline-block sm:whitespace-nowrap">
             of Excellence
           </span>
         </h1>

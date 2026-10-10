@@ -81,7 +81,7 @@ function Contact() {
 
         {/* Content */}
         <div className="container-x relative z-10 flex min-h-[580px] items-center py-16 lg:min-h-[620px]">
-          <div className="max-w-[620px]">
+          <div className="max-w-[720px]">
             {/* Tag Badge */}
             <Reveal direction="down">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/50 bg-black/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
@@ -92,10 +92,12 @@ function Contact() {
 
             {/* Main Headline */}
             <Reveal delay={100} direction="up">
-              <h1 className="mt-6 text-4xl font-black leading-[1.03] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[72px]">
-                Let's Discuss Your <br />
-                Business Goals & <br />
-                <span className="text-primary">Requirements</span>
+              <h1 className="mt-6 text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[66px]">
+                <span className="block sm:inline-block sm:whitespace-nowrap">Let's Discuss Your Business Goals</span>{" "}
+                <br className="hidden sm:block" />
+                <span className="text-primary block sm:inline-block sm:whitespace-nowrap">
+                  & Requirements
+                </span>
               </h1>
             </Reveal>
 

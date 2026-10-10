@@ -43,7 +43,7 @@ export function TextReveal({
   const words = text.split(" ");
 
   return (
-    <Component ref={containerRef as any} className={`inline-wrap ${className}`}>
+    <Component ref={containerRef as any} className={`inline-wrap [text-wrap:balance] ${className}`}>
       {words.map((word, index) => {
         const cleanWord = word.replace(/[^a-zA-Z0-9]/g, "");
         const isHighlight = highlightWords.some(
