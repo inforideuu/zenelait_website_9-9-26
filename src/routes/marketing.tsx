@@ -5,6 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { nonItProducts } from "@/data/products";
+import { IndustrySolutionsFilter } from "@/components/IndustrySolutionsFilter";
 import mktImg from "@/assets/abstract-marketing.jpg";
 
 const title = "Marketing Services — SEM, Paid Ads, Social, Content | Zenelait Infotech";
@@ -239,6 +240,9 @@ function Marketing() {
           </SpotlightCard>
         </Reveal>
       </section>
+
+      {/* Industry-Specific Solutions Filter (Vertical Showcase) */}
+      <IndustrySolutionsFilter />
 
       {/* Bottom CTA */}
       <section className="ink-panel relative overflow-hidden py-16 lg:py-20">

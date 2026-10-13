@@ -20,7 +20,7 @@ import {
   Sparkle,
   ChevronRight,
   Building2,
-  DollarSign,
+  IndianRupee,
   Laptop,
   Cpu,
   Upload,
@@ -687,7 +687,7 @@ function Careers() {
                             <Clock className="size-3.5 text-[#ff5252]" /> {job.experience}
                           </span>
                           <span className="flex items-center gap-1.5">
-                            <DollarSign className="size-3.5 text-emerald-500" /> {job.salary}
+                            <IndianRupee className="size-3.5 text-emerald-500" /> {job.salary}
                           </span>
                         </div>
 

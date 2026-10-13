@@ -14,7 +14,7 @@ import {
   Users,
   Sliders,
   ShieldCheck,
-  DollarSign,
+  IndianRupee,
   Headset,
   Search,
   Quote,
@@ -37,6 +37,11 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { getTestimonials } from "@/lib/api";
 import { TestimonialSection } from "@/components/TestimonialSection";
+import { TechStackMatrix } from "@/components/TechStackMatrix";
+import { SecurityComplianceSection } from "@/components/SecurityComplianceSection";
+import { GlobalInfrastructureStatusBadge } from "@/components/GlobalInfrastructureStatusBadge";
+import { InteractiveDemoSandbox } from "@/components/InteractiveDemoSandbox";
+import { FAQSection } from "@/components/FAQSection";
 import { itProducts, Product } from "@/data/products";
 
 const title = "IT Products — CRM, ERP, LMS, Billing, Web & AI | Zenelait Infotech";
@@ -107,7 +112,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Expert support & training", desc: "Dedicated onboarding and 24/7 technical support." },
       { icon: TrendingUp, title: "Scalable for future growth", desc: "Built on elastic cloud infrastructure for high scale." },
       { icon: Layers, title: "Seamless integrations", desc: "Connects with WhatsApp, Gmail, Outlook, and ERPs." },
-      { icon: DollarSign, title: "Affordable & transparent pricing", desc: "Clear pricing with zero hidden fees or setup penalties." },
+      { icon: IndianRupee, title: "Affordable & transparent pricing", desc: "Clear pricing with zero hidden fees or setup penalties." },
     ],
     testimonial: {
       quote:
@@ -117,7 +122,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "TechSolutions",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "27.4%", revenue: "$248,900", totalLeads: "1,248", dealsWon: "342" },
+    stats: { conversionRate: "27.4%", revenue: "₹248,900", totalLeads: "1,248", dealsWon: "342" },
     mockupUser: { name: "Sarah Johnson", email: "sarah@company.com", phone: "+1 234 567 8900", location: "New York, USA" },
     activityTimeline: [
       { title: "Email opened", time: "2 hours ago" },
@@ -147,7 +152,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Layers, title: "Smart Inventory Control", desc: "Real-time stock tracking, automatic reorders and batch control." },
       { icon: BarChart3, title: "Multi-Warehouse Sync", desc: "Multi-branch transfers and centralized stock auditing." },
       { icon: Sliders, title: "Production & BOM", desc: "Bill of materials, job work tracking, and shop floor scheduling." },
-      { icon: DollarSign, title: "Financial Accounting", desc: "General ledger, GST filings, payables, and receivables." },
+      { icon: IndianRupee, title: "Financial Accounting", desc: "General ledger, GST filings, payables, and receivables." },
       { icon: TrendingUp, title: "Procurement & POs", desc: "Automated requisitions, vendor quotes, and PO workflows." },
       { icon: Users, title: "Workforce & Payroll", desc: "Attendance tracking, automated payroll slips, and compliance." },
     ],
@@ -157,7 +162,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Dedicated implementation", desc: "On-site setup, data migration, and team training." },
       { icon: TrendingUp, title: "High availability", desc: "Zero-downtime architecture built for volume." },
       { icon: Layers, title: "Banking & GST API", desc: "Direct integration with corporate banking and GST portals." },
-      { icon: DollarSign, title: "Predictable ROI", desc: "Reduces inventory holding costs by up to 35%." },
+      { icon: IndianRupee, title: "Predictable ROI", desc: "Reduces inventory holding costs by up to 35%." },
     ],
     testimonial: {
       quote:
@@ -167,7 +172,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Apex Industries",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "34.2%", revenue: "$1,480,000", totalLeads: "4,520", dealsWon: "890" },
+    stats: { conversionRate: "34.2%", revenue: "₹1,480,000", totalLeads: "4,520", dealsWon: "890" },
     mockupUser: { name: "David Chen", email: "david@apex.com", phone: "+1 415 889 2030", location: "San Francisco, USA" },
     activityTimeline: [
       { title: "PO #4028 Approved", time: "1 hour ago" },
@@ -207,7 +212,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Instructor Portal", desc: "Multi-instructor payout management and course analytics." },
       { icon: TrendingUp, title: "Scalable Infrastructure", desc: "Stream to thousands of concurrent learners seamlessly." },
       { icon: Layers, title: "Payment Gateways", desc: "Integrated Razorpay, Stripe, and PayPal for course sales." },
-      { icon: DollarSign, title: "Gamification Rewards", desc: "Badges, leaderboards, and streak rewards for engagement." },
+      { icon: IndianRupee, title: "Gamification Rewards", desc: "Badges, leaderboards, and streak rewards for engagement." },
     ],
     testimonial: {
       quote:
@@ -217,7 +222,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Global EduTech",
       avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "98.2%", revenue: "$620,000", totalLeads: "8,900", dealsWon: "5,400" },
+    stats: { conversionRate: "98.2%", revenue: "₹620,000", totalLeads: "8,900", dealsWon: "5,400" },
     mockupUser: { name: "Alex Morgan", email: "alex@edu.org", phone: "+44 20 7946 0912", location: "London, UK" },
     activityTimeline: [
       { title: "Course Completed", time: "30 mins ago" },
@@ -248,7 +253,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: ShieldCheck, title: "GST Compliance", desc: "Auto-calculate CGST/SGST/IGST, e-invoicing, and GSTR filings." },
       { icon: Layers, title: "Stock & Inventory", desc: "Automatic stock deduction upon billing and low-stock alerts." },
       { icon: Users, title: "Customer Loyalty", desc: "Phone lookup, reward points, and discount voucher engine." },
-      { icon: DollarSign, title: "Expenses & Ledger", desc: "Track supplier payments, daybook, and cash reconciliation." },
+      { icon: IndianRupee, title: "Expenses & Ledger", desc: "Track supplier payments, daybook, and cash reconciliation." },
       { icon: TrendingUp, title: "Multi-Payment UPI", desc: "Accept UPI, Credit Cards, cash, and split payments easily." },
     ],
     benefits: [
@@ -257,7 +262,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Custom Invoice Templates", desc: "Add your logo, terms, bank QR code, and custom footers." },
       { icon: TrendingUp, title: "Multi-Branch Control", desc: "Monitor sales across all retail outlets from your phone." },
       { icon: Layers, title: "WhatsApp Digital Bills", desc: "Send digital PDF bills directly to customer WhatsApp." },
-      { icon: DollarSign, title: "Zero Learning Curve", desc: "Intuitive touch interface cashiers master in 5 minutes." },
+      { icon: IndianRupee, title: "Zero Learning Curve", desc: "Intuitive touch interface cashiers master in 5 minutes." },
     ],
     testimonial: {
       quote:
@@ -267,7 +272,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "RetailChain",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "99.9%", revenue: "$3,200,000", totalLeads: "12,400", dealsWon: "12,100" },
+    stats: { conversionRate: "99.9%", revenue: "₹3,200,000", totalLeads: "12,400", dealsWon: "12,100" },
     mockupUser: { name: "Anand Verma", email: "anand@retail.in", phone: "+91 98765 43210", location: "Mumbai, India" },
     activityTimeline: [
       { title: "GST Invoice #9021 Issued", time: "10 mins ago" },
@@ -307,7 +312,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Security Hardened", desc: "Protection against OWASP top vulnerabilities, XSS, and SQL injection." },
       { icon: TrendingUp, title: "Scalable Infrastructure", desc: "Engineered to sustain viral traffic spikes without slowing." },
       { icon: Layers, title: "Analytics Integrated", desc: "GA4 event tracking, heatmaps, and conversion goal setups." },
-      { icon: DollarSign, title: "Ongoing Audits", desc: "Continuous monitoring, updates, and speed optimization audits." },
+      { icon: IndianRupee, title: "Ongoing Audits", desc: "Continuous monitoring, updates, and speed optimization audits." },
     ],
     testimonial: {
       quote:
@@ -317,7 +322,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Lumina SaaS",
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "18.5%", revenue: "$950,000", totalLeads: "3,200", dealsWon: "1,120" },
+    stats: { conversionRate: "18.5%", revenue: "₹950,000", totalLeads: "3,200", dealsWon: "1,120" },
     mockupUser: { name: "Jessica Taylor", email: "jessica@lumina.io", phone: "+1 312 555 0199", location: "Chicago, USA" },
     activityTimeline: [
       { title: "Page Speed Score 100", time: "1 hour ago" },
@@ -357,7 +362,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Multilingual Support", desc: "Understands and responds in over 50+ languages natively." },
       { icon: TrendingUp, title: "CRM Sync", desc: "Automatically pushes captured leads directly to your sales pipeline." },
       { icon: Layers, title: "Continuous Learning", desc: "Learns continuously from agent handovers and new document uploads." },
-      { icon: DollarSign, title: "4x Conversion Boost", desc: "Increases website lead capture rates by up to 4x compared to forms." },
+      { icon: IndianRupee, title: "4x Conversion Boost", desc: "Increases website lead capture rates by up to 4x compared to forms." },
     ],
     testimonial: {
       quote:
@@ -367,7 +372,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "NovaTech",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "42.8%", revenue: "$480,000", totalLeads: "15,800", dealsWon: "6,200" },
+    stats: { conversionRate: "42.8%", revenue: "₹480,000", totalLeads: "15,800", dealsWon: "6,200" },
     mockupUser: { name: "Michael Chang", email: "michael@novatech.ai", phone: "+1 650 492 8811", location: "Seattle, USA" },
     activityTimeline: [
       { title: "Lead Qualified (Hot)", time: "5 mins ago" },
@@ -407,7 +412,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Dedicated Support", desc: "Assigned technical team for onboarding, maintenance, and feature expansions." },
       { icon: TrendingUp, title: "Process Efficiency", desc: "Reduces operational bottlenecks and speeds up task execution by up to 60%." },
       { icon: Layers, title: "Cross-Platform Access", desc: "Responsive web portals and tablet-friendly interfaces for field teams." },
-      { icon: DollarSign, title: "Lower Long-Term TCO", desc: "Eliminate recurring seat-license fees with bespoke owned software." },
+      { icon: IndianRupee, title: "Lower Long-Term TCO", desc: "Eliminate recurring seat-license fees with bespoke owned software." },
     ],
     testimonial: {
       quote:
@@ -417,7 +422,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "TransLogistics Solutions",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "99.8%", revenue: "$2,100,000", totalLeads: "3,400", dealsWon: "2,850" },
+    stats: { conversionRate: "99.8%", revenue: "₹2,100,000", totalLeads: "3,400", dealsWon: "2,850" },
     mockupUser: { name: "Rohan Gupta", email: "rohan@translog.com", phone: "+91 98112 33445", location: "Delhi, India" },
     activityTimeline: [
       { title: "Custom Module Deployed", time: "30 mins ago" },
@@ -439,13 +444,13 @@ const productDetailsData: Record<string, ProductDetail> = {
     featureDashboardImage: "hrms_dash.jpeg",
     heroPills: [
       { icon: UserCheck, label: "Attendance & Shift Sync" },
-      { icon: DollarSign, label: "Automated Payroll" },
+      { icon: IndianRupee, label: "Automated Payroll" },
       { icon: FileText, label: "Statutory Compliance" },
       { icon: Users, label: "Self-Service Portal" },
     ],
     features: [
       { icon: UserCheck, title: "Attendance & Rosters", desc: "Biometric integration, GPS geo-fencing, and automated shift scheduling." },
-      { icon: DollarSign, title: "One-Click Payroll", desc: "Calculate salaries, deductions, PF/ESI, and generate payslips automatically." },
+      { icon: IndianRupee, title: "One-Click Payroll", desc: "Calculate salaries, deductions, PF/ESI, and generate payslips automatically." },
       { icon: FileText, title: "Compliance Management", desc: "Statutory compliance reporting, tax withholding, and Form 16 generation." },
       { icon: Users, title: "Self-Service Portal", desc: "Employee portal for leave applications, reimbursement claims, and tax declarations." },
       { icon: TrendingUp, title: "Performance Appraisals", desc: "360-degree feedback, OKR tracking, and appraisal review cycles." },
@@ -457,7 +462,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Fast Employee Onboarding", desc: "Digital onboarding workflows reduce HR paperwork by 80%." },
       { icon: TrendingUp, title: "Employee Satisfaction", desc: "Instant mobile access to payslips, leave balances, and company announcements." },
       { icon: Layers, title: "Biometric Hardware Sync", desc: "Supports direct integration with ZKeco, Essl, and RFID biometric devices." },
-      { icon: DollarSign, title: "Cost Effective", desc: "Scalable per-employee pricing with zero hidden infrastructure costs." },
+      { icon: IndianRupee, title: "Cost Effective", desc: "Scalable per-employee pricing with zero hidden infrastructure costs." },
     ],
     testimonial: {
       quote:
@@ -467,7 +472,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Zenith Enterprises",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "99.4%", revenue: "$1,850,000", totalLeads: "5,100", dealsWon: "4,600" },
+    stats: { conversionRate: "99.4%", revenue: "₹1,850,000", totalLeads: "5,100", dealsWon: "4,600" },
     mockupUser: { name: "Kavita Nair", email: "kavita@zenith.com", phone: "+91 99887 76655", location: "Bengaluru, India" },
     activityTimeline: [
       { title: "Monthly Payroll Processed", time: "1 hour ago" },
@@ -507,7 +512,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Full System Auditability", desc: "Log every AI agent decision and output for compliance and security." },
       { icon: TrendingUp, title: "Scalable Inference", desc: "Engineered for low-latency batch processing and high-throughput queries." },
       { icon: Layers, title: "Seamless SDK Integrations", desc: "Simple REST and GraphQL APIs for frontend and backend consumption." },
-      { icon: DollarSign, title: "Cost Optimization", desc: "Smart model routing reduces LLM token expenses by up to 45%." },
+      { icon: IndianRupee, title: "Cost Optimization", desc: "Smart model routing reduces LLM token expenses by up to 45%." },
     ],
     testimonial: {
       quote:
@@ -517,7 +522,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "LegalTech Global",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "97.6%", revenue: "$3,400,000", totalLeads: "2,900", dealsWon: "1,820" },
+    stats: { conversionRate: "97.6%", revenue: "₹3,400,000", totalLeads: "2,900", dealsWon: "1,820" },
     mockupUser: { name: "Jason Vance", email: "jason@legaltech.io", phone: "+1 415 670 9922", location: "Austin, USA" },
     activityTimeline: [
       { title: "Agent Task Execution Completed", time: "15 mins ago" },
@@ -548,7 +553,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Zap, title: "Offline Data Sync", desc: "Store data locally and synchronize automatically when connectivity restores." },
       { icon: ShieldCheck, title: "Biometric Auth", desc: "FaceID, TouchID, and secure hardware key storage for sensitive user data." },
       { icon: Layers, title: "Push Notifications", desc: "Targeted push notification engine for user engagement and transaction alerts." },
-      { icon: DollarSign, title: "In-App Payments", desc: "Integrated Apple Pay, Google Pay, Razorpay, and Stripe checkout." },
+      { icon: IndianRupee, title: "In-App Payments", desc: "Integrated Apple Pay, Google Pay, Razorpay, and Stripe checkout." },
       { icon: BarChart3, title: "App Analytics", desc: "Track active users, retention rates, session duration, and crash reports." },
     ],
     benefits: [
@@ -557,7 +562,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "Continuous Maintenance", desc: "Regular OS updates, bug fixes, and performance optimizations." },
       { icon: TrendingUp, title: "High Engagement", desc: "Intuitive navigation drives higher daily active user retention rates." },
       { icon: Layers, title: "Scalable Microservices", desc: "Supported by robust cloud APIs capable of handling millions of API calls." },
-      { icon: DollarSign, title: "Flexible Licensing", desc: "Custom app ownership model with zero platform lock-in." },
+      { icon: IndianRupee, title: "Flexible Licensing", desc: "Custom app ownership model with zero platform lock-in." },
     ],
     testimonial: {
       quote:
@@ -567,7 +572,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "FitPulse",
       avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "98.9%", revenue: "$1,250,000", totalLeads: "7,800", dealsWon: "6,400" },
+    stats: { conversionRate: "98.9%", revenue: "₹1,250,000", totalLeads: "7,800", dealsWon: "6,400" },
     mockupUser: { name: "Chloe Adams", email: "chloe@fitpulse.app", phone: "+1 212 400 9811", location: "New York, USA" },
     activityTimeline: [
       { title: "App Store Version 2.4 Live", time: "1 hour ago" },
@@ -598,7 +603,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Zap, title: "Parent Live Tracking", desc: "Real-time location updates and trip progress shared directly with parents." },
       { icon: ShieldCheck, title: "Verified Drivers", desc: "Background-checked driver profiles with photo ID and vehicle details." },
       { icon: Layers, title: "Emergency SOS", desc: "One-tap panic button broadcasting live coordinates to parents and authorities." },
-      { icon: DollarSign, title: "Pass & Monthly Subscriptions", desc: "Flexible daily pass, weekly, or monthly student commute plans." },
+      { icon: IndianRupee, title: "Pass & Monthly Subscriptions", desc: "Flexible daily pass, weekly, or monthly student commute plans." },
       { icon: BarChart3, title: "Attendance & Trip Logs", desc: "Digital boarding verification and automated trip status reports." },
     ],
     benefits: [
@@ -607,7 +612,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "24/7 Transport Desk", desc: "Dedicated support team monitoring active routes around the clock." },
       { icon: TrendingUp, title: "Optimized Route Planning", desc: "AI route optimization reducing student commute time by up to 30%." },
       { icon: Layers, title: "School & College Portals", desc: "Dedicated admin dashboards for educational institutions to track fleets." },
-      { icon: DollarSign, title: "Transparent Billing", desc: "Simple fixed monthly pricing per student with zero hidden fees." },
+      { icon: IndianRupee, title: "Transparent Billing", desc: "Simple fixed monthly pricing per student with zero hidden fees." },
     ],
     testimonial: {
       quote:
@@ -617,7 +622,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Sunrise Academy",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "99.6%", revenue: "$850,000", totalLeads: "4,200", dealsWon: "3,800" },
+    stats: { conversionRate: "99.6%", revenue: "₹850,000", totalLeads: "4,200", dealsWon: "3,800" },
     mockupUser: { name: "Priya Sharma", email: "priya@sunrise.edu", phone: "+91 98765 12345", location: "Delhi, India" },
     activityTimeline: [
       { title: "Morning Pickup Completed", time: "30 mins ago" },
@@ -657,7 +662,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "24/7 Clinical Uptime", desc: "High-availability cloud infrastructure ensuring zero-downtime hospital operations." },
       { icon: TrendingUp, title: "Faster Patient Care", desc: "Reduces patient waiting times and streamlines doctor consultation workflows." },
       { icon: Layers, title: "Lab & Pharmacy Sync", desc: "Integrated lab test ordering, sample tracking, and automated pharmacy inventory." },
-      { icon: DollarSign, title: "Transparent Billing ROI", desc: "Eliminates billing leakage and automates revenue cycle management." },
+      { icon: IndianRupee, title: "Transparent Billing ROI", desc: "Eliminates billing leakage and automates revenue cycle management." },
     ],
     testimonial: {
       quote:
@@ -667,7 +672,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "CarePlus Hospital",
       avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "99.7%", revenue: "$2,850,000", totalLeads: "5,400", dealsWon: "4,600" },
+    stats: { conversionRate: "99.7%", revenue: "₹2,850,000", totalLeads: "5,400", dealsWon: "4,600" },
     mockupUser: { name: "Dr. Meera Nambiar", email: "meera@careplus.health", phone: "+91 98450 11223", location: "Bengaluru, India" },
     activityTimeline: [
       { title: "EMR Record Updated", time: "10 mins ago" },
@@ -707,7 +712,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       { icon: Headset, title: "24/7 AI Sales Assistant", desc: "Continuous lead nurturing and engagement even outside business hours." },
       { icon: TrendingUp, title: "Higher Win Rates", desc: "AI-driven action recommendations guide reps on the best next steps to close." },
       { icon: Layers, title: "Multi-Channel Auto-Sync", desc: "Consolidate call transcripts, WhatsApp chats, and email threads in one timeline." },
-      { icon: DollarSign, title: "Predictable Revenue Growth", desc: "Eliminate pipeline guesswork with data-backed win forecasting." },
+      { icon: IndianRupee, title: "Predictable Revenue Growth", desc: "Eliminate pipeline guesswork with data-backed win forecasting." },
     ],
     testimonial: {
       quote:
@@ -717,7 +722,7 @@ const productDetailsData: Record<string, ProductDetail> = {
       company: "Veloce Cloud",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
     },
-    stats: { conversionRate: "48.2%", revenue: "$4,120,000", totalLeads: "18,900", dealsWon: "8,450" },
+    stats: { conversionRate: "48.2%", revenue: "₹4,120,000", totalLeads: "18,900", dealsWon: "8,450" },
     mockupUser: { name: "Sophia Martinez", email: "sophia@velocecloud.com", phone: "+1 415 890 2234", location: "San Jose, USA" },
     activityTimeline: [
       { title: "AI Lead Score updated to 94 (Hot)", time: "5 mins ago" },
@@ -1439,6 +1444,17 @@ function ItProducts() {
           })}
         </div>
       </section>
+
+      {/* Tech Stack Matrix & Integration Ecosystem */}
+      <TechStackMatrix />
+
+      {/* Live Global Infrastructure & Service Uptime Status Badge */}
+      <GlobalInfrastructureStatusBadge />
+
+      
+
+      {/* Interactive Product / UI Demo Sandbox (Live Before vs. After Slider) */}
+      <InteractiveDemoSandbox initialTab="webapp" />
 
       {/* Quick Preview Modal */}
       {previewProduct && (

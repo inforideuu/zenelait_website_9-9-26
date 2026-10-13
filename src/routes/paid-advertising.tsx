@@ -10,10 +10,10 @@ import {
   Video,
   Building2,
   Layout,
-  Repeat,
-  DollarSign,
+  IndianRupee,
   PieChart,
   Zap,
+  Repeat,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
@@ -227,7 +227,7 @@ function PaidAdvertisingPage() {
             { label: "Average Campaign ROAS", val: "4.2x - 8.5x" },
             { label: "Cost Per Lead Reduction", val: "-40%" },
             { label: "Conversion Rate Lift", val: "+220%" },
-            { label: "Ad Spend Managed", val: "$10M+" },
+            { label: "Ad Spend Managed", val: "₹80Cr+" },
           ].map((st, i) => (
             <Reveal key={st.label} delay={i * 80} direction="up" className="text-center">
               <p className="text-3xl sm:text-4xl font-extrabold text-primary">{st.val}</p>
@@ -341,32 +341,32 @@ function PaidAdvertisingPage() {
                     <div className="flex justify-between items-center text-sm font-bold text-foreground">
                       <span>Monthly Ad Budget:</span>
                       <span className="text-xl text-primary font-extrabold">
-                        ${adSpend.toLocaleString()} / mo
+                        ₹{adSpend.toLocaleString("en-IN")} / mo
                       </span>
                     </div>
 
                     <input
                       type="range"
-                      min="1000"
-                      max="50000"
-                      step="1000"
+                      min="10000"
+                      max="1000000"
+                      step="10000"
                       value={adSpend}
                       onChange={(e) => setAdSpend(parseInt(e.target.value, 10))}
                       className="mt-4 w-full accent-primary cursor-pointer h-2.5 bg-border rounded-lg"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                      <span>$1,000</span>
-                      <span>$25,000</span>
-                      <span>$50,000+</span>
+                      <span>₹10,000</span>
+                      <span>₹5,00,000</span>
+                      <span>₹10,00,000+</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-5">
                   <div className="rounded-2xl border border-border bg-background/90 p-6 text-center shadow-lg backdrop-blur-md">
-                    <DollarSign className="mx-auto size-8 text-primary" />
+                    <IndianRupee className="mx-auto size-8 text-primary" />
                     <p className="mt-3 text-3xl font-extrabold text-foreground">
-                      ${projectedReturn.toLocaleString()}
+                      ₹{projectedReturn.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
                       Projected Revenue (4.2x ROAS)

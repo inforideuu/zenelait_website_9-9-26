@@ -8,6 +8,9 @@ import aboutImg from "@/assets/abstract-about.jpg";
 import missionImg from "@/assets/mission-abstract.png";
 import visionImg from "@/assets/vision-abstract.png";
 import { getPageSections, PageSectionContent } from "@/lib/api";
+import { CaseStudiesSection } from "@/components/CaseStudiesSection";
+import { SecurityComplianceSection } from "@/components/SecurityComplianceSection";
+import { KnowledgeHubDownloadCenter } from "@/components/KnowledgeHubDownloadCenter";
 
 const title = "About Zenelait Infotech — Product Engineering & Growth Team";
 const description =
@@ -696,6 +699,9 @@ function About() {
       </section>
       )}
 
+      {/* Enterprise Case Studies & Success Stories Section */}
+      <CaseStudiesSection />
+
       {/* Principles Section */}
       <section className="ink-panel relative overflow-hidden border-y border-white/10 py-16 lg:py-24">
         <div className="pointer-events-none absolute -bottom-20 right-0 size-96 rounded-full bg-primary/10 blur-3xl" />
@@ -889,6 +895,11 @@ function About() {
           </div>
         </div>
       </section>
+
+      {/* Security, QA & Compliance Guarantees Section */}
+      <SecurityComplianceSection />
+
+      
 
       {/* Bottom CTA Banner */}
       <section className="ink-panel relative overflow-hidden py-16 text-center lg:py-24">

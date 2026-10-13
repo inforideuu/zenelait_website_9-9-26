@@ -23,8 +23,28 @@ import {
   Sparkles,
   Volume2,
   ExternalLink,
-  Info
+  Info,
+  Calculator,
+  BookOpen,
+  Upload,
+  FileUp,
+  HelpCircle
 } from "lucide-react";
+import { 
+  DEFAULT_ESTIMATOR_CONFIG, 
+  EstimatorConfig, 
+  OptionItem, 
+  FeatureItem, 
+  TimelineItem 
+} from "@/components/ProjectCostEstimator";
+import {
+  ResourceGuide,
+  RESOURCE_GUIDES
+} from "@/components/KnowledgeHubDownloadCenter";
+import {
+  FAQItem,
+  DEFAULT_FAQS
+} from "@/components/FAQSection";
 import { playNotificationBell } from "@/lib/sound";
 import {
   getDemoRequests,
@@ -221,7 +241,7 @@ function handleDownloadResume(app: JobApplication) {
 
 function AdminDashboardPage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"demos" | "applications" | "home_sections" | "about_sections" | "testimonials" | "careers">("demos");
+  const [activeTab, setActiveTab] = useState<"demos" | "applications" | "home_sections" | "about_sections" | "testimonials" | "careers" | "estimator" | "knowledge_hub" | "faqs">("demos");
 
   // Live Data States
   const [demos, setDemos] = useState<DemoRequest[]>([]);
@@ -572,6 +592,36 @@ function AdminDashboardPage() {
               <Briefcase className="size-4" />
               <span>Open Positions (CRUD)</span>
             </button>
+
+            <button 
+              onClick={() => setActiveTab("estimator")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                activeTab === "estimator" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+              }`}
+            >
+              <Calculator className="size-4" />
+              <span>Project Estimator (CRUD)</span>
+            </button>
+
+            <button 
+              onClick={() => setActiveTab("knowledge_hub")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                activeTab === "knowledge_hub" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+              }`}
+            >
+              <BookOpen className="size-4" />
+              <span>Knowledge Hub (CRUD)</span>
+            </button>
+
+            <button 
+              onClick={() => setActiveTab("faqs")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                activeTab === "faqs" ? "bg-[#ff2a38] text-white shadow-md" : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+              }`}
+            >
+              <HelpCircle className="size-4" />
+              <span>FAQs (CRUD)</span>
+            </button>
           </div>
         </aside>
 
@@ -881,6 +931,30 @@ function AdminDashboardPage() {
                 )}
               </div>
             </div>
+          )}
+
+          {/* TAB 6: Project Estimator Calculator CRUD */}
+          {activeTab === "estimator" && (
+            <ProjectEstimatorAdminSubtab 
+              sections={sections} 
+              loadData={loadData}
+            />
+          )}
+
+          {/* TAB 7: Knowledge Hub & Downloadable Guides CRUD */}
+          {activeTab === "knowledge_hub" && (
+            <KnowledgeHubAdminSubtab 
+              sections={sections} 
+              loadData={loadData}
+            />
+          )}
+
+          {/* TAB 8: Frequently Asked Questions (FAQs) CRUD */}
+          {activeTab === "faqs" && (
+            <FAQAdminSubtab 
+              sections={sections} 
+              loadData={loadData}
+            />
           )}
 
         </main>
@@ -1505,19 +1579,6 @@ function HomePageSectionsAdminSubtab({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <input 
-                type="checkbox" 
-                id="intro_active_check" 
-                checked={introActive} 
-                onChange={e => setIntroActive(e.target.checked)}
-                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
-              />
-              <label htmlFor="intro_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                Section Visible on Home Page
-              </label>
-            </div>
-
             <button
               type="button"
               onClick={handleDeleteIntro}
@@ -1630,19 +1691,6 @@ function HomePageSectionsAdminSubtab({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <input 
-                type="checkbox" 
-                id="stats_active_check" 
-                checked={statsActive} 
-                onChange={e => setStatsActive(e.target.checked)}
-                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
-              />
-              <label htmlFor="stats_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                Section Visible on Home Page
-              </label>
-            </div>
-
             <button
               type="button"
               onClick={handleDeleteStats}
@@ -1948,19 +1996,6 @@ function AboutUsPageSectionsAdminSubtab({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <input 
-                type="checkbox" 
-                id="who_active_check" 
-                checked={whoActive} 
-                onChange={e => setWhoActive(e.target.checked)}
-                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
-              />
-              <label htmlFor="who_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                Section Visible on About Us Page
-              </label>
-            </div>
-
             <button
               type="button"
               onClick={handleDeleteWhoWeAre}
@@ -2094,19 +2129,6 @@ function AboutUsPageSectionsAdminSubtab({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <input 
-                type="checkbox" 
-                id="mv_active_check" 
-                checked={mvActive} 
-                onChange={e => setMvActive(e.target.checked)}
-                className="size-4 accent-[#ff2a38] rounded cursor-pointer"
-              />
-              <label htmlFor="mv_active_check" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                Section Visible on About Us Page
-              </label>
-            </div>
-
             <button
               type="button"
               onClick={handleDeleteMissionVision}
@@ -2210,4 +2232,1449 @@ function AboutUsPageSectionsAdminSubtab({
   );
 }
 
+function ProjectEstimatorAdminSubtab({
+  sections,
+  loadData,
+}: {
+  sections: PageSectionContent[];
+  loadData: () => void;
+}) {
+  const calcSec = sections.find((s) => s.section_key === "home_calculator");
 
+  // Load existing configuration or defaults
+  const initialConfig: EstimatorConfig = calcSec?.extra_json
+    ? {
+        badge: calcSec.subtitle || calcSec.extra_json.badge || DEFAULT_ESTIMATOR_CONFIG.badge,
+        title: calcSec.title || DEFAULT_ESTIMATOR_CONFIG.title,
+        subtitle: calcSec.body || calcSec.extra_json.subtitle || DEFAULT_ESTIMATOR_CONFIG.subtitle,
+        ctaText: calcSec.extra_json.ctaText || DEFAULT_ESTIMATOR_CONFIG.ctaText,
+        warrantyText: calcSec.extra_json.warrantyText || DEFAULT_ESTIMATOR_CONFIG.warrantyText,
+        currency: calcSec.extra_json.currency || DEFAULT_ESTIMATOR_CONFIG.currency,
+        is_active: calcSec.extra_json.is_active !== false,
+        categories: Array.isArray(calcSec.extra_json.categories) && calcSec.extra_json.categories.length > 0 
+          ? calcSec.extra_json.categories 
+          : DEFAULT_ESTIMATOR_CONFIG.categories,
+        featuresMap: calcSec.extra_json.featuresMap && Object.keys(calcSec.extra_json.featuresMap).length > 0 
+          ? calcSec.extra_json.featuresMap 
+          : DEFAULT_ESTIMATOR_CONFIG.featuresMap,
+        timelines: Array.isArray(calcSec.extra_json.timelines) && calcSec.extra_json.timelines.length > 0 
+          ? calcSec.extra_json.timelines 
+          : DEFAULT_ESTIMATOR_CONFIG.timelines,
+      }
+    : DEFAULT_ESTIMATOR_CONFIG;
+
+  const [isActive, setIsActive] = useState<boolean>(initialConfig.is_active);
+  const [badge, setBadge] = useState<string>(initialConfig.badge);
+  const [title, setTitle] = useState<string>(initialConfig.title);
+  const [subtitle, setSubtitle] = useState<string>(initialConfig.subtitle);
+  const [ctaText, setCtaText] = useState<string>(initialConfig.ctaText);
+  const [warrantyText, setWarrantyText] = useState<string>(initialConfig.warrantyText);
+  const [currency, setCurrency] = useState<string>(initialConfig.currency || "INR");
+  const [categories, setCategories] = useState<OptionItem[]>(initialConfig.categories);
+  const [featuresMap, setFeaturesMap] = useState<Record<string, FeatureItem[]>>(initialConfig.featuresMap);
+  const [timelines, setTimelines] = useState<TimelineItem[]>(initialConfig.timelines);
+
+  // Selected category for editing features
+  const [activeCategoryTab, setActiveCategoryTab] = useState<string>(
+    initialConfig.categories[0]?.id || "web-saas"
+  );
+
+  // Sync state if server updates
+  useEffect(() => {
+    if (calcSec?.extra_json) {
+      const ej = calcSec.extra_json;
+      setIsActive(ej.is_active !== false);
+      setBadge(calcSec.subtitle || ej.badge || DEFAULT_ESTIMATOR_CONFIG.badge);
+      setTitle(calcSec.title || DEFAULT_ESTIMATOR_CONFIG.title);
+      setSubtitle(calcSec.body || ej.subtitle || DEFAULT_ESTIMATOR_CONFIG.subtitle);
+      setCtaText(ej.ctaText || DEFAULT_ESTIMATOR_CONFIG.ctaText);
+      setWarrantyText(ej.warrantyText || DEFAULT_ESTIMATOR_CONFIG.warrantyText);
+      setCurrency(ej.currency || DEFAULT_ESTIMATOR_CONFIG.currency || "INR");
+      if (Array.isArray(ej.categories) && ej.categories.length > 0) setCategories(ej.categories);
+      if (ej.featuresMap && Object.keys(ej.featuresMap).length > 0) setFeaturesMap(ej.featuresMap);
+      if (Array.isArray(ej.timelines) && ej.timelines.length > 0) setTimelines(ej.timelines);
+    }
+  }, [sections]);
+
+  // Save all calculator configuration
+  const handleSaveCalculator = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload: Partial<PageSectionContent> = {
+      section_key: "home_calculator",
+      title: title,
+      subtitle: badge,
+      body: subtitle,
+      extra_json: {
+        is_active: isActive,
+        badge,
+        subtitle,
+        ctaText,
+        warrantyText,
+        currency,
+        categories,
+        featuresMap,
+        timelines,
+      },
+    };
+
+    try {
+      try {
+        await updatePageSection("home_calculator", payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+      alert("Project Cost Estimator & Scope Calculator updated successfully!");
+    } catch (err) {
+      console.error("Error saving calculator:", err);
+      alert("Failed to save calculator configuration.");
+    }
+  };
+
+  // Reset to initial factory defaults
+  const handleResetToDefaults = () => {
+    if (confirm("Reset all project estimator categories, pricing, and features to factory defaults?")) {
+      setIsActive(DEFAULT_ESTIMATOR_CONFIG.is_active);
+      setBadge(DEFAULT_ESTIMATOR_CONFIG.badge);
+      setTitle(DEFAULT_ESTIMATOR_CONFIG.title);
+      setSubtitle(DEFAULT_ESTIMATOR_CONFIG.subtitle);
+      setCtaText(DEFAULT_ESTIMATOR_CONFIG.ctaText);
+      setWarrantyText(DEFAULT_ESTIMATOR_CONFIG.warrantyText);
+      setCurrency(DEFAULT_ESTIMATOR_CONFIG.currency || "INR");
+      setCategories(DEFAULT_ESTIMATOR_CONFIG.categories);
+      setFeaturesMap(DEFAULT_ESTIMATOR_CONFIG.featuresMap);
+      setTimelines(DEFAULT_ESTIMATOR_CONFIG.timelines);
+      if (DEFAULT_ESTIMATOR_CONFIG.categories[0]) {
+        setActiveCategoryTab(DEFAULT_ESTIMATOR_CONFIG.categories[0].id);
+      }
+    }
+  };
+
+  // Category CRUD
+  const handleAddCategory = () => {
+    const newId = `service-${Date.now()}`;
+    const newCat: OptionItem = {
+      id: newId,
+      name: "New Service / Architecture",
+      desc: "Comprehensive custom engineering solution and architecture build.",
+      iconName: "Globe",
+      baseDays: 14,
+    };
+    setCategories([...categories, newCat]);
+    setFeaturesMap({
+      ...featuresMap,
+      [newId]: [
+        { id: `feat-${Date.now()}-1`, name: "Core Architecture Setup", days: 5 },
+        { id: `feat-${Date.now()}-2`, name: "Testing & QA Automation", days: 3 },
+      ],
+    });
+    setActiveCategoryTab(newId);
+  };
+
+  const handleDeleteCategory = (catId: string) => {
+    if (categories.length <= 1) {
+      alert("You must keep at least 1 category.");
+      return;
+    }
+    if (confirm("Delete this category and its associated add-on modules?")) {
+      const remaining = categories.filter((c) => c.id !== catId);
+      setCategories(remaining);
+      const updatedMap = { ...featuresMap };
+      delete updatedMap[catId];
+      setFeaturesMap(updatedMap);
+      if (activeCategoryTab === catId && remaining[0]) {
+        setActiveCategoryTab(remaining[0].id);
+      }
+    }
+  };
+
+  // Feature Add / Delete for active category
+  const handleAddFeature = () => {
+    const newFeat: FeatureItem = {
+      id: `feat-${Date.now()}`,
+      name: "New Deliverable Module",
+      days: 4,
+    };
+    const currentFeats = featuresMap[activeCategoryTab] || [];
+    setFeaturesMap({
+      ...featuresMap,
+      [activeCategoryTab]: [...currentFeats, newFeat],
+    });
+  };
+
+  const handleDeleteFeature = (featId: string) => {
+    const currentFeats = featuresMap[activeCategoryTab] || [];
+    setFeaturesMap({
+      ...featuresMap,
+      [activeCategoryTab]: currentFeats.filter((f) => f.id !== featId),
+    });
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              Project Delivery & Timeline Blueprint (CRUD)
+            </h2>
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-[#ff2a38] dark:bg-rose-950 border border-rose-300">
+              Live Interactive Tool
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Manage engineering sprint durations, delivery timelines, architecture categories, and modular deliverables for the live calculator
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={handleResetToDefaults}
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            Reset Defaults
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={handleSaveCalculator} className="space-y-6 text-xs">
+        {/* Section Visibility & General Content */}
+        <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+              <Calculator className="size-4 text-[#ff2a38]" />
+              <span>General Settings & Copy</span>
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Badge Tagline</label>
+              <input
+                type="text"
+                value={badge}
+                onChange={(e) => setBadge(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Headline</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Subtitle / Subtext</label>
+            <textarea
+              rows={2}
+              value={subtitle}
+              onChange={(e) => setSubtitle(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">CTA Button Text</label>
+              <input
+                type="text"
+                value={ctaText}
+                onChange={(e) => setCtaText(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Warranty Badge / SLA Text</label>
+              <input
+                type="text"
+                value={warrantyText}
+                onChange={(e) => setWarrantyText(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Categories (Step 1) CRUD */}
+        <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div>
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                <span className="size-5 rounded-full bg-[#ff2a38] text-white flex items-center justify-center text-[10px] font-black">1</span>
+                <span>Product & Service Categories ({categories.length})</span>
+              </h3>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                Each category defines the baseline development timeline in working days
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddCategory}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#ff2a38] text-white font-bold hover:bg-rose-600 transition-colors cursor-pointer"
+            >
+              <Plus className="size-3.5" />
+              <span>Add Category</span>
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {categories.map((cat, idx) => (
+              <div
+                key={cat.id}
+                className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#ff2a38] bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-900">
+                    Category #{idx + 1}: {cat.name}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteCategory(cat.id)}
+                    className="p-1 text-slate-400 hover:text-rose-500 transition-colors"
+                    title="Delete Category"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Category Name</label>
+                    <input
+                      type="text"
+                      value={cat.name}
+                      onChange={(e) => {
+                        const updated = [...categories];
+                        const item = updated[idx];
+                        if (item) {
+                          updated[idx] = { ...item, name: e.target.value };
+                          setCategories(updated);
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 font-bold text-slate-900 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Base Timeline (Working Days)</label>
+                    <input
+                      type="number"
+                      value={cat.baseDays}
+                      onChange={(e) => {
+                        const updated = [...categories];
+                        const item = updated[idx];
+                        if (item) {
+                          updated[idx] = { ...item, baseDays: Number(e.target.value) };
+                          setCategories(updated);
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 font-bold text-slate-900 dark:text-white font-mono"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Short Description</label>
+                  <input
+                    type="text"
+                    value={cat.desc}
+                    onChange={(e) => {
+                      const updated = [...categories];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, desc: e.target.value };
+                        setCategories(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Features & Deliverables (Step 2) CRUD */}
+        <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div>
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                <span className="size-5 rounded-full bg-[#ff2a38] text-white flex items-center justify-center text-[10px] font-black">2</span>
+                <span>Deliverables & Modules for Selected Category</span>
+              </h3>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                Add-on deliverables user can check to add incremental development effort (working days)
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddFeature}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#ff2a38] text-white font-bold hover:bg-rose-600 transition-colors self-start sm:self-auto cursor-pointer"
+            >
+              <Plus className="size-3.5" />
+              <span>Add Module</span>
+            </button>
+          </div>
+
+          {/* Select Category to edit its features */}
+          <div className="flex flex-wrap gap-2 pb-2">
+            {categories.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setActiveCategoryTab(c.id)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeCategoryTab === c.id
+                    ? "bg-[#ff2a38] text-white shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200"
+                }`}
+              >
+                <span>{c.name}</span>
+                <span className="ml-1.5 opacity-75 font-mono text-[10px]">
+                  ({(featuresMap[c.id] || []).length})
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Feature rows */}
+          <div className="space-y-3">
+            {(featuresMap[activeCategoryTab] || []).length === 0 ? (
+              <div className="text-center py-6 text-slate-400 text-xs italic">
+                No deliverable modules added yet for this category. Click "+ Add Module" to create one.
+              </div>
+            ) : (
+              (featuresMap[activeCategoryTab] || []).map((feat, fIdx) => (
+                <div
+                  key={feat.id}
+                  className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 flex flex-col sm:flex-row items-center gap-3"
+                >
+                  <div className="w-full sm:flex-1">
+                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Module / Deliverable Name</label>
+                    <input
+                      type="text"
+                      value={feat.name}
+                      onChange={(e) => {
+                        const current = [...(featuresMap[activeCategoryTab] || [])];
+                        const item = current[fIdx];
+                        if (item) {
+                          current[fIdx] = { ...item, name: e.target.value };
+                          setFeaturesMap({ ...featuresMap, [activeCategoryTab]: current });
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 font-semibold text-slate-900 dark:text-white"
+                    />
+                  </div>
+
+                  <div className="w-full sm:w-36">
+                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Effort (+ Days)</label>
+                    <input
+                      type="number"
+                      value={feat.days}
+                      onChange={(e) => {
+                        const current = [...(featuresMap[activeCategoryTab] || [])];
+                        const item = current[fIdx];
+                        if (item) {
+                          current[fIdx] = { ...item, days: Number(e.target.value) };
+                          setFeaturesMap({ ...featuresMap, [activeCategoryTab]: current });
+                        }
+                      }}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 font-bold text-slate-900 dark:text-white font-mono"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteFeature(feat.id)}
+                    className="p-2 text-slate-400 hover:text-rose-500 self-end sm:self-center transition-colors"
+                    title="Delete Module"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Timelines & Sprint Cadence (Step 3) */}
+        <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4">
+          <div className="pb-3 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+              <span className="size-5 rounded-full bg-[#ff2a38] text-white flex items-center justify-center text-[10px] font-black">3</span>
+              <span>Delivery Speed & Sprint Cadence</span>
+            </h3>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              Control the delivery speed labels and sprint velocity options available to prospective clients
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {timelines.map((tl, tIdx) => (
+              <div
+                key={tl.id}
+                className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 space-y-3"
+              >
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Cadence Title</label>
+                  <input
+                    type="text"
+                    value={tl.name}
+                    onChange={(e) => {
+                      const updated = [...timelines];
+                      const item = updated[tIdx];
+                      if (item) {
+                        updated[tIdx] = { ...item, name: e.target.value };
+                        setTimelines(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 font-bold text-slate-900 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Description / Subtitle</label>
+                  <input
+                    type="text"
+                    value={tl.label}
+                    onChange={(e) => {
+                      const updated = [...timelines];
+                      const item = updated[tIdx];
+                      if (item) {
+                        updated[tIdx] = { ...item, label: e.target.value };
+                        setTimelines(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Save Submission Button */}
+        <div className="flex items-center justify-end gap-3 pt-4">
+          <button
+            type="submit"
+            className="px-8 py-3.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-all shadow-lg shadow-rose-500/25 cursor-pointer flex items-center gap-2"
+          >
+            <CheckCircle2 className="size-4" />
+            <span>Save & Publish Project Estimator</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function KnowledgeHubAdminSubtab({
+  sections,
+  loadData,
+}: {
+  sections: PageSectionContent[];
+  loadData: () => void;
+}) {
+  const hubSec = sections.find((s) => s.section_key === "home_knowledge_hub");
+
+  const parseGuides = (sec?: PageSectionContent): ResourceGuide[] => {
+    if (!sec?.extra_json) return RESOURCE_GUIDES;
+    try {
+      const parsed =
+        typeof sec.extra_json === "string"
+          ? JSON.parse(sec.extra_json)
+          : sec.extra_json;
+      if (Array.isArray(parsed?.guides) && parsed.guides.length > 0) {
+        return parsed.guides;
+      }
+    } catch {
+      // fallback
+    }
+    return RESOURCE_GUIDES;
+  };
+
+  const [title, setTitle] = useState<string>(
+    hubSec?.title || "Interactive Knowledge Hub & Free Executive Guides"
+  );
+  const [subtitle, setSubtitle] = useState<string>(
+    hubSec?.body || "Actionable frameworks, financial formulas, and technical blueprints written by our senior architects to help forward-thinking teams make smarter digital decisions."
+  );
+  const [guides, setGuides] = useState<ResourceGuide[]>(parseGuides(hubSec));
+
+  // Sync state if server updates
+  useEffect(() => {
+    if (hubSec) {
+      if (hubSec.title) setTitle(hubSec.title);
+      if (hubSec.body) setSubtitle(hubSec.body);
+      const parsed = parseGuides(hubSec);
+      if (parsed.length > 0) {
+        setGuides(parsed);
+      }
+    }
+  }, [sections]);
+
+  const persistHubToBackend = async (
+    updatedGuides: ResourceGuide[],
+    customTitle?: string,
+    customSubtitle?: string
+  ) => {
+    const payload: Partial<PageSectionContent> = {
+      section_key: "home_knowledge_hub",
+      title: customTitle || title,
+      subtitle: "Knowledge Hub & Executive Guides",
+      body: customSubtitle || subtitle,
+      extra_json: {
+        guides: updatedGuides,
+      },
+    };
+
+    try {
+      try {
+        await updatePageSection("home_knowledge_hub", payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+      return true;
+    } catch (err) {
+      console.error("Error persisting knowledge hub to backend:", err);
+      return false;
+    }
+  };
+
+  const handleAddGuide = () => {
+    const newGuide: ResourceGuide = {
+      id: `guide-${Date.now()}`,
+      title: "New Executive Development Guide",
+      fileFormat: "PDF Guide",
+      badge: "Architecture & Deployment",
+      pages: "",
+      downloadsCount: "1,500+ Downloads",
+      description: "Comprehensive step-by-step technical blueprint and production checklist.",
+      takeaways: [
+        "Core architectural patterns and baseline requirements",
+        "Step-by-step checklist for production deployment",
+        "Security, testing, and continuous monitoring procedures",
+      ],
+      coverColor: "from-rose-600 via-primary to-orange-500",
+      downloadFileName: "Zenelait_Executive_Guide.pdf",
+    };
+    setGuides([...guides, newGuide]);
+  };
+
+  const handleDeleteGuide = async (id: string) => {
+    if (guides.length <= 1) {
+      alert("You must keep at least 1 guide.");
+      return;
+    }
+    if (confirm("Are you sure you want to delete this guide?")) {
+      const updated = guides.filter((g) => g.id !== id);
+      setGuides(updated);
+      await persistHubToBackend(updated);
+    }
+  };
+
+  const handleFileUpload = (guideIndex: number, file: File) => {
+    if (file.type !== "application/pdf") {
+      alert("Please upload a valid PDF file.");
+      return;
+    }
+
+    if (file.size > 8 * 1024 * 1024) {
+      alert("File size exceeds 8MB limit. Please upload an optimized PDF.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const dataUri = e.target?.result as string;
+      const updated = [...guides];
+      const item = updated[guideIndex];
+      if (item) {
+        updated[guideIndex] = {
+          ...item,
+          pdfBase64: dataUri,
+          downloadFileName: file.name,
+        };
+        setGuides(updated);
+
+        // Auto-persist immediately to backend database
+        const ok = await persistHubToBackend(updated);
+        if (ok) {
+          alert(`PDF "${file.name}" uploaded & published live for "${item.title}"! Users downloading this section will now receive this PDF.`);
+        } else {
+          alert(`PDF "${file.name}" loaded in preview. Please click "Save & Publish Knowledge Hub" below to save.`);
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleClearPdf = async (idx: number) => {
+    const updated = [...guides];
+    const item = updated[idx];
+    if (item) {
+      const { pdfBase64, ...rest } = item;
+      updated[idx] = rest;
+      setGuides(updated);
+      await persistHubToBackend(updated);
+      alert(`Custom PDF cleared for "${item.title}". Users will now download the default generated guide.`);
+    }
+  };
+
+  const handleSaveHub = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = await persistHubToBackend(guides, title, subtitle);
+    if (ok) {
+      alert("Knowledge Hub & Downloadable Guides saved and published successfully!");
+    } else {
+      alert("Failed to save knowledge hub configuration.");
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              Knowledge Hub & Executive Guides (CRUD)
+            </h2>
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-[#ff2a38] dark:bg-rose-950 border border-rose-300">
+              Live Download Center
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Manage the downloadable guides, key takeaways, cover colors, and optionally upload custom PDF files for each card
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={handleAddGuide}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#ff2a38] text-white text-xs font-bold hover:bg-rose-600 transition-colors shadow-sm cursor-pointer"
+          >
+            <Plus className="size-3.5" />
+            <span>Add Guide Card</span>
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={handleSaveHub} className="space-y-6 text-xs">
+        {/* Header Settings */}
+        <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4">
+          <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <BookOpen className="size-4 text-[#ff2a38]" />
+            <span>Section Header & Copy</span>
+          </h3>
+
+          <div className="space-y-3">
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Title</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Section Subtitle / Description</label>
+              <textarea
+                rows={2}
+                value={subtitle}
+                onChange={(e) => setSubtitle(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Guides Cards List */}
+        <div className="space-y-6">
+          {guides.map((guide, idx) => (
+            <div
+              key={guide.id}
+              className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-4"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#ff2a38] bg-rose-50 dark:bg-rose-950 px-2.5 py-1 rounded-md border border-rose-200 dark:border-rose-900">
+                  Card #{idx + 1}: {guide.title}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => handleDeleteGuide(guide.id)}
+                  className="p-1.5 text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                  title="Delete Guide"
+                >
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="sm:col-span-2">
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Guide Title</label>
+                  <input
+                    type="text"
+                    value={guide.title}
+                    onChange={(e) => {
+                      const updated = [...guides];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, title: e.target.value };
+                        setGuides(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Badge Tagline</label>
+                  <input
+                    type="text"
+                    value={guide.badge}
+                    onChange={(e) => {
+                      const updated = [...guides];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, badge: e.target.value };
+                        setGuides(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Document Type / Format</label>
+                  <input
+                    type="text"
+                    value={guide.fileFormat}
+                    onChange={(e) => {
+                      const updated = [...guides];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, fileFormat: e.target.value, pages: "" };
+                        setGuides(updated);
+                      }
+                    }}
+                    placeholder="e.g. PDF Guide, Technical Manual"
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-mono text-slate-900 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Download File Name</label>
+                  <input
+                    type="text"
+                    value={guide.downloadFileName}
+                    onChange={(e) => {
+                      const updated = [...guides];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, downloadFileName: e.target.value };
+                        setGuides(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-mono text-slate-900 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-slate-500 block mb-1">Cover Gradient Classes</label>
+                  <input
+                    type="text"
+                    value={guide.coverColor}
+                    onChange={(e) => {
+                      const updated = [...guides];
+                      const item = updated[idx];
+                      if (item) {
+                        updated[idx] = { ...item, coverColor: e.target.value };
+                        setGuides(updated);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-mono text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-[10px] font-bold text-slate-500 block mb-1">Guide Summary / Description</label>
+                <textarea
+                  rows={2}
+                  value={guide.description}
+                  onChange={(e) => {
+                    const updated = [...guides];
+                    const item = updated[idx];
+                    if (item) {
+                      updated[idx] = { ...item, description: e.target.value };
+                      setGuides(updated);
+                    }
+                  }}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 text-slate-900 dark:text-white"
+                />
+              </div>
+
+              {/* Takeaways list */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-[10px] font-bold text-slate-500">Key Takeaway Bullet Points (One per line)</label>
+                </div>
+                <textarea
+                  rows={3}
+                  value={guide.takeaways.join("\n")}
+                  onChange={(e) => {
+                    const updated = [...guides];
+                    const item = updated[idx];
+                    if (item) {
+                      updated[idx] = {
+                        ...item,
+                        takeaways: e.target.value.split("\n").filter((l) => l.trim().length > 0),
+                      };
+                      setGuides(updated);
+                    }
+                  }}
+                  placeholder="Enter each takeaway on a new line"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 text-slate-900 dark:text-white font-mono text-xs"
+                />
+              </div>
+
+              {/* Custom PDF Upload Option */}
+              <div className="p-4 rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <FileUp className="size-4 text-[#ff2a38]" />
+                    <span className="font-bold text-slate-900 dark:text-white text-xs">
+                      Custom PDF File Upload (Optional)
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                    {guide.pdfBase64 ? (
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                        ✓ Custom PDF loaded ({guide.downloadFileName}). Users will download this exact uploaded file.
+                      </span>
+                    ) : (
+                      "No custom PDF uploaded. The system automatically creates a high-res, multi-page branded PDF with full diagrams and takeaways."
+                    )}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <label className="px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5 shadow-xs">
+                    <Upload className="size-3.5 text-[#ff2a38]" />
+                    <span>Upload Custom PDF</span>
+                    <input
+                      type="file"
+                      accept="application/pdf"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleFileUpload(idx, file);
+                      }}
+                    />
+                  </label>
+
+                  {guide.pdfBase64 && (
+                    <button
+                      type="button"
+                      onClick={() => handleClearPdf(idx)}
+                      className="px-2.5 py-2 rounded-xl border border-rose-200 text-xs font-semibold text-rose-600 hover:bg-rose-100 transition-colors cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Save Submission Button */}
+        <div className="flex items-center justify-end gap-3 pt-4">
+          <button
+            type="submit"
+            className="px-8 py-3.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-all shadow-lg shadow-rose-500/25 cursor-pointer flex items-center gap-2"
+          >
+            <CheckCircle2 className="size-4" />
+            <span>Save & Publish Knowledge Hub</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function FAQAdminSubtab({
+  sections,
+  loadData,
+}: {
+  sections: PageSectionContent[];
+  loadData: () => void;
+}) {
+  const faqSec = sections.find((s) => s.section_key === "home_faqs");
+
+  const parseFaqs = (sec?: PageSectionContent): FAQItem[] => {
+    if (!sec?.extra_json) return DEFAULT_FAQS;
+    try {
+      const raw =
+        typeof sec.extra_json === "string"
+          ? JSON.parse(sec.extra_json)
+          : sec.extra_json;
+      return Array.isArray(raw?.faqs) && raw.faqs.length > 0 ? raw.faqs : DEFAULT_FAQS;
+    } catch {
+      return DEFAULT_FAQS;
+    }
+  };
+
+  const [title, setTitle] = useState<string>(
+    faqSec?.title || "Frequently Asked Questions"
+  );
+  const [badgeText, setBadgeText] = useState<string>(
+    faqSec?.subtitle || "Transparent Answers & Advisory"
+  );
+  const [subtitle, setSubtitle] = useState<string>(
+    faqSec?.body || "Find immediate answers about pricing transparency, security benchmarks, delivery timelines, code IP ownership, and post-launch SLAs."
+  );
+  const [faqs, setFaqs] = useState<FAQItem[]>(parseFaqs(faqSec));
+
+  const [editingFaq, setEditingFaq] = useState<FAQItem | null>(null);
+  const [searchFilter, setSearchFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("All");
+
+  // Sync state if server updates
+  useEffect(() => {
+    if (faqSec) {
+      if (faqSec.title) setTitle(faqSec.title);
+      if (faqSec.subtitle) setBadgeText(faqSec.subtitle);
+      if (faqSec.body) setSubtitle(faqSec.body);
+      const parsed = parseFaqs(faqSec);
+      if (parsed.length > 0) {
+        setFaqs(parsed);
+      }
+    }
+  }, [sections]);
+
+  const persistToBackend = async (
+    targetFaqs: FAQItem[],
+    t = title,
+    b = badgeText,
+    s = subtitle
+  ) => {
+    const payload: Partial<PageSectionContent> = {
+      section_key: "home_faqs",
+      title: t,
+      subtitle: b,
+      body: s,
+      extra_json: {
+        faqs: targetFaqs,
+      },
+    };
+
+    try {
+      try {
+        await updatePageSection("home_faqs", payload);
+      } catch {
+        await createPageSection(payload);
+      }
+      loadData();
+    } catch (err) {
+      console.error("Error saving FAQs:", err);
+    }
+  };
+
+  const handleCreateNewFaq = () => {
+    const newFaq: FAQItem = {
+      id: `faq-${Date.now()}`,
+      category: "Pricing",
+      question: "New Frequently Asked Question?",
+      answer: "Provide a detailed, transparent answer explaining your engineering or engagement policies.",
+      highlight: "Key takeaway summary",
+      popular: false,
+    };
+    setEditingFaq(newFaq);
+  };
+
+  const handleSaveModalFaq = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingFaq) return;
+
+    let updatedList: FAQItem[];
+    const exists = faqs.some((f) => f.id === editingFaq.id);
+    if (exists) {
+      updatedList = faqs.map((f) => (f.id === editingFaq.id ? editingFaq : f));
+    } else {
+      updatedList = [editingFaq, ...faqs];
+    }
+    setFaqs(updatedList);
+    setEditingFaq(null);
+    await persistToBackend(updatedList);
+  };
+
+  const handleDeleteFaq = async (id: string) => {
+    if (faqs.length <= 1) {
+      alert("You must keep at least 1 FAQ item.");
+      return;
+    }
+    if (confirm("Are you sure you want to delete this FAQ item?")) {
+      const updatedList = faqs.filter((f) => f.id !== id);
+      setFaqs(updatedList);
+      await persistToBackend(updatedList);
+    }
+  };
+
+  const handleSaveAllFaqs = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await persistToBackend(faqs, title, badgeText, subtitle);
+    alert("Frequently Asked Questions (FAQs) updated and published successfully!");
+  };
+
+  const categories = ["All", "Pricing", "Security", "Timeline", "Code Ownership", "Support"];
+
+  const filtered = faqs.filter((f) => {
+    const matchesCat = categoryFilter === "All" || f.category === categoryFilter;
+    if (!matchesCat) return false;
+    if (!searchFilter.trim()) return true;
+    const q = searchFilter.toLowerCase();
+    return (
+      f.question.toLowerCase().includes(q) ||
+      f.answer.toLowerCase().includes(q) ||
+      f.category.toLowerCase().includes(q) ||
+      (f.highlight && f.highlight.toLowerCase().includes(q))
+    );
+  });
+
+  return (
+    <div className="space-y-6">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              Frequently Asked Questions (CRUD)
+            </h2>
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-[#ff2a38] dark:bg-rose-950 border border-rose-300">
+              Live Website FAQs
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Create, edit, delete, categorize, and prioritize customer questions shown across the website.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleCreateNewFaq}
+          className="px-4 py-2.5 rounded-xl bg-[#ff2a38] hover:bg-rose-600 text-white text-xs font-bold transition-all shadow-md shadow-rose-500/20 cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
+        >
+          <Plus className="size-4" />
+          <span>Add New FAQ</span>
+        </button>
+      </div>
+
+      {/* Main Save Form */}
+      <form onSubmit={handleSaveAllFaqs} className="space-y-6">
+        {/* Section Header Controls */}
+        <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4 shadow-xs">
+          <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+            <HelpCircle className="size-4 text-[#ff2a38]" />
+            <span>FAQ Section Header & Advisory Info</span>
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                Badge Pill Text
+              </label>
+              <input
+                type="text"
+                value={badgeText}
+                onChange={(e) => setBadgeText(e.target.value)}
+                className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                Section Main Title
+              </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
+              Section Description / Advisory Subtitle
+            </label>
+            <textarea
+              rows={2}
+              value={subtitle}
+              onChange={(e) => setSubtitle(e.target.value)}
+              className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+            />
+          </div>
+        </div>
+
+        {/* Filter and Search Controls */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <div className="flex flex-wrap gap-1.5">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setCategoryFilter(cat)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  categoryFilter === cat
+                    ? "bg-[#ff2a38] text-white shadow-xs"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                }`}
+              >
+                {cat} ({cat === "All" ? faqs.length : faqs.filter((f) => f.category === cat).length})
+              </button>
+            ))}
+          </div>
+
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-3 top-2.5 size-3.5 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search FAQs..."
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(e.target.value)}
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+            />
+          </div>
+        </div>
+
+        {/* List of FAQs */}
+        <div className="space-y-3">
+          {filtered.length === 0 ? (
+            <div className="text-center py-12 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-2">
+              <HelpCircle className="size-8 text-slate-300 dark:text-slate-600 mx-auto" />
+              <p className="text-xs font-bold text-slate-700 dark:text-slate-300">No FAQs found matching filter.</p>
+              <button
+                type="button"
+                onClick={handleCreateNewFaq}
+                className="text-xs text-[#ff2a38] font-bold hover:underline"
+              >
+                Create a new FAQ
+              </button>
+            </div>
+          ) : (
+            filtered.map((item, idx) => (
+              <div
+                key={item.id}
+                className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col md:flex-row md:items-start justify-between gap-4"
+              >
+                <div className="space-y-2 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                      {item.category}
+                    </span>
+                    {item.popular && (
+                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60">
+                        ★ Popular Highlight
+                      </span>
+                    )}
+                    <span className="text-[10px] font-mono text-slate-400">
+                      ID: {item.id}
+                    </span>
+                  </div>
+
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white leading-snug">
+                    {item.question}
+                  </h4>
+
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {item.answer}
+                  </p>
+
+                  {item.highlight && (
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#ff2a38] bg-rose-50 dark:bg-rose-950/30 px-2.5 py-1 rounded-lg border border-rose-200/60 dark:border-rose-900/40">
+                      <Sparkles className="size-3 shrink-0" />
+                      <span>{item.highlight}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0 self-end md:self-start pt-2 md:pt-0">
+                  <button
+                    type="button"
+                    onClick={() => setEditingFaq({ ...item })}
+                    className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:text-[#ff2a38] hover:border-rose-300 transition-all cursor-pointer flex items-center gap-1 text-xs font-bold"
+                    title="Edit FAQ"
+                  >
+                    <Edit3 className="size-3.5" />
+                    <span>Edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteFaq(item.id)}
+                    className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-all cursor-pointer"
+                    title="Delete FAQ"
+                  >
+                    <Trash2 className="size-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Save Submission Button */}
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+          <button
+            type="submit"
+            className="px-8 py-3.5 rounded-xl bg-[#ff2a38] text-white font-bold text-xs hover:bg-rose-600 transition-all shadow-lg shadow-rose-500/25 cursor-pointer flex items-center gap-2"
+          >
+            <CheckCircle2 className="size-4" />
+            <span>Save & Publish FAQs</span>
+          </button>
+        </div>
+      </form>
+
+      {/* Edit / Create FAQ Modal */}
+      {editingFaq && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+                <HelpCircle className="size-4 text-[#ff2a38]" />
+                <span>{faqs.some((f) => f.id === editingFaq.id) ? "Edit Question" : "Add New Question"}</span>
+              </h3>
+              <button
+                type="button"
+                onClick={() => setEditingFaq(null)}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveModalFaq} className="space-y-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                    Category *
+                  </label>
+                  <select
+                    value={editingFaq.category}
+                    onChange={(e) =>
+                      setEditingFaq({
+                        ...editingFaq,
+                        category: e.target.value as FAQItem["category"],
+                      })
+                    }
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white"
+                  >
+                    <option value="Pricing">Pricing</option>
+                    <option value="Security">Security</option>
+                    <option value="Timeline">Timeline</option>
+                    <option value="Code Ownership">Code Ownership</option>
+                    <option value="Support">Support</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                    Popular Flag
+                  </label>
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(editingFaq.popular)}
+                      onChange={(e) =>
+                        setEditingFaq({ ...editingFaq, popular: e.target.checked })
+                      }
+                      className="rounded accent-[#ff2a38]"
+                    />
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                      Highlight as Popular
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                  Question *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editingFaq.question}
+                  onChange={(e) =>
+                    setEditingFaq({ ...editingFaq, question: e.target.value })
+                  }
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+                  placeholder="e.g. Do you sign Non-Disclosure Agreements (NDA)?"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                  Answer *
+                </label>
+                <textarea
+                  rows={4}
+                  required
+                  value={editingFaq.answer}
+                  onChange={(e) =>
+                    setEditingFaq({ ...editingFaq, answer: e.target.value })
+                  }
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+                  placeholder="Provide a comprehensive and clear answer..."
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                  Key Takeaway / Highlight Pill (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={editingFaq.highlight || ""}
+                  onChange={(e) =>
+                    setEditingFaq({ ...editingFaq, highlight: e.target.value })
+                  }
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 text-slate-900 dark:text-white focus:outline-none focus:border-[#ff2a38]"
+                  placeholder="e.g. Strict mutual NDA signed before initial discovery calls."
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => setEditingFaq(null)}
+                  className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-[#ff2a38] text-white text-xs font-bold hover:bg-rose-600 shadow-md shadow-rose-500/20"
+                >
+                  Apply Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -25,6 +25,7 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
+import { InteractiveDemoSandbox } from "@/components/InteractiveDemoSandbox";
 
 const designHeroImg = "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1024&auto=format&fit=crop&q=80";
 const logoDesignRealImg = "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=1024&auto=format&fit=crop&q=80";
@@ -547,6 +548,9 @@ function GraphicDesignPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Interactive Product / UI Demo Sandbox (Live Before vs. After Slider) */}
+      <InteractiveDemoSandbox initialTab="graphic" />
 
       {/* Artful Bottom CTA Banner */}
       <section className="ink-panel relative overflow-hidden py-20 lg:py-28 text-center">

@@ -32,6 +32,9 @@ class PageSectionContent(models.Model):
     SECTION_CHOICES = [
         ('home_intro', 'Home Company Introduction'),
         ('home_stats', 'Home Statistics'),
+        ('home_calculator', 'Home Calculator & Estimator'),
+        ('home_knowledge_hub', 'Home Knowledge Hub & Guides'),
+        ('home_faqs', 'Frequently Asked Questions (FAQ)'),
         ('about_who_we_are', 'About Who We Are'),
         ('about_mission', 'About Mission'),
         ('about_vision', 'About Vision'),

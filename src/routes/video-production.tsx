@@ -23,6 +23,7 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
+import { InteractiveDemoSandbox } from "@/components/InteractiveDemoSandbox";
 
 const videoHeroImg = "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1024&auto=format&fit=crop&q=80";
 const scriptWritingRealImg = "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1024&auto=format&fit=crop&q=80";
@@ -494,6 +495,9 @@ function VideoProductionPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Interactive Product / UI Demo Sandbox (Live Before vs. After Slider) */}
+      <InteractiveDemoSandbox initialTab="video" />
 
       {/* Cinematic Bottom CTA Banner */}
       <section className="ink-panel relative overflow-hidden py-20 lg:py-28 text-center">

@@ -6,6 +6,8 @@ import { TextReveal } from "@/components/TextReveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { itProducts, nonItProducts } from "@/data/products";
 import { submitDemoRequest } from "@/lib/api";
+import { EngagementModelsTimeline } from "@/components/EngagementModelsTimeline";
+import { FAQSection } from "@/components/FAQSection";
 
 const title = "Contact Zenelait Infotech — Request a Demo";
 const description =
@@ -129,6 +131,8 @@ function Contact() {
           </div>
         </div>
       </section>
+
+      
 
       {/* Main Form & Contact Information Grid */}
       <section id="contact-form" className="container-x py-12 lg:py-16">
@@ -311,6 +315,12 @@ function Contact() {
           </Reveal>
         </div>
       </section>
+
+      {/* Process & Flexible Engagement Models Section */}
+      <EngagementModelsTimeline />
+
+      {/* Smart Categorized FAQ with Live Search Filter */}
+      <FAQSection showContactCta={false} className="border-t border-border/40" />
     </div>
   );
 }

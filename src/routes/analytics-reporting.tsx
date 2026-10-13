@@ -7,7 +7,7 @@ import {
   TrendingUp,
   BarChart3,
   FileSpreadsheet,
-  DollarSign,
+  IndianRupee,
   LayoutDashboard,
   Eye,
   Zap,
@@ -79,9 +79,9 @@ const analyticsPillars = [
     id: "roi-analysis",
     title: "ROI Analysis",
     short: "Financial Attribution Modeling",
-    icon: DollarSign,
+    icon: IndianRupee,
     image: roiAnalysisRealImg,
-    tagline: "Track exact revenue attribution down to every dollar of marketing spend.",
+    tagline: "Track exact revenue attribution down to every rupee of marketing spend.",
     overview:
       "ROI Analysis turns marketing from an expense into a predictable profit center. We implement multi-touch attribution models, Customer Lifetime Value (CLV) calculations, CAC payback period tracking, and gross margin contribution analysis.",
     points: [
@@ -208,7 +208,7 @@ function AnalyticsReportingPage() {
             { label: "Data Accuracy Index", val: "99.8%" },
             { label: "Ad Budget Wasted Eliminated", val: "-28%" },
             { label: "Decision Velocity Speed", val: "10x" },
-            { label: "Attributed Revenue Tracked", val: "$50M+" },
+            { label: "Attributed Revenue Tracked", val: "₹400Cr+" },
           ].map((st, i) => (
             <Reveal key={st.label} delay={i * 80} direction="up" className="text-center">
               <p className="text-3xl sm:text-4xl font-extrabold text-primary">{st.val}</p>
@@ -344,9 +344,9 @@ function AnalyticsReportingPage() {
 
                 <div className="grid grid-cols-2 gap-5">
                   <div className="rounded-2xl border border-border bg-background/90 p-6 text-center shadow-lg backdrop-blur-md">
-                    <DollarSign className="mx-auto size-8 text-primary" />
+                    <IndianRupee className="mx-auto size-8 text-primary" />
                     <p className="mt-3 text-3xl font-extrabold text-foreground">
-                      ${projectedAttributedRev.toLocaleString()}
+                      ₹{projectedAttributedRev.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
                       Est. Attributed Revenue Lift
@@ -356,7 +356,7 @@ function AnalyticsReportingPage() {
                   <div className="rounded-2xl border border-border bg-background/90 p-6 text-center shadow-lg backdrop-blur-md">
                     <PieChart className="mx-auto size-8 text-rose-500" />
                     <p className="mt-3 text-3xl font-extrabold text-foreground">
-                      ${projectedWasteEliminated.toLocaleString()}
+                      ₹{projectedWasteEliminated.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
                       Est. Monthly Ad Waste Saved

@@ -1,7 +1,18 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://zenelait-website-9-9-26.onrender.com/api';
+const getApiBase = () => {
+  if (typeof window !== 'undefined') {
+    if (import.meta.env['VITE_API_BASE']) {
+      return import.meta.env['VITE_API_BASE'];
+    }
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://127.0.0.1:8000/api';
+    }
+  }
+  return import.meta.env['VITE_API_BASE'] || 'https://zenelait-website-9-9-26.onrender.com/api';
+};
 
 export async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${endpoint}`, {
+  const apiBase = getApiBase();
+  const res = await fetch(`${apiBase}${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
       ...options?.headers,

@@ -27,6 +27,10 @@ import mktImg from "@/assets/abstract-marketing.jpg";
 import aboutImg from "@/assets/abstract-about.jpg";
 import { nonItProducts } from "@/data/products";
 import { TestimonialSection } from "@/components/TestimonialSection";
+import { ProjectCostEstimator } from "@/components/ProjectCostEstimator";
+import { CompetitorComparisonMatrix } from "@/components/CompetitorComparisonMatrix";
+import { KnowledgeHubDownloadCenter } from "@/components/KnowledgeHubDownloadCenter";
+import { FAQSection } from "@/components/FAQSection";
 
 const title = "Zenelait Infotech — Software Products & Digital Growth";
 const description =
@@ -511,6 +515,9 @@ function Home() {
         </Reveal>
       </section>
 
+      {/* Interactive ROI / Project Cost Estimator */}
+      <ProjectCostEstimator />
+
       {/* Two Practices Showcase */}
       <section className="ink-panel relative overflow-hidden py-16 lg:py-24">
         <div className="pointer-events-none absolute -bottom-20 right-0 size-[30rem] rounded-full bg-rose-500/10 blur-3xl" />
@@ -609,6 +616,14 @@ function Home() {
 
       {/* Testimonials Carousel Section */}
       <TestimonialSection />
+
+      {/* Why Zenelait Comparison Matrix (Zenelait vs. Competitors) */}
+      <CompetitorComparisonMatrix />
+
+      {/* Interactive Knowledge Hub & Lead Magnet Download Center */}
+      <KnowledgeHubDownloadCenter />
+
+
 
       {/* CTA Banner */}
       <section className="container-x py-16 lg:py-24">

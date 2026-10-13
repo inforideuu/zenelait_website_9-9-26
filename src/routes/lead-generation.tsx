@@ -322,23 +322,23 @@ function LeadGenerationPage() {
                     <div className="flex justify-between items-center text-sm font-bold text-foreground">
                       <span>Monthly Campaign Budget:</span>
                       <span className="text-xl text-primary font-extrabold">
-                        ${adSpend.toLocaleString()} / mo
+                        ₹{adSpend.toLocaleString("en-IN")} / mo
                       </span>
                     </div>
 
                     <input
                       type="range"
-                      min="1000"
-                      max="50000"
-                      step="1000"
+                      min="10000"
+                      max="1000000"
+                      step="10000"
                       value={adSpend}
                       onChange={(e) => setAdSpend(parseInt(e.target.value, 10))}
                       className="mt-4 w-full accent-primary cursor-pointer h-2.5 bg-border rounded-lg"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                      <span>$1,000</span>
-                      <span>$25,000</span>
-                      <span>$50,000+</span>
+                      <span>₹10,000</span>
+                      <span>₹5,00,000</span>
+                      <span>₹10,00,000+</span>
                     </div>
                   </div>
                 </div>
@@ -347,7 +347,7 @@ function LeadGenerationPage() {
                   <div className="rounded-2xl border border-border bg-background/90 p-6 text-center shadow-lg backdrop-blur-md">
                     <Target className="mx-auto size-8 text-primary" />
                     <p className="mt-3 text-3xl font-extrabold text-foreground">
-                      ~{projectedLeads.toLocaleString()}
+                      ~{projectedLeads.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
                       Est. Qualified Leads / Mo
@@ -357,7 +357,7 @@ function LeadGenerationPage() {
                   <div className="rounded-2xl border border-border bg-background/90 p-6 text-center shadow-lg backdrop-blur-md">
                     <PieChart className="mx-auto size-8 text-rose-500" />
                     <p className="mt-3 text-3xl font-extrabold text-foreground">
-                      ${projectedPipelineVal.toLocaleString()}
+                      ₹{projectedPipelineVal.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
                       Est. Pipeline Value
