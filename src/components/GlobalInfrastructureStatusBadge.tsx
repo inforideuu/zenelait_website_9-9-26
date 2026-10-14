@@ -143,7 +143,7 @@ export function GlobalInfrastructureStatusBadge() {
               </div>
 
               <span className="text-[11px] font-mono text-slate-400">
-                Zenelait SRE Status Page v3.2
+                Zenelait InfoTech SRE Status Page v3.2
               </span>
             </div>
           </div>

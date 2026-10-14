@@ -175,12 +175,12 @@ export function CompetitorComparisonMatrix() {
 
           <Reveal delay={100} direction="up">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
-              Why Forward-Thinking Leaders Choose <span className="text-primary">Zenelait</span>
+              Why Forward-Thinking Leaders Choose <span className="text-primary">Zenelait InfoTech</span>
             </h2>
           </Reveal>
 
           <Reveal delay={200} direction="up">
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
               Compare how our integrated engineering model outperforms traditional legacy agencies, unreliable freelance gig boards, and high-risk in-house hiring.
             </p>
           </Reveal>
@@ -190,45 +190,45 @@ export function CompetitorComparisonMatrix() {
         <Reveal delay={250} direction="up" className="mt-14">
           {/* Mobile Swipe Hint */}
           <div className="flex items-center justify-end mb-3 px-1 lg:hidden">
-            <span className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1.5 bg-surface/80 border border-border/60 px-3 py-1 rounded-full shadow-sm">
+            <span className="text-xs font-semibold text-muted-foreground flex items-center gap-1.5 bg-surface/80 border border-border/60 px-3 py-1 rounded-full shadow-sm">
               <span>⇄ Swipe horizontally to explore full matrix</span>
             </span>
           </div>
 
-          <div className="overflow-x-auto rounded-3xl border border-border bg-card/60 shadow-2xl backdrop-blur-md">
+          <div className="overflow-x-auto rounded-3xl border border-border bg-card shadow-2xl backdrop-blur-md">
             <table className="w-full text-left border-collapse min-w-[860px]">
               {/* Header Columns */}
               <thead>
                 <tr className="border-b border-border/80 bg-surface/50">
-                  <th className="p-6 w-[28%] text-xs font-black uppercase tracking-wider text-muted-foreground align-top">
+                  <th className="p-6 w-[28%] text-xs font-extrabold uppercase tracking-widest text-muted-foreground align-top">
                     Core Capability
                   </th>
 
                   {/* Zenelait Highlight Column Header */}
                   <th className="p-6 w-[28%] relative bg-gradient-to-b from-primary/15 via-primary/5 to-transparent border-x border-primary/30 shadow-md align-top">
                     <div className="mb-2.5">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-rose-600 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white shadow-md">
-                        <Sparkles className="size-2.5" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-rose-600 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-md">
+                        <Sparkles className="size-3" />
                         Superior Choice
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-base sm:text-lg font-black text-foreground">Zenelait Infotech</span>
+                      <span className="text-base sm:text-lg font-black tracking-tight text-foreground">Zenelait InfoTech</span>
                     </div>
-                    <p className="text-[11px] font-medium text-primary mt-0.5 leading-snug">
+                    <p className="text-xs font-semibold text-primary mt-0.5 leading-snug">
                       Dedicated Product Squad & Growth
                     </p>
                   </th>
 
-                  <th className="p-6 w-[15%] text-xs font-bold text-muted-foreground border-r border-border/60 align-top">
+                  <th className="p-6 w-[15%] text-xs font-extrabold uppercase tracking-wider text-muted-foreground border-r border-border/60 align-top">
                     Traditional Agencies
                   </th>
 
-                  <th className="p-6 w-[14%] text-xs font-bold text-muted-foreground border-r border-border/60 align-top">
+                  <th className="p-6 w-[14%] text-xs font-extrabold uppercase tracking-wider text-muted-foreground border-r border-border/60 align-top">
                     Freelance Platforms
                   </th>
 
-                  <th className="p-6 w-[15%] text-xs font-bold text-muted-foreground align-top">
+                  <th className="p-6 w-[15%] text-xs font-extrabold uppercase tracking-wider text-muted-foreground align-top">
                     In-House Hiring
                   </th>
                 </tr>
@@ -243,13 +243,13 @@ export function CompetitorComparisonMatrix() {
                   >
                     {/* Feature Title & Description */}
                     <td className="p-6 align-top">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-primary block mb-1">
+                      <span className="text-xs font-extrabold uppercase tracking-widest text-primary block mb-1.5">
                         {row.category}
                       </span>
-                      <h4 className="text-sm sm:text-base font-extrabold text-foreground group-hover:text-primary transition-colors">
+                      <h4 className="text-sm sm:text-base font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">
                         {row.feature}
                       </h4>
-                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                      <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                         {row.description}
                       </p>
                     </td>
@@ -261,11 +261,11 @@ export function CompetitorComparisonMatrix() {
                           <Check className="size-3 stroke-[3]" />
                         </div>
                         <div>
-                          <strong className="block font-black text-foreground sm:text-sm">
+                          <strong className="block font-extrabold tracking-tight text-foreground text-sm sm:text-base">
                             {row.zenelait.label}
                           </strong>
                           {row.zenelait.sublabel && (
-                            <p className="mt-1 text-xs text-muted-foreground font-medium leading-relaxed">
+                            <p className="mt-1 text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed">
                               {row.zenelait.sublabel}
                             </p>
                           )}
@@ -290,10 +290,10 @@ export function CompetitorComparisonMatrix() {
                           </div>
                         )}
                         <div>
-                          <span className="font-bold text-foreground block text-xs">
+                          <span className="font-bold text-foreground block text-xs tracking-tight">
                             {row.traditionalAgencies.label}
                           </span>
-                          <p className="mt-1 text-[11px] text-muted-foreground leading-snug">
+                          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                             {row.traditionalAgencies.sublabel}
                           </p>
                         </div>
@@ -317,10 +317,10 @@ export function CompetitorComparisonMatrix() {
                           </div>
                         )}
                         <div>
-                          <span className="font-bold text-foreground block text-xs">
+                          <span className="font-bold text-foreground block text-xs tracking-tight">
                             {row.freelancers.label}
                           </span>
-                          <p className="mt-1 text-[11px] text-muted-foreground leading-snug">
+                          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                             {row.freelancers.sublabel}
                           </p>
                         </div>
@@ -344,10 +344,10 @@ export function CompetitorComparisonMatrix() {
                           </div>
                         )}
                         <div>
-                          <span className="font-bold text-foreground block text-xs">
+                          <span className="font-bold text-foreground block text-xs tracking-tight">
                             {row.inHouse.label}
                           </span>
-                          <p className="mt-1 text-[11px] text-muted-foreground leading-snug">
+                          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                             {row.inHouse.sublabel}
                           </p>
                         </div>
@@ -368,10 +368,10 @@ export function CompetitorComparisonMatrix() {
                 <Shield className="size-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="text-base sm:text-lg font-black text-foreground">
+                <h3 className="text-base sm:text-lg font-extrabold tracking-tight text-foreground">
                   Zero Lock-in. Transparent Timelines. Full IP Transfer.
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Experience enterprise engineering velocity without agency bureaucracy or hiring overhead.
                 </p>
               </div>
@@ -380,9 +380,9 @@ export function CompetitorComparisonMatrix() {
             <div className="shrink-0 w-full sm:w-auto flex justify-center lg:justify-end">
               <Link
                 to="/contact"
-                className="button-shine w-full sm:w-auto max-w-xs sm:max-w-none inline-flex items-center justify-center whitespace-nowrap gap-2.5 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-7 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0"
+                className="button-shine w-full sm:w-auto max-w-xs sm:max-w-none inline-flex items-center justify-center whitespace-nowrap gap-2.5 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-7 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-primary/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/30 active:translate-y-0"
               >
-                <span>Partner with Zenelait</span>
+                <span>Partner with Zenelait InfoTech</span>
                 <ArrowRight className="size-4 shrink-0" />
               </Link>
             </div>

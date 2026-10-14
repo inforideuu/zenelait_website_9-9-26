@@ -218,7 +218,7 @@ function About() {
           "
         >
           <Sparkles className="size-3.5" />
-          <span>About Zenelait</span>
+          <span>About Zenelait InfoTech</span>
         </div>
       </Reveal>
 
@@ -421,7 +421,7 @@ function About() {
                   {/* Bottom Image Overlay Text */}
                   <div className="absolute bottom-6 left-6 right-6">
                     <p className="text-xs font-extrabold uppercase tracking-widest text-[#ff5252]">
-                      ZENELAIT INFOTECH PTE LTD
+                      ZENELAIT INFOTECH PVT LTD
                     </p>
                     <h3 className="mt-1 text-xl sm:text-2xl font-bold text-white tracking-tight">
                       Technology & Digital Growth Center

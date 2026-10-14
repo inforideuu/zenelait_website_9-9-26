@@ -222,7 +222,7 @@ export function TechStackMatrix() {
       <div className="container-x relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <Reveal className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/40 bg-rose-950/50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.2em] text-[#ff5252] backdrop-blur-md mb-4 shadow-lg shadow-rose-950/50">
+          <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/40 bg-rose-950/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#ff5252] backdrop-blur-md mb-4 shadow-lg shadow-rose-950/50">
             <Cpu className="size-3.5 text-[#ff5252] animate-pulse" />
             <span>Tech Stack Matrix & Integration Ecosystem</span>
           </div>
@@ -231,7 +231,7 @@ export function TechStackMatrix() {
             Engineered with <span className="text-[#ff5252]">Modern Enterprise Technologies</span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-slate-300 text-base sm:text-lg font-medium leading-relaxed">
+          <p className="mx-auto mt-4 max-w-2xl text-slate-300 text-lg font-medium leading-relaxed">
             We build with cloud-native frameworks, resilient database architectures, and production-ready AI models to guarantee speed, security, and scalability.
           </p>
         </Reveal>
@@ -248,7 +248,7 @@ export function TechStackMatrix() {
                   key={cat.id}
                   type="button"
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${
+                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                     isSelected
                       ? "bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 text-white shadow-md shadow-rose-600/30 scale-102"
                       : "text-slate-400 hover:text-white hover:bg-slate-800/80"
@@ -279,10 +279,10 @@ export function TechStackMatrix() {
                       </div>
 
                       <div>
-                        <h3 className="font-extrabold text-white text-base leading-tight group-hover:text-[#ff5252] transition-colors">
+                        <h3 className="font-black text-white text-base tracking-tight leading-tight group-hover:text-[#ff5252] transition-colors">
                           {tech.name}
                         </h3>
-                        <span className="text-[11px] font-bold text-slate-400">
+                        <span className="text-xs font-semibold text-slate-400">
                           {tech.badge}
                         </span>
                       </div>
@@ -291,25 +291,25 @@ export function TechStackMatrix() {
 
                   {/* Scalability Tag Pill */}
                   <div className="mb-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-[10px] font-extrabold text-emerald-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-xs font-bold text-emerald-400">
                       <CheckCircle2 className="size-3 text-emerald-400" />
                       <span>{tech.tag}</span>
                     </span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                     {tech.description}
                   </p>
                 </div>
 
                 {/* Bottom Status Footnote */}
-                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-medium text-slate-400">
                   <span className="flex items-center gap-1.5 text-slate-400">
                     <Server className="size-3 text-rose-500" />
                     Enterprise Standard
                   </span>
-                  <span className="text-emerald-400 font-bold">ACTIVE</span>
+                  <span className="text-emerald-400 font-bold uppercase tracking-wider text-[11px]">ACTIVE</span>
                 </div>
               </div>
             </Reveal>
@@ -323,7 +323,7 @@ export function TechStackMatrix() {
 
             <div className="grid lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/40 px-3 py-1 text-xs font-bold text-emerald-400">
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/40 px-3.5 py-1 text-xs font-bold text-emerald-400">
                   <ShieldCheck className="size-3.5" />
                   <span>100% Modular & API-First Architecture</span>
                 </div>
@@ -332,15 +332,15 @@ export function TechStackMatrix() {
                   Have an Existing Legacy Stack or Third-Party ERP?
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  We specialize in building custom connectors, REST/GraphQL APIs, and webhook bridges to connect modern Zenelait products directly into your current infrastructure — with zero downtime.
+                <p className="text-sm text-slate-300 leading-relaxed font-normal">
+                  We specialize in building custom connectors, REST/GraphQL APIs, and webhook bridges to connect modern Zenelait InfoTech products directly into your current infrastructure — with zero downtime.
                 </p>
               </div>
 
               <div className="lg:col-span-4 flex justify-start lg:justify-end">
                 <Link
                   to="/contact"
-                  className="button-shine inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 px-7 py-4 text-sm font-extrabold text-white shadow-xl shadow-rose-600/30 transition-all duration-300 hover:scale-[1.03]"
+                  className="button-shine inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-rose-600/30 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span>Discuss Integration Scope</span>
                   <ArrowRight className="size-4 stroke-[2.5]" />

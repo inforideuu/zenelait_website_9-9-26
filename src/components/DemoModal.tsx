@@ -96,7 +96,7 @@ export function DemoModal({ isOpen, onClose, defaultProduct }: DemoModalProps) {
             <div className="flex items-center gap-2 mb-2">
               <div className="size-2 rounded-full bg-[#ff5252] animate-ping" />
               <span className="text-xs font-extrabold uppercase tracking-widest text-[#ff5252]">
-                ZENELAIT DEMO DESK
+                ZENELAIT InfoTech DEMO DESK
               </span>
             </div>
 

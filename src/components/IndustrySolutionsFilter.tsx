@@ -260,7 +260,7 @@ export const INDUSTRY_VERTICALS: IndustryVertical[] = [
       { value: "78%", label: "Pre-Qualified Inbound Leads" },
       { value: "100%", label: "Real-Time CRM Data Sync" }
     ],
-    techStack: ["Next.js", "Matterport 3D", "Zenelait CRM", "Twilio / WhatsApp API", "Meta Ads", "Google Maps API"],
+    techStack: ["Next.js", "Matterport 3D", "Zenelait InfoTech CRM", "Twilio / WhatsApp API", "Meta Ads", "Google Maps API"],
     ctaText: "Accelerate Property Conversions"
   }
 ];
@@ -281,7 +281,7 @@ export function IndustrySolutionsFilter() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <Reveal direction="down">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-sm mb-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4 shadow-lg shadow-primary/20">
               <Layers className="size-3.5" />
               <span>Tailored Vertical Capabilities</span>
             </div>
@@ -294,7 +294,7 @@ export function IndustrySolutionsFilter() {
           </Reveal>
 
           <Reveal delay={200} direction="up">
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
               We do not believe in generic one-size-fits-all strategies. Explore customized technology architectures and targeted marketing engines built purposefully for your domain.
             </p>
           </Reveal>
@@ -314,7 +314,7 @@ export function IndustrySolutionsFilter() {
                   onClick={() => setSelectedId(vertical.id)}
                   className={`group relative flex items-center gap-2.5 rounded-2xl px-5 py-3.5 text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                     isSelected
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30 scale-[1.03] ring-2 ring-primary/40"
+                      ? "bg-gradient-to-r from-primary via-red-600 to-rose-600 text-primary-foreground shadow-lg shadow-primary/30 scale-[1.03] ring-2 ring-primary/40"
                       : "bg-card hover:bg-accent text-muted-foreground hover:text-foreground border border-border/80 shadow-xs"
                   }`}
                 >
@@ -336,8 +336,8 @@ export function IndustrySolutionsFilter() {
             <div className="grid gap-8 lg:grid-cols-12 items-center">
               {/* Text Info */}
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-primary">
-                  <Sparkles className="size-3" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  <Sparkles className="size-3.5" />
                   <span>{activeVertical.badge}</span>
                 </div>
 
@@ -345,20 +345,20 @@ export function IndustrySolutionsFilter() {
                   {activeVertical.tagline}
                 </h3>
 
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-normal">
                   {activeVertical.description}
                 </p>
 
                 {/* Tech Stack Chips */}
                 <div className="pt-2">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground block mb-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-2">
                     Specialized Stacks & Integrations:
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {activeVertical.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-lg border border-border/70 bg-surface px-3 py-1 text-xs font-semibold text-foreground/90 font-mono"
+                        className="rounded-lg border border-border/70 bg-surface px-3 py-1 text-xs font-semibold text-foreground/90"
                       >
                         {tech}
                       </span>
@@ -377,8 +377,8 @@ export function IndustrySolutionsFilter() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
-                    <span className="text-xs font-bold text-white/80 block">Vertical Focus</span>
-                    <h4 className="text-lg font-black text-white">{activeVertical.name}</h4>
+                    <span className="text-xs font-bold uppercase tracking-wider text-white/80 block">Vertical Focus</span>
+                    <h4 className="text-lg sm:text-xl font-black text-white tracking-tight">{activeVertical.name}</h4>
                   </div>
                 </div>
               </div>
@@ -388,10 +388,10 @@ export function IndustrySolutionsFilter() {
             <div className="mt-12 pt-10 border-t border-border/60">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h4 className="text-lg sm:text-xl font-black text-foreground">
+                  <h4 className="text-lg sm:text-xl font-black text-foreground tracking-tight">
                     Custom Modules Engineered for {activeVertical.name}
                   </h4>
-                  <p className="text-xs text-muted-foreground mt-0.5">
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1 font-normal">
                     Purpose-built architectures addressing real operational friction and regulatory hurdles
                   </p>
                 </div>
@@ -404,19 +404,19 @@ export function IndustrySolutionsFilter() {
                     className="p-6 bg-surface/50 border border-border/80 flex flex-col justify-between"
                   >
                     <div>
-                      <span className="inline-block rounded-md bg-primary/10 px-2.5 py-1 text-[10px] font-extrabold text-primary uppercase tracking-wider mb-3">
+                      <span className="inline-block rounded-md bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary uppercase tracking-wider mb-3">
                         {sol.highlightTag}
                       </span>
-                      <h5 className="text-base font-bold text-foreground leading-snug">
+                      <h5 className="text-base font-black text-foreground tracking-tight leading-snug">
                         {sol.title}
                       </h5>
-                      <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                      <p className="mt-2 text-xs text-muted-foreground leading-relaxed font-normal">
                         {sol.description}
                       </p>
 
                       <ul className="mt-4 space-y-2 border-t border-border/50 pt-3">
                         {sol.points.map((pt) => (
-                          <li key={pt} className="flex items-start gap-2 text-xs text-foreground/90">
+                          <li key={pt} className="flex items-start gap-2 text-xs text-foreground/90 font-medium">
                             <CheckCircle2 className="size-3.5 text-primary shrink-0 mt-0.5" />
                             <span>{pt}</span>
                           </li>
@@ -434,7 +434,7 @@ export function IndustrySolutionsFilter() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-auto">
                 {activeVertical.metrics.map((m) => (
                   <div key={m.label} className="text-center sm:text-left">
-                    <p className="text-2xl sm:text-3xl font-black text-primary tracking-tight font-mono">
+                    <p className="text-2xl sm:text-3xl font-black text-primary tracking-tight">
                       {m.value}
                     </p>
                     <p className="text-xs font-semibold text-muted-foreground mt-0.5">
@@ -448,10 +448,10 @@ export function IndustrySolutionsFilter() {
               <div className="w-full lg:w-auto shrink-0">
                 <Link
                   to="/contact"
-                  className="button-shine w-full lg:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-7 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105"
+                  className="button-shine w-full lg:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-7 py-3.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span>{activeVertical.ctaText}</span>
-                  <ArrowRight className="size-4" />
+                  <ArrowRight className="size-4 stroke-[2.5]" />
                 </Link>
               </div>
             </div>

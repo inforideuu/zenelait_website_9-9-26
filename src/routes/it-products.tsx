@@ -89,7 +89,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     tag: "Sales & Customer Management",
     headline: "Build stronger relationships. Drive more sales.",
     subtext:
-      "Zenelait's CRM helps you manage customer interactions, track leads, automate workflows, and get real-time insights — all in one powerful platform.",
+      "Zenelait InfoTech's CRM helps you manage customer interactions, track leads, automate workflows, and get real-time insights — all in one powerful platform.",
     heroBgImage: "IT_product_detail.png",
     featureDashboardImage: "crm_dash.jpg",
     heroPills: [
@@ -116,7 +116,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait CRM has completely transformed the way we manage our leads and customer relationships. The platform is intuitive, powerful and our sales team loves it.",
+        "Zenelait InfoTeh CRM has completely transformed the way we manage our leads and customer relationships. The platform is intuitive, powerful and our sales team loves it.",
       name: "Emma Carter",
       role: "Marketing Manager, TechSolutions",
       company: "TechSolutions",
@@ -139,7 +139,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     tag: "Enterprise System & Operations",
     headline: "Unify your operations. Optimize every asset.",
     subtext:
-      "Zenelait's ERP connects your inventory, purchase, production, finance, and workforce into one connected system for growing enterprises.",
+      "Zenelait InfoTech's ERP connects your inventory, purchase, production, finance, and workforce into one connected system for growing enterprises.",
     heroBgImage: "IT_product_detail.png",
     featureDashboardImage: "erp dash.jpg",
     heroPills: [
@@ -166,7 +166,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Switching to Zenelait ERP gave us 100% visibility over our multi-branch inventory and supplier chain. Delivery times dropped by 40% in our first quarter.",
+        "Switching to Zenelait InfoTech ERP gave us 100% visibility over our multi-branch inventory and supplier chain. Delivery times dropped by 40% in our first quarter.",
       name: "Rajesh Kumar",
       role: "Operations Director, Apex Industries",
       company: "Apex Industries",
@@ -216,7 +216,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait LMS allowed us to onboard 5,000+ corporate students across 12 countries with 98% course completion rates. The interface is flawless.",
+        "Zenelait InfoTech LMS allowed us to onboard 5,000+ corporate students across 12 countries with 98% course completion rates. The interface is flawless.",
       name: "Sophia Martinez",
       role: "Head of L&D, Global EduTech",
       company: "Global EduTech",
@@ -266,7 +266,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait Billing cut our checkout queues in half and automated our GST return filing completely. It is the most reliable POS software we have used.",
+        "Zenelait InfoTech Billing cut our checkout queues in half and automated our GST return filing completely. It is the most reliable POS software we have used.",
       name: "Vikas Patel",
       role: "Founder, RetailChain India",
       company: "RetailChain",
@@ -316,7 +316,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Our new web platform engineered by Zenelait loaded 3x faster and doubled our organic lead conversion within the first 60 days.",
+        "Our new web platform engineered by Zenelait InfoTech loaded 3x faster and doubled our organic lead conversion within the first 60 days.",
       name: "Marcus Vance",
       role: "VP Marketing, Lumina SaaS",
       company: "Lumina SaaS",
@@ -366,7 +366,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "The AI Chatbot built by Zenelait handles 80% of our customer inquiries automatically and captures qualified lead details 24/7 flawlessly.",
+        "The AI Chatbot built by Zenelait InfoTech handles 80% of our customer inquiries automatically and captures qualified lead details 24/7 flawlessly.",
       name: "Elena Rostova",
       role: "Head of Customer Experience, NovaTech",
       company: "NovaTech",
@@ -416,7 +416,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait built a custom logistics management suite for us from scratch. It replaced 4 legacy tools and increased our daily dispatch efficiency by 50%.",
+        "Zenelait InfoTech built a custom logistics management suite for us from scratch. It replaced 4 legacy tools and increased our daily dispatch efficiency by 50%.",
       name: "Siddharth Mehta",
       role: "CTO, TransLogistics Solutions",
       company: "TransLogistics Solutions",
@@ -439,7 +439,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     tag: "Workforce & HR Automation",
     headline: "Simplify HR operations. Empower your workforce.",
     subtext:
-      "Zenelait HRMS digitizes the full employee lifecycle — from biometric attendance and automated payroll processing to performance appraisals and leave management.",
+      "Zenelait InfoTech HRMS digitizes the full employee lifecycle — from biometric attendance and automated payroll processing to performance appraisals and leave management.",
     heroBgImage: "IT_product_detail.png",
     featureDashboardImage: "hrms_dash.jpeg",
     heroPills: [
@@ -466,7 +466,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait HRMS simplified our multi-branch payroll from 5 days down to 10 minutes. The attendance and mobile self-service app is loved by all 600 employees.",
+        "Zenelait InfoTech HRMS simplified our multi-branch payroll from 5 days down to 10 minutes. The attendance and mobile self-service app is loved by all 600 employees.",
       name: "Pooja Sharma",
       role: "Head of HR, Zenith Enterprises",
       company: "Zenith Enterprises",
@@ -516,7 +516,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "The AI Software Factory by Zenelait allowed us to build custom AI workflow automation for our legal team in 2 weeks. It slashed processing times by 70%.",
+        "The AI Software Factory by Zenelait InfoTech allowed us to build custom AI workflow automation for our legal team in 2 weeks. It slashed processing times by 70%.",
       name: "David Sterling",
       role: "VP of Product, LegalTech Global",
       company: "LegalTech Global",
@@ -566,7 +566,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait delivered our iOS and Android mobile app on time with a stunning user interface. Our active user base grew 3x within 3 months of launch.",
+        "Zenelait InfoTech delivered our iOS and Android mobile app on time with a stunning user interface. Our active user base grew 3x within 3 months of launch.",
       name: "Rachel Miller",
       role: "Product Lead, FitPulse App",
       company: "FitPulse",
@@ -666,7 +666,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait Hospital CRM HMS transformed our multi-specialty hospital's operations. Patient registration time dropped by 60% and billing accuracy reached 100%.",
+        "Zenelait InfoTech Hospital CRM HMS transformed our multi-specialty hospital's operations. Patient registration time dropped by 60% and billing accuracy reached 100%.",
       name: "Dr. Vikram Sethi",
       role: "Medical Director, CarePlus Super Specialty Hospital",
       company: "CarePlus Hospital",
@@ -689,7 +689,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     tag: "AI Sales & Intelligence",
     headline: "Supercharge Sales Pipelines with Predictive AI Intelligence.",
     subtext:
-      "Zenelait's AI Integrated CRM combines intelligent customer relationship management with autonomous sales outreach agents, predictive lead scoring, call sentiment analysis, and automated deal forecasting.",
+      "Zenelait InfoTech's AI Integrated CRM combines intelligent customer relationship management with autonomous sales outreach agents, predictive lead scoring, call sentiment analysis, and automated deal forecasting.",
     heroBgImage: "IT_product_detail.png",
     featureDashboardImage: "ai_crm.jpeg",
     heroPills: [
@@ -716,7 +716,7 @@ const productDetailsData: Record<string, ProductDetail> = {
     ],
     testimonial: {
       quote:
-        "Zenelait AI Integrated CRM revolutionized our sales team's productivity. The predictive lead scoring helped us prioritize high-value prospects and increased our close rate by 45%.",
+        "Zenelait InfoTech AI Integrated CRM revolutionized our sales team's productivity. The predictive lead scoring helped us prioritize high-value prospects and increased our close rate by 45%.",
       name: "Alexander Thorne",
       role: "Chief Commercial Officer, Veloce Cloud",
       company: "Veloce Cloud",
@@ -1136,7 +1136,7 @@ function ItProducts() {
                 </div>
 
                 <h2 className="mt-3 text-3xl font-black text-slate-900 dark:text-white sm:text-4xl lg:text-5xl tracking-tight leading-tight">
-                  Why Choose Zenelait <span className="text-[#ff5252]">{activeProduct.short}?</span>
+                  Why Choose Zenelait InfoTech <span className="text-[#ff5252]">{activeProduct.short}?</span>
                 </h2>
 
                 <p className="mt-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-xl">
@@ -1196,7 +1196,7 @@ function ItProducts() {
                   </h2>
 
                   <p className="mt-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-md">
-                    See how companies across different industries are growing with Zenelait {activeProduct.short}.
+                    See how companies across different industries are growing with Zenelait InfoTech {activeProduct.short}.
                   </p>
                 </Reveal>
 
@@ -1518,7 +1518,7 @@ function ItProducts() {
           <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-4 sm:p-6 bg-gradient-to-b from-black/90 via-black/50 to-transparent">
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ff5252] px-3.5 py-1 text-xs font-black text-white uppercase tracking-wider shadow-md">
-                Zenelait Showcase
+                Zenelait InfoTech Showcase
               </span>
               <span className="text-white text-xs sm:text-sm font-bold tracking-wide hidden sm:inline-block">
                 Website Development & Architecture

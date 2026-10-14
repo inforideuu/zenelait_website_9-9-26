@@ -14,7 +14,7 @@ def seed():
         {
             'section_key': 'home_intro',
             'title': 'Indian Product Engineering & Growth Team',
-            'subtitle': 'Zenelait Infotech builds business software and runs digital growth programmes for ambitious companies.',
+            'subtitle': 'Zenelait InfoTech builds business software and runs digital growth programmes for ambitious companies.',
             'body': 'We work across enterprise web applications, mobile platforms, lead engine workflows and custom operational tools. Our focus is shipping software that actually gets adopted and marketing campaigns that generate real commercial revenue.',
             'extra_json': {'badge': 'WHO WE ARE', 'tagline': 'Engineered in India • Built for Growth'}
         },
@@ -34,7 +34,7 @@ def seed():
             'section_key': 'about_who_we_are',
             'title': 'Who We Are',
             'subtitle': 'Product engineers, designers and performance marketers working under one roof.',
-            'body': 'Founded with a clear focus on practical business execution, Zenelait Infotech bridges the gap between software development and market growth. We construct the software systems that power your daily operations, and run the targeted acquisition channels that bring you qualified customers.',
+            'body': 'Founded with a clear focus on practical business execution, Zenelait InfoTech bridges the gap between software development and market growth. We construct the software systems that power your daily operations, and run the targeted acquisition channels that bring you qualified customers.',
             'extra_json': {'established': '2020', 'headquarters': 'Chennai, Tamil Nadu'}
         },
         {
@@ -79,7 +79,7 @@ def seed():
             'author': 'Ramesh Kumar',
             'role': 'Director of Operations',
             'company': 'Apex Logistics India',
-            'content': 'Zenelait Infotech transformed our manual dispatch process into an automated cloud ERP. Order processing speed doubled within 30 days.',
+            'content': 'Zenelait InfoTech transformed our manual dispatch process into an automated cloud ERP. Order processing speed doubled within 30 days.',
             'rating': 5,
         },
         {
@@ -95,7 +95,7 @@ def seed():
             'author': 'Karthik Raja',
             'role': 'Chief Technology Officer',
             'company': 'Metro Healthcare Solutions',
-            'content': 'The custom billing and CRM module developed by Zenelait integrates seamlessly with our existing database. Zero downtime since launch.',
+            'content': 'The custom billing and CRM module developed by Zenelait InfoTech integrates seamlessly with our existing database. Zero downtime since launch.',
             'rating': 5,
         },
         {
@@ -103,7 +103,7 @@ def seed():
             'author': 'Deepa Viswanathan',
             'role': 'Managing Director',
             'company': 'Horizon EduTech',
-            'content': 'Their LMS platform scaled effortlessly during peak enrollment. Excellent UX and proactive engineering support from the Zenelait team.',
+            'content': 'Their LMS platform scaled effortlessly during peak enrollment. Excellent UX and proactive engineering support from the Zenelait InfoTech team.',
             'rating': 5,
         }
     ]

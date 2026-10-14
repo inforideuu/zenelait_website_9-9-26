@@ -36,7 +36,7 @@ const defaultTestimonials: Testimonial[] = [
     company: "AeroTech Solutions",
     rating: 5,
     quote:
-      "The paid advertising campaigns and landing pages built by Zenelait reduced our Cost Per Lead by 42% in just two months. The ROI tracking dashboards are exceptionally clear.",
+      "The paid advertising campaigns and landing pages built by Zenelait InfoTech reduced our Cost Per Lead by 42% in just two months. The ROI tracking dashboards are exceptionally clear.",
     metric: "-42% Cost Per Lead",
     industry: "Enterprise Growth",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
@@ -48,7 +48,7 @@ const defaultTestimonials: Testimonial[] = [
     company: "Apex EdTech Network",
     rating: 5,
     quote:
-      "Our Learning Management System and AI Chatbot serve over 50,000 active students daily with zero downtime. Zenelait's software architecture and ongoing support are world-class.",
+      "Our Learning Management System and AI Chatbot serve over 50,000 active students daily with zero downtime. Zenelait InfoTech's software architecture and ongoing support are world-class.",
     metric: "99.99% Platform Uptime",
     industry: "EdTech & LMS",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
@@ -147,7 +147,7 @@ export function TestimonialSection({ page = "home" }: { page?: "home" | "it_prod
             </div>
             <Reveal direction="up" delay={150}>
               <p className="mt-3 text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed">
-                See how global organizations scale software engineering and pipeline velocity with Zenelait Infotech.
+                See how global organizations scale software engineering and pipeline velocity with Zenelait InfoTech.
               </p>
             </Reveal>
           </div>

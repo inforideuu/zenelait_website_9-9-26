@@ -237,7 +237,7 @@ export function KnowledgeHubDownloadCenter({
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(255, 255, 255);
-    doc.text("ZENELAIT ARCHITECTURAL BLUEPRINT", 20, 13);
+    doc.text("ZENELAIT InfoTech ARCHITECTURAL BLUEPRINT", 20, 13);
     doc.setFont("helvetica", "normal");
     doc.text("Page 2", 185, 13);
 
@@ -328,7 +328,7 @@ export function KnowledgeHubDownloadCenter({
     doc.setFontSize(8.5);
     doc.setTextColor(71, 85, 105);
     doc.text(
-      "Schedule a 30-minute free technical architecture review with our lead software engineers. Visit zenelait.com/contact or email team@zenelait.com.",
+      "Schedule a 30-minute free technical architecture review with our lead software engineers. Visit zenelait InfoTech.com/contact or email team@zenelait.com.",
       25,
       checkY + 21
     );
@@ -458,8 +458,8 @@ export function KnowledgeHubDownloadCenter({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <Reveal direction="down">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-sm mb-4">
-              <BookOpen className="size-3.5" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4">
+              <BookOpen className="size-3.5 text-primary" />
               <span>Thought Leadership & Engineering Hub</span>
             </div>
           </Reveal>
@@ -475,7 +475,7 @@ export function KnowledgeHubDownloadCenter({
           </Reveal>
 
           <Reveal delay={200} direction="up">
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
               {headerSubtitle || "Actionable frameworks, financial formulas, and technical blueprints written by our senior architects to help forward-thinking teams make smarter digital decisions."}
             </p>
           </Reveal>
@@ -485,22 +485,22 @@ export function KnowledgeHubDownloadCenter({
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {guides.map((guide, idx) => (
             <Reveal key={guide.id} delay={idx * 120} direction="up" className="h-full">
-              <SpotlightCard className="h-full flex flex-col justify-between p-7 sm:p-8 bg-card border border-border/80 shadow-xl hover:border-primary/50 transition-all duration-300">
+              <SpotlightCard className="h-full flex flex-col justify-between p-7 sm:p-8 bg-card border border-border/80 shadow-xl hover:border-primary/50 transition-all duration-300 rounded-3xl">
                 <div>
                   {/* Top Header Badge */}
                   <div className="flex items-center justify-between gap-2 mb-6">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-primary border border-primary/20">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/30 px-3.5 py-1 text-xs font-extrabold uppercase tracking-widest text-primary">
                       <Sparkles className="size-3" />
                       {guide.badge}
                     </span>
-                    <span className="text-xs font-semibold text-muted-foreground font-mono">
+                    <span className="text-xs font-semibold text-muted-foreground">
                       {guide.downloadsCount || "Free Download"}
                     </span>
                   </div>
 
                   {/* Document Cover Card Visual Preview */}
                   <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${guide.coverColor} p-6 text-white shadow-lg mb-6 group`}>
-                    <div className="absolute top-3 right-3 rounded-full bg-black/25 px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider uppercase text-white/90 backdrop-blur-sm">
+                    <div className="absolute top-3 right-3 rounded-full bg-black/40 px-3 py-1 text-[11px] font-bold tracking-wider uppercase text-white backdrop-blur-md">
                       {(guide.fileFormat || "PDF Guide")
                         .replace(/[•\-\|]\s*\d+\s*pages/gi, "")
                         .replace(/\d+\s*pages/gi, "")
@@ -509,26 +509,26 @@ export function KnowledgeHubDownloadCenter({
                     <div className="size-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-4">
                       <FileText className="size-5" />
                     </div>
-                    <h4 className="text-lg font-black text-white leading-snug">
+                    <h4 className="text-xl font-extrabold text-white tracking-tight leading-snug">
                       {guide.title}
                     </h4>
-                    <p className="text-[11px] text-white/80 mt-2 font-medium">
+                    <p className="text-xs text-white/85 mt-2 font-semibold tracking-wide">
                       Zenelait Executive Research Series
                     </p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <p className="mt-4 text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1 text-justify">
                     {guide.description}
                   </p>
 
                   {/* Key Takeaways Checklist */}
                   <div className="mt-6 space-y-2.5 border-t border-border/70 pt-5">
-                    <h5 className="text-[11px] font-black uppercase tracking-wider text-foreground flex items-center gap-1.5">
+                    <h5 className="text-xs font-extrabold uppercase tracking-widest text-foreground flex items-center gap-2">
                       <FileCheck className="size-3.5 text-primary" />
                       <span>Executive Takeaways Inside</span>
                     </h5>
-                    <ul className="space-y-2 text-xs text-muted-foreground">
+                    <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                       {guide.takeaways.map((point, pIdx) => (
                         <li key={pIdx} className="flex items-start gap-2">
                           <Check className="size-3.5 text-primary shrink-0 mt-0.5" />
@@ -544,12 +544,12 @@ export function KnowledgeHubDownloadCenter({
                   <button
                     type="button"
                     onClick={() => handleOpenDownload(guide)}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-xs font-bold text-white shadow-md shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] transition-all cursor-pointer"
+                    className="button-shine w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 py-4 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-primary/40 cursor-pointer"
                   >
                     <Download className="size-4" />
                     <span>Download Complete Guide (PDF)</span>
                   </button>
-                  <p className="text-[10px] text-center text-muted-foreground mt-2 font-mono">
+                  <p className="text-xs text-center text-muted-foreground mt-2.5 font-medium">
                     Instant Download • No Credit Card Required
                   </p>
                 </div>
@@ -581,80 +581,80 @@ export function KnowledgeHubDownloadCenter({
               {!downloadSuccess ? (
                 <>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary border border-primary/20">
-                      <FileText className="size-3" />
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/30 px-3 py-1 text-xs font-extrabold uppercase tracking-widest text-primary">
+                      <FileText className="size-3.5" />
                       <span>Free Resource Download</span>
                     </span>
                     {activeModalGuide.pdfBase64 ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                        <CheckCircle2 className="size-3" />
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        <CheckCircle2 className="size-3.5" />
                         <span>Admin Verified PDF</span>
                       </span>
                     ) : null}
                   </div>
 
-                  <h3 className="text-xl font-black text-foreground">
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
                     Get Instant Access to {activeModalGuide.title}
                   </h3>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    File: <strong className="font-mono text-foreground break-all">{activeModalGuide.downloadFileName}</strong>.
+                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    File: <strong className="font-bold text-foreground break-all">{activeModalGuide.downloadFileName}</strong>.
                     Please provide your contact details below to begin your download immediately.
                   </p>
 
-                  <form onSubmit={handleSubmitDownload} className="mt-6 space-y-4 text-xs">
+                  <form onSubmit={handleSubmitDownload} className="mt-6 space-y-4 text-xs sm:text-sm">
                     <div>
-                      <label className="block text-[11px] font-bold text-foreground mb-1">
+                      <label className="block text-xs font-bold tracking-tight text-foreground mb-1.5">
                         Full Name *
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 size-4 text-muted-foreground" />
+                        <User className="absolute left-3.5 top-3.5 size-4 text-muted-foreground" />
                         <input
                           type="text"
                           required
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="John Doe"
-                          className="w-full rounded-xl border border-border bg-surface pl-9 pr-3 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
+                          className="w-full rounded-xl border border-border bg-surface pl-10 pr-3.5 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-medium"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-foreground mb-1">
+                      <label className="block text-xs font-bold tracking-tight text-foreground mb-1.5">
                         Business Email Address *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-3 size-4 text-muted-foreground" />
+                        <Mail className="absolute left-3.5 top-3.5 size-4 text-muted-foreground" />
                         <input
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="john@company.com"
-                          className="w-full rounded-xl border border-border bg-surface pl-9 pr-3 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
+                          className="w-full rounded-xl border border-border bg-surface pl-10 pr-3.5 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-medium"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-foreground mb-1">
+                        <label className="block text-xs font-bold tracking-tight text-foreground mb-1.5">
                           Company Name
                         </label>
                         <div className="relative">
-                          <Building className="absolute left-3 top-3 size-4 text-muted-foreground" />
+                          <Building className="absolute left-3.5 top-3.5 size-4 text-muted-foreground" />
                           <input
                             type="text"
                             value={company}
                             onChange={(e) => setCompany(e.target.value)}
                             placeholder="Acme Inc."
-                            className="w-full rounded-xl border border-border bg-surface pl-9 pr-3 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
+                            className="w-full rounded-xl border border-border bg-surface pl-10 pr-3.5 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-medium"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-bold text-foreground mb-1">
+                        <label className="block text-xs font-bold tracking-tight text-foreground mb-1.5">
                           Phone Number
                         </label>
                         <input
@@ -662,7 +662,7 @@ export function KnowledgeHubDownloadCenter({
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 98765 43210"
-                          className="w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
+                          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-medium"
                         />
                       </div>
                     </div>
@@ -670,13 +670,13 @@ export function KnowledgeHubDownloadCenter({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-xs font-bold text-white shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all cursor-pointer disabled:opacity-50"
+                      className="button-shine w-full mt-4 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 py-4 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-primary/40 cursor-pointer disabled:opacity-50"
                     >
                       <Download className="size-4 shrink-0" />
                       <span>{isSubmitting ? "Initiating Download..." : "Download Free Guide (PDF)"}</span>
                     </button>
 
-                    <p className="text-[10px] text-center text-muted-foreground mt-2">
+                    <p className="text-xs text-center text-muted-foreground mt-2.5 font-medium">
                       🔒 We respect your privacy. No spam. Unsubscribe anytime.
                     </p>
                   </form>
@@ -686,17 +686,17 @@ export function KnowledgeHubDownloadCenter({
                   <div className="size-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center shadow-inner">
                     <CheckCircle2 className="size-8" />
                   </div>
-                  <h3 className="text-xl font-black text-foreground">
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
                     Your Download Has Started!
                   </h3>
-                  <div className="space-y-1.5 text-xs text-muted-foreground max-w-sm mx-auto">
+                  <div className="space-y-1.5 text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto">
                     <p>
-                      Thank you, <strong>{name}</strong>!
+                      Thank you, <strong className="text-foreground">{name}</strong>!
                     </p>
-                    <div className="rounded-xl border border-border/70 bg-surface px-3 py-2 text-[11px] font-mono text-foreground break-all inline-block max-w-full">
+                    <div className="rounded-xl border border-border/70 bg-surface px-3.5 py-2 text-xs font-bold text-foreground break-all inline-block max-w-full">
                       📄 {activeModalGuide.downloadFileName}
                     </div>
-                    <p className="text-[11px] text-muted-foreground pt-1">
+                    <p className="text-xs text-muted-foreground pt-1">
                       The file has been saved to your downloads folder.
                     </p>
                   </div>
@@ -704,7 +704,7 @@ export function KnowledgeHubDownloadCenter({
                     <button
                       type="button"
                       onClick={() => triggerDownload(activeModalGuide)}
-                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-xs font-bold text-white shadow-md shadow-primary/20 hover:bg-primary/90 transition-all cursor-pointer min-w-0"
+                      className="button-shine w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 text-xs sm:text-sm font-bold text-primary-foreground shadow-md shadow-primary/20 hover:shadow-primary/30 transition-all cursor-pointer min-w-0"
                     >
                       <Download className="size-3.5 shrink-0" />
                       <span>Download Again</span>
@@ -712,7 +712,7 @@ export function KnowledgeHubDownloadCenter({
                     <button
                       type="button"
                       onClick={() => setSelectedGuide(null)}
-                      className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-surface border border-border text-xs font-bold text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-surface border border-border text-xs sm:text-sm font-bold text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
                     >
                       Close Window
                     </button>

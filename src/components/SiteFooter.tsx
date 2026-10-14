@@ -21,7 +21,7 @@ export function SiteFooter() {
               style={{ borderRadius: '10px' }}
             />
             <p className="mt-5 max-w-xs text-ink-foreground/75 leading-relaxed text-sm text-justify">
-              Zenelait Infotech transforms complex business challenges into intelligent, scalable digital solutions. From strategy to execution, we help organisations innovate, grow, and lead with confidence.
+              Zenelait InfoTech transforms complex business challenges into intelligent, scalable digital solutions. From strategy to execution, we help organisations innovate, grow, and lead with confidence.
             </p>
             <div className="mt-4">
               <Link

@@ -281,25 +281,39 @@ export function ProjectCostEstimator() {
     }
   };
 
+  const renderHeading = (titleText: string) => {
+    const words = titleText.split(" ");
+    if (words.length > 3) {
+      const first = words.slice(0, -3).join(" ");
+      const last = words.slice(-3).join(" ");
+      return (
+        <>
+          {first} <span className="text-primary">{last}</span>
+        </>
+      );
+    }
+    return titleText;
+  };
+
   return (
-    <section className="relative overflow-hidden bg-[#f8fafc] dark:bg-slate-950 py-20 lg:py-28 text-slate-900 dark:text-white border-y border-slate-200/80 dark:border-slate-800" id="project-calculator">
+    <section className="relative overflow-hidden bg-surface/30 dark:bg-background py-20 lg:py-28 text-foreground border-y border-border" id="project-calculator">
       {/* Background Subtle Gradient Lighting */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 size-[600px] rounded-full bg-rose-500/5 dark:bg-rose-600/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-40 right-10 size-[450px] rounded-full bg-rose-400/5 dark:bg-primary/10 blur-[100px]" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 size-[600px] rounded-full bg-primary/5 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-40 right-10 size-[450px] rounded-full bg-primary/10 blur-[100px]" />
 
       <div className="container-x relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <Reveal className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-primary/40 bg-rose-50 dark:bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#ff5252] dark:text-primary backdrop-blur-md mb-4 shadow-sm">
-            <Calculator className="size-3.5 text-[#ff5252] dark:text-primary animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4 shadow-xs">
+            <Calculator className="size-3.5 text-primary animate-pulse" />
             <span>{config.badge}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-            {config.title}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
+            {renderHeading(config.title)}
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400 text-base sm:text-lg font-medium leading-relaxed">
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
             {config.subtitle}
           </p>
         </Reveal>
@@ -310,322 +324,322 @@ export function ProjectCostEstimator() {
           <div className="lg:col-span-7 space-y-8">
             {/* Step 1: Category Selection */}
             <Reveal delay={100} direction="up">
-              <div className="rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-xl shadow-slate-200/40 dark:shadow-2xl">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-8 items-center justify-center rounded-full bg-[#ff5252] dark:bg-primary text-xs font-extrabold text-white">
-                    01
-                  </span>
-                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Select Product / Service Architecture
-                  </h3>
+              <div className="rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-lg transition-all duration-300">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 border border-primary/30 text-xs font-extrabold text-primary">
+                      01
+                    </span>
+                    <h3 className="text-xl font-extrabold tracking-tight text-foreground">
+                      Select Product / Service Architecture
+                    </h3>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={resetEstimator}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                  >
+                    <RotateCcw className="size-3.5" />
+                    <span>Reset</span>
+                  </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={resetEstimator}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-[#ff5252] dark:hover:text-primary transition-colors cursor-pointer"
-                >
-                  <RotateCcw className="size-3.5" />
-                  <span>Reset</span>
-                </button>
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {categories.map((cat) => {
+                    const Icon = (cat.iconName && ICON_MAP[cat.iconName]) || Globe;
+                    const isSelected = selectedCategory === cat.id;
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {categories.map((cat) => {
-                  const Icon = (cat.iconName && ICON_MAP[cat.iconName]) || Globe;
-                  const isSelected = selectedCategory === cat.id;
-
-                  return (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() => handleCategoryChange(cat.id)}
-                      className={`group relative flex items-start gap-3.5 p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer ${
-                        isSelected
-                          ? "border-[#ff5252] dark:border-primary bg-rose-50/70 dark:bg-primary/10 shadow-md shadow-rose-100 dark:shadow-[0_0_20px_rgba(225,29,72,0.25)] ring-1 ring-[#ff5252] dark:ring-primary"
-                          : "border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/60 hover:border-rose-200 dark:hover:border-white/30 hover:bg-white dark:hover:bg-slate-950"
-                      }`}
-                    >
-                      <div
-                        className={`size-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                    return (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => handleCategoryChange(cat.id)}
+                        className={`group relative flex items-start gap-3.5 p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer ${
                           isSelected
-                            ? "bg-[#ff5252] dark:bg-primary text-white"
-                            : "bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 group-hover:bg-rose-100 dark:group-hover:bg-slate-800"
+                            ? "border-primary bg-primary/10 shadow-md shadow-primary/10 ring-1 ring-primary"
+                            : "border-border/80 bg-surface/50 hover:border-primary/50 hover:bg-card"
                         }`}
                       >
-                        <Icon className="size-5 stroke-[2.2]" />
-                      </div>
+                        <div
+                          className={`size-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                            isSelected
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-surface border border-border text-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                          }`}
+                        >
+                          <Icon className="size-5 stroke-[2.2]" />
+                        </div>
 
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h4
-                            className={`font-bold text-sm truncate ${
-                              isSelected ? "text-slate-900 dark:text-white" : "text-slate-800 dark:text-slate-200"
-                            }`}
-                          >
-                            {cat.name}
-                          </h4>
-                          {isSelected && (
-                            <CheckCircle2 className="size-4 text-[#ff5252] dark:text-primary shrink-0 ml-1" />
-                          )}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between">
+                            <h4
+                              className={`font-bold text-sm tracking-tight truncate ${
+                                isSelected ? "text-primary" : "text-foreground group-hover:text-primary transition-colors"
+                              }`}
+                            >
+                              {cat.name}
+                            </h4>
+                            {isSelected && (
+                              <CheckCircle2 className="size-4 text-primary shrink-0 ml-1" />
+                            )}
+                          </div>
+                          <p className="mt-1 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                            {cat.desc}
+                          </p>
+                          <div className="mt-2.5 flex items-center gap-1.5 text-xs font-bold text-primary">
+                            <Clock className="size-3.5 text-primary" />
+                            <span>Est. Base: ~{cat.baseDays} working days</span>
+                          </div>
                         </div>
-                        <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                          {cat.desc}
-                        </p>
-                        <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-primary font-mono">
-                          <Clock className="size-3 text-primary" />
-                          Est. Base: ~{cat.baseDays} working days
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
             </Reveal>
 
             {/* Step 2: Deliverables & Add-on Features */}
             <Reveal delay={150} direction="up">
-              <div className="rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-xl shadow-slate-200/40 dark:shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="flex size-8 items-center justify-center rounded-full bg-[#ff5252] dark:bg-primary text-xs font-extrabold text-white">
-                  02
-                </span>
-                <div>
-                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Choose Deliverables & Modules
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Customize your build specifications for {categoryObj.name}
-                  </p>
+              <div className="rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-lg transition-all duration-300">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 border border-primary/30 text-xs font-extrabold text-primary">
+                    02
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-extrabold tracking-tight text-foreground">
+                      Choose Deliverables & Modules
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-0.5 font-medium">
+                      Customize your build specifications for {categoryObj.name}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {availableFeatures.length === 0 ? (
-                <p className="text-xs text-muted-foreground italic py-3">No specific add-on features configured for this category yet.</p>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {availableFeatures.map((feat) => {
-                    const isChecked = selectedFeatures.includes(feat.id);
+                {availableFeatures.length === 0 ? (
+                  <p className="text-xs text-muted-foreground italic py-3">No specific add-on features configured for this category yet.</p>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {availableFeatures.map((feat) => {
+                      const isChecked = selectedFeatures.includes(feat.id);
+
+                      return (
+                        <button
+                          key={feat.id}
+                          type="button"
+                          onClick={() => toggleFeature(feat.id)}
+                          className={`flex items-center justify-between p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
+                            isChecked
+                              ? "border-primary bg-primary/10 text-foreground shadow-xs ring-1 ring-primary/40"
+                              : "border-border/80 bg-surface/50 text-foreground hover:border-primary/40 hover:bg-card"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0 pr-2">
+                            <div
+                              className={`size-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
+                                isChecked
+                                  ? "border-primary bg-primary text-primary-foreground"
+                                  : "border-border bg-background"
+                              }`}
+                            >
+                              {isChecked && <CheckCircle2 className="size-3.5" />}
+                            </div>
+                            <span className="text-xs font-bold tracking-tight truncate">
+                              {feat.name}
+                            </span>
+                          </div>
+
+                          <span className="text-xs font-bold text-primary shrink-0 flex items-center gap-1">
+                            <Clock className="size-3.5" />
+                            +{feat.days}d
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </Reveal>
+
+            {/* Step 3: Delivery Timeline Pace */}
+            <Reveal delay={200} direction="up">
+              <div className="rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-lg transition-all duration-300">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 border border-primary/30 text-xs font-extrabold text-primary">
+                    03
+                  </span>
+                  <h3 className="text-xl font-extrabold tracking-tight text-foreground">
+                    Sprint Cadence & Velocity
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {timelines.map((tl) => {
+                    const isSelected = selectedTimeline === tl.id;
 
                     return (
                       <button
-                        key={feat.id}
+                        key={tl.id}
                         type="button"
-                        onClick={() => toggleFeature(feat.id)}
-                        className={`flex items-center justify-between p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
-                          isChecked
-                            ? "border-[#ff5252]/60 dark:border-primary/60 bg-rose-50/80 dark:bg-rose-950/30 text-slate-900 dark:text-white shadow-xs"
-                            : "border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/40 text-slate-700 dark:text-slate-300 hover:border-rose-200 dark:hover:border-white/25"
+                        onClick={() => setSelectedTimeline(tl.id)}
+                        className={`p-4 rounded-2xl border text-center transition-all duration-300 cursor-pointer ${
+                          isSelected
+                            ? "border-primary bg-primary/10 text-foreground ring-1 ring-primary shadow-xs"
+                            : "border-border/80 bg-surface/50 text-muted-foreground hover:border-primary/40 hover:bg-card hover:text-foreground"
                         }`}
                       >
-                        <div className="flex items-center gap-3 min-w-0 pr-2">
-                          <div
-                            className={`size-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
-                              isChecked
-                                ? "border-[#ff5252] dark:border-primary bg-[#ff5252] dark:bg-primary text-white"
-                                : "border-slate-300 dark:border-slate-600 bg-white dark:bg-transparent"
-                            }`}
-                          >
-                            {isChecked && <CheckCircle2 className="size-3.5" />}
-                          </div>
-                          <span className="text-xs font-semibold truncate">
-                            {feat.name}
-                          </span>
-                        </div>
-
-                        <span className="text-[11px] font-bold text-[#ff5252] dark:text-primary shrink-0 flex items-center gap-1 font-mono">
-                          <Clock className="size-3" />
-                          +{feat.days}d
+                        <h4 className="font-extrabold text-sm text-foreground tracking-tight">{tl.name}</h4>
+                        <p className="mt-1 text-xs text-muted-foreground">{tl.label}</p>
+                        <span className="mt-2.5 inline-block text-[11px] font-extrabold uppercase tracking-wider text-primary">
+                          {tl.id === "fast"
+                            ? "High-Velocity Sprint"
+                            : tl.id === "flexible"
+                            ? "Gradual Phased Milestones"
+                            : "Standard Bi-Weekly Cadence"}
                         </span>
                       </button>
                     );
                   })}
                 </div>
-              )}
-            </div>
-            </Reveal>
-
-            {/* Step 3: Delivery Timeline Pace */}
-            <Reveal delay={200} direction="up">
-              <div className="rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-xl shadow-slate-200/40 dark:shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="flex size-8 items-center justify-center rounded-full bg-[#ff5252] dark:bg-primary text-xs font-extrabold text-white">
-                  03
-                </span>
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                  Sprint Cadence & Velocity
-                </h3>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {timelines.map((tl) => {
-                  const isSelected = selectedTimeline === tl.id;
-
-                  return (
-                    <button
-                      key={tl.id}
-                      type="button"
-                      onClick={() => setSelectedTimeline(tl.id)}
-                      className={`p-4 rounded-2xl border text-center transition-all duration-300 cursor-pointer ${
-                        isSelected
-                          ? "border-[#ff5252] dark:border-primary bg-rose-50/70 dark:bg-primary/10 text-slate-900 dark:text-white ring-1 ring-[#ff5252] dark:ring-primary shadow-sm"
-                          : "border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/40 text-slate-600 dark:text-slate-400 hover:border-rose-200 dark:hover:border-white/30"
-                      }`}
-                    >
-                      <h4 className="font-extrabold text-sm text-foreground">{tl.name}</h4>
-                      <p className="mt-1 text-[11px] text-muted-foreground">{tl.label}</p>
-                      <span className="mt-2.5 inline-block text-[11px] font-black text-[#ff5252] dark:text-primary">
-                        {tl.id === "fast"
-                          ? "High-Velocity Sprint"
-                          : tl.id === "flexible"
-                          ? "Gradual Phased Milestones"
-                          : "Standard Bi-Weekly Cadence"}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
             </Reveal>
           </div>
 
           {/* Right Column: Dynamic Project Blueprint & Roadmap Card (5 Cols Sticky) */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <Reveal delay={250} direction="up">
-              <div className="relative overflow-hidden rounded-3xl border border-rose-200/80 dark:border-white/10 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xl shadow-rose-200/40 dark:shadow-rose-950/20">
-              <div className="pointer-events-none absolute -right-20 -top-20 size-60 rounded-full bg-rose-500/10 blur-3xl" />
+              <div className="relative flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-lg transition-all duration-500">
+                <div className="pointer-events-none absolute -right-20 -top-20 size-60 rounded-full bg-primary/10 blur-3xl" />
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between pb-5 border-b border-slate-100 dark:border-white/10">
-                  <span className="text-xs font-black uppercase tracking-widest text-[#ff5252] dark:text-primary">
-                    Delivery Blueprint
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Sprint Ready
-                  </span>
-                </div>
-
-                {/* Primary Metric: Delivery Timeline & Sprints */}
-                <div className="mt-6 rounded-2xl bg-gradient-to-br from-rose-50 to-orange-50/50 dark:from-white/5 dark:to-white/5 p-6 text-center border border-rose-100 dark:border-white/5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
-                    Estimated Time-To-Market
-                  </span>
-
-                  <div className="mt-2 flex items-center justify-center gap-2">
-                    <span className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-                      ~{estimatedWeeks} {estimatedWeeks === 1 ? "Week" : "Weeks"}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between pb-5 border-b border-border/60">
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-primary">
+                      Delivery Blueprint
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 backdrop-blur-md">
+                      <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Sprint Ready
                     </span>
                   </div>
-                  <div className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400 font-mono">
-                    ({totalDays} Working Days • {sprintCount} Agile {sprintCount === 1 ? "Sprint" : "Sprints"})
-                  </div>
 
-                  {/* Complexity Tier Badge */}
-                  <div className="mt-4 pt-3 border-t border-rose-100 dark:border-white/10">
-                    <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-extrabold border shadow-xs">
-                      <Sparkles className="size-3.5 text-[#ff5252] dark:text-primary" />
-                      <span className="text-slate-900 dark:text-white font-black">{complexityLevel.label}</span>
-                    </div>
-                    <p className="mt-1.5 text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                      {complexityLevel.desc}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Phased Milestone Roadmap */}
-                <div className="mt-6 space-y-3">
-                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                    <span>Phased Execution Roadmap</span>
-                    <span className="text-[10px] text-primary lowercase font-mono">~{engineeringHours} eng hrs</span>
-                  </h4>
-
-                  <div className="space-y-2">
-                    {/* Phase 1 */}
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                          <span className="size-2 rounded-full bg-emerald-500" />
-                          Phase 1: Architecture & UI Prototype
-                        </span>
-                        <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Sprint 1</span>
-                      </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                        System schema, UX wireframes, interactive design system, and technical discovery.
-                      </p>
-                    </div>
-
-                    {/* Phase 2 */}
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                          <span className="size-2 rounded-full bg-blue-500" />
-                          Phase 2: Core Engineering & Modules
-                        </span>
-                        <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">
-                          {sprintCount > 1 ? `Sprint 2 – ${sprintCount}` : "Active Sprint"}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                        Backend APIs, frontend implementation, database schemas, and {selectedFeatures.length} selected feature integrations.
-                      </p>
-                    </div>
-
-                    {/* Phase 3 */}
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                          <span className="size-2 rounded-full bg-purple-500" />
-                          Phase 3: QA, Security & Production Launch
-                        </span>
-                        <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Final Release</span>
-                      </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                        End-to-end stress testing, security audits, cloud CI/CD staging, and live production deployment.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Team Squad Blueprint */}
-                <div className="mt-6 space-y-2.5">
-                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                    Dedicated Engineering Squad
-                  </h4>
-
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    {teamSquad.map((member, i) => (
-                      <div key={i} className="p-2.5 rounded-xl bg-slate-50/70 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
-                        <div className="text-[10px] font-bold text-primary font-mono">{member.count}</div>
-                        <div className="font-semibold text-slate-800 dark:text-slate-200 truncate mt-0.5">{member.role}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bottom Call-To-Action Button */}
-                <div className="mt-7">
-                  <Link
-                    to="/contact"
-                    className="button-shine w-full inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 px-6 py-4 text-sm font-extrabold text-white shadow-xl shadow-rose-500/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-rose-500/40"
-                  >
-                    <span>{config.ctaText}</span>
-                    <ArrowRight className="size-4 stroke-[2.5]" />
-                  </Link>
-
-                  <div className="mt-3.5 flex items-center justify-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
-                    <span className="flex items-center gap-1 text-rose-600 dark:text-rose-400 font-semibold">
-                      <ShieldCheck className="size-3.5" />
-                      {config.warrantyText}
+                  {/* Primary Metric: Delivery Timeline & Sprints */}
+                  <div className="mt-6 rounded-2xl bg-surface/80 border border-border/60 p-6 text-center">
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground block">
+                      Estimated Time-To-Market
                     </span>
-                    <span>•</span>
-                    <span>Confidential NDA & Free Architecture Consultation</span>
+
+                    <div className="mt-2 flex items-center justify-center gap-2">
+                      <span className="text-4xl sm:text-5xl font-black text-foreground tracking-tight">
+                        ~{estimatedWeeks} {estimatedWeeks === 1 ? "Week" : "Weeks"}
+                      </span>
+                    </div>
+                    <div className="mt-1.5 text-xs font-bold text-muted-foreground">
+                      ({totalDays} Working Days • {sprintCount} Agile {sprintCount === 1 ? "Sprint" : "Sprints"})
+                    </div>
+
+                    {/* Complexity Tier Badge */}
+                    <div className="mt-4 pt-3.5 border-t border-border/60">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-extrabold text-foreground shadow-xs">
+                        <Sparkles className="size-3.5 text-primary" />
+                        <span>{complexityLevel.label}</span>
+                      </div>
+                      <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                        {complexityLevel.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Phased Milestone Roadmap */}
+                  <div className="mt-6 space-y-3">
+                    <h4 className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground flex items-center justify-between">
+                      <span>Phased Execution Roadmap</span>
+                      <span className="text-xs font-bold text-primary">~{engineeringHours} eng hrs</span>
+                    </h4>
+
+                    <div className="space-y-2">
+                      {/* Phase 1 */}
+                      <div className="p-3.5 rounded-xl bg-surface/60 border border-border/60">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-foreground flex items-center gap-2">
+                            <span className="size-2 rounded-full bg-emerald-500" />
+                            Phase 1: Architecture & UI Prototype
+                          </span>
+                          <span className="text-xs font-bold text-muted-foreground">Sprint 1</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                          System schema, UX wireframes, interactive design system, and technical discovery.
+                        </p>
+                      </div>
+
+                      {/* Phase 2 */}
+                      <div className="p-3.5 rounded-xl bg-surface/60 border border-border/60">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-foreground flex items-center gap-2">
+                            <span className="size-2 rounded-full bg-blue-500" />
+                            Phase 2: Core Engineering & Modules
+                          </span>
+                          <span className="text-xs font-bold text-muted-foreground">
+                            {sprintCount > 1 ? `Sprint 2 – ${sprintCount}` : "Active Sprint"}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                          Backend APIs, frontend implementation, database schemas, and {selectedFeatures.length} selected feature integrations.
+                        </p>
+                      </div>
+
+                      {/* Phase 3 */}
+                      <div className="p-3.5 rounded-xl bg-surface/60 border border-border/60">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-foreground flex items-center gap-2">
+                            <span className="size-2 rounded-full bg-purple-500" />
+                            Phase 3: QA, Security & Production Launch
+                          </span>
+                          <span className="text-xs font-bold text-muted-foreground">Final Release</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                          End-to-end stress testing, security audits, cloud CI/CD staging, and live production deployment.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Team Squad Blueprint */}
+                  <div className="mt-6 space-y-2.5">
+                    <h4 className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                      Dedicated Engineering Squad
+                    </h4>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      {teamSquad.map((member, i) => (
+                        <div key={i} className="p-2.5 rounded-xl bg-surface/60 border border-border/60">
+                          <div className="text-xs font-bold text-primary">{member.count}</div>
+                          <div className="font-semibold text-foreground truncate mt-0.5">{member.role}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom Call-To-Action Button */}
+                  <div className="mt-7">
+                    <Link
+                      to="/contact"
+                      className="button-shine w-full inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 py-4 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-primary/40"
+                    >
+                      <span>{config.ctaText}</span>
+                      <ArrowRight className="size-4 stroke-[2.5]" />
+                    </Link>
+
+                    <div className="mt-3.5 flex items-center justify-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1.5 text-primary font-bold">
+                        <ShieldCheck className="size-3.5" />
+                        {config.warrantyText}
+                      </span>
+                      <span>•</span>
+                      <span>Confidential NDA & Free Architecture Consultation</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </Reveal>
           </div>
         </div>

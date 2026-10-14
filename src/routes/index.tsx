@@ -71,7 +71,7 @@ const heroSlides = [
     headlineParts: ["One Accountable Team,", "Driving Software & Growth"],
     description:
       "We unite software engineering and growth marketing under one roof to build systems and campaigns that deliver measurable outcomes.",
-    ctaText: "Discover Zenelait",
+    ctaText: "Discover Zenelait InfoTech",
     ctaRoute: "/about",
   },
 ];
@@ -414,7 +414,7 @@ function Home() {
             <span>Unified Architecture</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
-            The Zenelait <span className="text-primary">Product Suite</span>
+            The Zenelait InfoTech <span className="text-primary">Product Suite</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium">
             Enterprise-grade products engineered under a single connected stack. Adopt a single module or deploy the entire ecosystem.

@@ -53,7 +53,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
     headline: "Legacy, Bloated Code vs. Glassmorphic Next.js Engineering",
     subheadline: "See how modern architecture, edge rendering, and micro-interactions turn high-bounce websites into 3x revenue conversion engines.",
     before: {
-      title: "without zenelait (Outdated Web App)",
+      title: "without zenelait InfoTech (Outdated Web App)",
       description: "Cluttered PHP/monolith with slow database calls, 4.8s initial load, high layout shifts, and frustrated users.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -68,7 +68,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
       ]
     },
     after: {
-      title: "with zenelait (Modern Glassmorphic Web App)",
+      title: "with zenelait InfoTech (Modern Glassmorphic Web App)",
       description: "Next.js 15, edge API routes, glassmorphic dark-mode aesthetics, sub-second TTFB, and seamless frictionless user onboarding.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -90,7 +90,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
     headline: "Generic Stock Graphics vs. Premium Bespoke Art Direction",
     subheadline: "Witness the contrast between cheap Canva template clutter and high-authority enterprise design that justifies premium market pricing.",
     before: {
-      title: "without zenelait (Generic Crowdsourced Designs)",
+      title: "without zenelait InfoTech (Generic Crowdsourced Designs)",
       description: "Inconsistent color palettes, generic stock vector illustrations, and crowded typography that devalues the enterprise brand.",
       image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -105,7 +105,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
       ]
     },
     after: {
-      title: "with zenelait (Tailored 3D & Vector Art Direction)",
+      title: "with zenelait InfoTech (Tailored 3D & Vector Art Direction)",
       description: "Custom 3D renders, cohesive Pantone design systems, bespoke typography hierarchy, and arresting social creatives.",
       image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -127,7 +127,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
     headline: "Flat Slideshow Ads vs. 4K Cinema-Grade Storytelling",
     subheadline: "Compare flat amateur video clips with scripted 4K commercial direction, sound design, and viral short-form retention pacing.",
     before: {
-      title: "without zenelait (Flat DIY Footage)",
+      title: "without zenelait InfoTech (Flat DIY Footage)",
       description: "Grainy phone video, muffled audio, robotic AI voiceovers, and weak 3-second hook leading to immediate viewer drop-off.",
       image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -142,7 +142,7 @@ export const DEMO_PRESETS: Record<DemoTabKey, DemoPreset> = {
       ]
     },
     after: {
-      title: "with zenelait (4K Color Graded Masterpiece)",
+      title: "with zenelait InfoTech (4K Color Graded Masterpiece)",
       description: "Studio lighting, RED/Sony FX 4K footage, professional voice actors, kinetic subtitles, and sound-designed retention pacing.",
       image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80",
       metrics: [
@@ -211,7 +211,7 @@ export function InteractiveDemoSandbox({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <Reveal direction="down">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-sm mb-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4">
               <Sliders className="size-3.5" />
               <span>Interactive Before vs. After Proof</span>
             </div>
@@ -219,13 +219,13 @@ export function InteractiveDemoSandbox({
 
           <Reveal delay={100} direction="up">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
-              See the Tangible Impact: <span className="text-primary">Without vs. with zenelait</span>
+              See the Tangible Impact: <span className="text-primary">Without vs. with zenelait InfoTech</span>
             </h2>
           </Reveal>
 
           <Reveal delay={200} direction="up">
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Drag the interactive slider to compare outdated legacy standards against Zenelait's high-performance engineering, glassmorphism UI, and ROI velocity.
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
+              Drag the interactive slider to compare outdated legacy standards against Zenelait InfoTech's high-performance engineering, glassmorphism UI, and ROI velocity.
             </p>
           </Reveal>
         </div>
@@ -265,13 +265,13 @@ export function InteractiveDemoSandbox({
             {/* Header Description of the active preset */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border/70">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary bg-primary/10 px-3.5 py-1 rounded-full border border-primary/30">
                   {preset.badge}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-foreground mt-2">
+                <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight mt-2">
                   {preset.headline}
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl font-normal leading-relaxed">
                   {preset.subheadline}
                 </p>
               </div>
@@ -303,21 +303,21 @@ export function InteractiveDemoSandbox({
 
                 {/* Floating "AFTER" Badge Label */}
                 <div className="absolute top-5 right-5 z-20">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 text-white font-black text-xs uppercase tracking-wider px-4 py-1.5 shadow-lg backdrop-blur-md">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 text-white font-bold text-xs uppercase tracking-wider px-4 py-1.5 shadow-lg backdrop-blur-md">
                     <Sparkles className="size-3.5" />
-                    with zenelait
+                    with zenelait InfoTech
                   </span>
                 </div>
 
                 {/* Floating After Highlights (Bottom Right) */}
                 <div className="absolute bottom-6 right-6 z-20 max-w-xs text-right hidden sm:block">
-                  <span className="text-emerald-400 font-black text-xs uppercase tracking-widest block">
+                  <span className="text-emerald-400 font-bold text-xs uppercase tracking-widest block">
                     High Performance
                   </span>
-                  <p className="text-white font-bold text-sm leading-tight mt-0.5">
+                  <p className="text-white font-black tracking-tight text-sm leading-tight mt-0.5">
                     {preset.after.title}
                   </p>
-                  <p className="text-white/80 text-xs mt-1 leading-snug line-clamp-2">
+                  <p className="text-white/80 text-xs mt-1 leading-relaxed font-normal line-clamp-2">
                     {preset.after.description}
                   </p>
                 </div>
@@ -343,21 +343,21 @@ export function InteractiveDemoSandbox({
 
                   {/* Floating "BEFORE" Badge Label */}
                   <div className="absolute top-5 left-5 z-20">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-600/90 text-white font-black text-xs uppercase tracking-wider px-4 py-1.5 shadow-lg backdrop-blur-md">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-600/90 text-white font-bold text-xs uppercase tracking-wider px-4 py-1.5 shadow-lg backdrop-blur-md">
                       <XCircle className="size-3.5" />
-                      without zenelait
+                      without zenelait InfoTech
                     </span>
                   </div>
 
                   {/* Floating Before Highlights (Bottom Left) */}
                   <div className="absolute bottom-6 left-6 z-20 max-w-xs text-left hidden sm:block">
-                    <span className="text-rose-400 font-black text-xs uppercase tracking-widest block">
+                    <span className="text-rose-400 font-bold text-xs uppercase tracking-widest block">
                       Legacy Standard
                     </span>
-                    <p className="text-white font-bold text-sm leading-tight mt-0.5">
+                    <p className="text-white font-black tracking-tight text-sm leading-tight mt-0.5">
                       {preset.before.title}
                     </p>
-                    <p className="text-white/80 text-xs mt-1 leading-snug line-clamp-2">
+                    <p className="text-white/80 text-xs mt-1 leading-relaxed font-normal line-clamp-2">
                       {preset.before.description}
                     </p>
                   </div>
@@ -382,11 +382,11 @@ export function InteractiveDemoSandbox({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <XCircle className="size-4 text-rose-500" />
-                    <h4 className="font-extrabold text-sm text-foreground">
-                      without zenelait Metrics
+                    <h4 className="font-black text-sm text-foreground tracking-tight">
+                      without zenelait InfoTech Metrics
                     </h4>
                   </div>
-                  <span className="text-[10px] font-black uppercase text-rose-500 tracking-wider">
+                  <span className="text-[11px] font-bold uppercase text-rose-500 tracking-wider">
                     High Friction
                   </span>
                 </div>
@@ -394,7 +394,7 @@ export function InteractiveDemoSandbox({
                 <div className="grid grid-cols-3 gap-2">
                   {preset.before.metrics.map((m) => (
                     <div key={m.label} className="p-3 rounded-xl bg-card border border-rose-500/15 text-center">
-                      <p className="text-base sm:text-lg font-black text-rose-500 font-mono">
+                      <p className="text-base sm:text-lg font-black text-rose-500 tracking-tight">
                         {m.value}
                       </p>
                       <p className="text-[11px] font-semibold text-muted-foreground mt-0.5 leading-tight">
@@ -404,7 +404,7 @@ export function InteractiveDemoSandbox({
                   ))}
                 </div>
 
-                <ul className="space-y-1.5 pt-2 border-t border-rose-500/15 text-xs text-muted-foreground">
+                <ul className="space-y-1.5 pt-2 border-t border-rose-500/15 text-xs text-muted-foreground font-normal">
                   {preset.before.problems.map((p) => (
                     <li key={p} className="flex items-start gap-2">
                       <span className="text-rose-500 font-bold shrink-0">✕</span>
@@ -419,11 +419,11 @@ export function InteractiveDemoSandbox({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-4 text-emerald-500" />
-                    <h4 className="font-extrabold text-sm text-foreground">
-                      with zenelait Results
+                    <h4 className="font-black text-sm text-foreground tracking-tight">
+                      with zenelait InfoTech Results
                     </h4>
                   </div>
-                  <span className="text-[10px] font-black uppercase text-emerald-500 tracking-wider">
+                  <span className="text-[11px] font-bold uppercase text-emerald-500 tracking-wider">
                     Verified Lift
                   </span>
                 </div>
@@ -431,7 +431,7 @@ export function InteractiveDemoSandbox({
                 <div className="grid grid-cols-3 gap-2">
                   {preset.after.metrics.map((m) => (
                     <div key={m.label} className="p-3 rounded-xl bg-card border border-emerald-500/20 text-center">
-                      <p className="text-base sm:text-lg font-black text-emerald-500 font-mono">
+                      <p className="text-base sm:text-lg font-black text-emerald-500 tracking-tight">
                         {m.value}
                       </p>
                       <p className="text-[11px] font-semibold text-muted-foreground mt-0.5 leading-tight">
@@ -441,7 +441,7 @@ export function InteractiveDemoSandbox({
                   ))}
                 </div>
 
-                <ul className="space-y-1.5 pt-2 border-t border-emerald-500/15 text-xs text-muted-foreground">
+                <ul className="space-y-1.5 pt-2 border-t border-emerald-500/15 text-xs text-muted-foreground font-normal">
                   {preset.after.benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2">
                       <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0 mt-0.5" />
@@ -459,10 +459,10 @@ export function InteractiveDemoSandbox({
                   <Zap className="size-5" />
                 </div>
                 <div>
-                  <h5 className="font-bold text-sm text-foreground">
-                    Ready to upgrade your brand or platform to Zenelait standards?
+                  <h5 className="font-black text-sm sm:text-base text-foreground tracking-tight">
+                    Ready to upgrade your brand or platform to Zenelait InfoTech standards?
                   </h5>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground font-normal">
                     Get an itemized visual and technical audit of your current digital presence.
                   </p>
                 </div>
@@ -470,7 +470,7 @@ export function InteractiveDemoSandbox({
 
               <Link
                 to="/contact"
-                className="button-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-105"
+                className="button-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02]"
               >
                 <span>Upgrade Your Platform ➔</span>
               </Link>

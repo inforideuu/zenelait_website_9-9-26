@@ -166,11 +166,11 @@ const METRICS_SHOWCASE = [
 
 export function SecurityComplianceSection() {
   return (
-    <section className="relative overflow-hidden bg-[#fafafa] py-24 lg:py-32 text-slate-900 border-t border-slate-200/80">
+    <section className="relative overflow-hidden bg-background py-20 lg:py-28 text-foreground border-t border-border" id="security-compliance">
       {/* Precision Decorative Geometric Radial Overlays */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 size-[800px] rounded-full bg-gradient-to-b from-rose-500/[0.04] via-primary/[0.02] to-transparent blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-0 right-10 size-[550px] rounded-full bg-emerald-500/[0.03] blur-[140px]" />
-      <div className="pointer-events-none absolute top-1/3 left-0 size-[500px] rounded-full bg-indigo-500/[0.03] blur-[130px]" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 size-[800px] rounded-full bg-gradient-to-b from-primary/5 via-primary/2 to-transparent blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-0 right-10 size-[550px] rounded-full bg-emerald-500/5 blur-[140px]" />
+      <div className="pointer-events-none absolute top-1/3 left-0 size-[500px] rounded-full bg-primary/5 blur-[130px]" />
 
       {/* Grid Pattern */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -178,38 +178,38 @@ export function SecurityComplianceSection() {
       <div className="container-x relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <Reveal className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-rose-200/90 bg-white px-4 py-1.5 text-xs font-mono font-bold tracking-[0.2em] text-[#ff2a38] shadow-sm mb-5">
-            <ShieldCheck className="size-4 text-[#ff2a38] animate-pulse" />
-            <span>INSTITUTIONAL TRUST & INFRASTRUCTURE</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4 shadow-xs">
+            <ShieldCheck className="size-3.5 text-primary animate-pulse" />
+            <span>Institutional Trust & Infrastructure</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
             Bank-Grade Security, Quality QA &{" "}
-            <span className="text-[#ff2a38]">
+            <span className="text-primary">
               SLA Guarantees
             </span>
           </h2>
 
-          <p className="mx-auto mt-5 text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-            Every digital asset engineered by Zenelait undergoes strict military-grade cryptography, zero-trust RBAC auditing, automated penetration testing, and contractual 99.99% high-availability SLAs.
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
+            Every digital asset engineered by Zenelait InfoTech undergoes strict military-grade cryptography, zero-trust RBAC auditing, automated penetration testing, and contractual 99.99% high-availability SLAs.
           </p>
 
           {/* Quick Live Operational SLA Status Ticker */}
-          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-slate-200/90 bg-white shadow-md shadow-slate-100 px-6 py-3.5 text-xs">
-            <span className="flex items-center gap-2 font-mono text-emerald-700 font-bold">
+          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-border/80 bg-card shadow-lg px-6 py-3.5 text-xs">
+            <span className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold">
               <span className="relative flex size-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full size-2.5 bg-emerald-600"></span>
               </span>
               LIVE PRODUCTION STATUS: NORMAL
             </span>
-            <span className="hidden sm:inline text-slate-300">•</span>
-            <span className="font-mono text-slate-600">
-              Contractual Uptime: <strong className="text-slate-900 font-black">99.99% High Availability</strong>
+            <span className="hidden sm:inline text-border">•</span>
+            <span className="text-muted-foreground font-medium">
+              Contractual Uptime: <strong className="text-foreground font-extrabold">99.99% High Availability</strong>
             </span>
-            <span className="hidden sm:inline text-slate-300">•</span>
-            <span className="font-mono text-slate-600">
-              Response Guarantee: <strong className="text-slate-900 font-black">&lt; 15 Minutes P1</strong>
+            <span className="hidden sm:inline text-border">•</span>
+            <span className="text-muted-foreground font-medium">
+              Response Guarantee: <strong className="text-foreground font-extrabold">&lt; 15 Minutes P1</strong>
             </span>
           </div>
         </Reveal>
@@ -221,7 +221,7 @@ export function SecurityComplianceSection() {
 
             return (
               <Reveal key={pillar.id} delay={idx * 100} direction="up" className="h-full">
-                <div className="group relative h-full flex flex-col justify-between rounded-[2rem] border border-slate-200/90 bg-white p-8 sm:p-10 shadow-[0_10px_30px_rgba(15,23,42,0.05)] hover:shadow-[0_25px_60px_rgba(15,23,42,0.12)] hover:border-slate-300 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden">
+                <div className="group relative h-full flex flex-col justify-between rounded-3xl border border-border/80 bg-card p-8 sm:p-10 shadow-lg hover:shadow-2xl hover:border-primary/50 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden">
                   {/* Luxury Top Corner Accent Glow */}
                   <div
                     className={`pointer-events-none absolute -top-20 -right-20 size-60 rounded-full bg-gradient-to-br ${pillar.gradientAccent} blur-3xl group-hover:scale-125 transition-transform duration-700`}
@@ -236,15 +236,15 @@ export function SecurityComplianceSection() {
                       </div>
 
                       <div className="text-right">
-                        <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase shadow-xs ${pillar.pillColor}`}>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-extrabold uppercase tracking-widest text-primary shadow-xs">
                           <Sparkles className="size-3" />
                           <span>{pillar.badge}</span>
                         </span>
-                        <div className="mt-2 text-right">
-                          <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none font-mono tracking-tight">
+                        <div className="mt-2.5 text-right">
+                          <span className="text-xl sm:text-2xl font-black text-foreground block leading-none tracking-tight">
                             {pillar.statNumber}
                           </span>
-                          <span className="text-[10px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+                          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
                             {pillar.statLabel}
                           </span>
                         </div>
@@ -252,28 +252,28 @@ export function SecurityComplianceSection() {
                     </div>
 
                     {/* Title & Tagline */}
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight group-hover:text-[#ff2a38] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight group-hover:text-primary transition-colors">
                       {pillar.title}
                     </h3>
-                    <p className="mt-1 text-xs font-mono font-semibold text-slate-500">
+                    <p className="mt-1 text-xs font-semibold text-primary">
                       {pillar.tagline}
                     </p>
 
                     {/* Full Description */}
-                    <p className="mt-4 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    <p className="mt-4 text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal text-justify">
                       {pillar.description}
                     </p>
 
                     {/* Engineering Guarantees Checklist */}
-                    <div className="mt-6 pt-5 border-t border-slate-100">
-                      <div className="flex items-center justify-between mb-3 text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">
+                    <div className="mt-6 pt-5 border-t border-border/60">
+                      <div className="flex items-center justify-between mb-3 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                         <span>ENGINEERING GUARANTEES</span>
-                        <span className="text-emerald-700 font-semibold">{pillar.auditFirm}</span>
+                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">{pillar.auditFirm}</span>
                       </div>
                       <ul className="space-y-2.5">
                         {pillar.highlights.map((item, hIdx) => (
-                          <li key={hIdx} className="flex items-start gap-2.5 text-xs text-slate-700">
-                            <span className="size-4 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-300 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                          <li key={hIdx} className="flex items-start gap-2.5 text-xs text-foreground">
+                            <span className="size-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
                               <Check className="size-2.5 stroke-[3]" />
                             </span>
                             <span className="font-semibold">{item}</span>
@@ -284,14 +284,14 @@ export function SecurityComplianceSection() {
                   </div>
 
                   {/* Card Bottom Footer: Institutional Status */}
-                  <div className="relative z-10 mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-slate-600 flex items-center gap-2 font-bold">
+                  <div className="relative z-10 mt-8 pt-5 border-t border-border/60 flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground flex items-center gap-2 font-bold">
                       <span className="size-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                       {pillar.protocol}
                     </span>
-                    <span className="text-[#ff2a38] font-black uppercase tracking-wider flex items-center gap-1">
+                    <span className="text-primary font-extrabold uppercase tracking-wider flex items-center gap-1">
                       <span>CONTRACTUALLY BOUND</span>
-                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                     </span>
                   </div>
                 </div>
@@ -302,31 +302,31 @@ export function SecurityComplianceSection() {
 
         {/* High-Impact Numerical SLA Metric Band */}
         <Reveal delay={150} direction="up" className="mt-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 p-6 sm:p-8 rounded-[2rem] border border-slate-200/90 bg-white shadow-xl shadow-slate-100">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 p-6 sm:p-8 rounded-3xl border border-border/80 bg-card shadow-lg">
             {METRICS_SHOWCASE.map((metric, mIdx) => {
               const MIcon = metric.icon;
 
               return (
                 <div
                   key={mIdx}
-                  className="p-5 sm:p-6 rounded-2xl border border-slate-100 bg-slate-50/70 hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300 group flex flex-col justify-between"
+                  className="p-5 sm:p-6 rounded-2xl border border-border/60 bg-surface/60 hover:bg-card hover:border-primary/40 hover:shadow-md transition-all duration-300 group flex flex-col justify-between"
                 >
                   <div className="flex items-center justify-between gap-3 mb-3">
-                    <span className="size-9 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#ff2a38] group-hover:bg-[#ff2a38] group-hover:text-white transition-colors">
+                    <span className="size-9 rounded-xl bg-card border border-border/80 shadow-xs flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <MIcon className="size-4" />
                     </span>
-                    <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
                       VERIFIED
                     </span>
                   </div>
                   <div>
-                    <div className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-slate-900">
+                    <div className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
                       {metric.value}
                     </div>
-                    <div className="mt-1 text-xs font-bold text-slate-800 tracking-tight">
+                    <div className="mt-1.5 text-xs font-extrabold text-foreground tracking-tight">
                       {metric.label}
                     </div>
-                    <div className="text-[11px] text-slate-500 mt-1 leading-snug">
+                    <div className="text-xs text-muted-foreground mt-1 leading-snug">
                       {metric.sub}
                     </div>
                   </div>
@@ -338,25 +338,25 @@ export function SecurityComplianceSection() {
 
         {/* Enterprise Compliance & Audit Fortress Banner */}
         <Reveal delay={200} direction="up" className="mt-12">
-          <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/90 bg-white p-8 sm:p-12 shadow-xl shadow-slate-200/50">
-            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-slate-100">
+          <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-card p-8 sm:p-12 shadow-lg">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-border/60">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-3.5 py-1 text-[11px] font-mono font-bold tracking-widest text-[#ff2a38] uppercase mb-3">
-                  <Fingerprint className="size-3.5 text-[#ff2a38]" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-extrabold tracking-widest text-primary uppercase mb-3">
+                  <Fingerprint className="size-3.5 text-primary" />
                   <span>REGULATORY COMPLIANCE SUITE</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
                   Audited & Certified for Institutional Deployment
                 </h3>
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
-                  Zenelait's software architecture meets the most stringent third-party compliance frameworks required by enterprise institutions, fintech platforms, and healthcare networks.
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                  Zenelait InfoTech's software architecture meets the most stringent third-party compliance frameworks required by enterprise institutions, fintech platforms, and healthcare networks.
                 </p>
               </div>
 
               <div className="shrink-0 flex items-center gap-3">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-600 via-[#ff2a38] to-rose-600 hover:from-red-700 hover:to-rose-700 px-7 py-4 text-xs font-bold text-white shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transition-all"
+                  className="button-shine inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-7 py-4 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-primary/40"
                 >
                   <FileCheck className="size-4" />
                   <span>Request Security Whitepaper & NDA</span>
@@ -371,15 +371,15 @@ export function SecurityComplianceSection() {
                 return (
                   <div
                     key={bIdx}
-                    className="group flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80 text-center transition-all duration-300 hover:border-rose-300 hover:bg-white hover:shadow-md hover:-translate-y-1"
+                    className="group flex flex-col items-center justify-center p-4 rounded-2xl bg-surface/60 border border-border/80 text-center transition-all duration-300 hover:border-primary/50 hover:bg-card hover:shadow-md hover:-translate-y-1"
                   >
-                    <div className="size-10 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#ff2a38] mb-2.5 group-hover:scale-110 group-hover:text-white group-hover:bg-[#ff2a38] transition-all duration-300">
+                    <div className="size-10 rounded-xl bg-card border border-border/80 shadow-xs flex items-center justify-center text-primary mb-2.5 group-hover:scale-110 group-hover:text-primary-foreground group-hover:bg-primary transition-all duration-300">
                       <BIcon className="size-5" />
                     </div>
-                    <span className="text-xs font-black text-slate-900 block tracking-tight">
+                    <span className="text-xs font-extrabold text-foreground block tracking-tight">
                       {badge.label}
                     </span>
-                    <span className="text-[10px] font-mono text-slate-500 mt-0.5 line-clamp-1">
+                    <span className="text-xs text-muted-foreground mt-0.5 line-clamp-1 font-medium">
                       {badge.sub}
                     </span>
                   </div>
@@ -388,14 +388,14 @@ export function SecurityComplianceSection() {
             </div>
 
             {/* Bottom Security Guarantee Text */}
-            <div className="relative z-10 mt-8 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+            <div className="relative z-10 mt-8 pt-6 border-t border-border/60 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-muted-foreground">
               <span className="flex items-center gap-2">
                 <ShieldCheck className="size-4 text-emerald-600" />
                 <span>Custom Enterprise Master Services Agreements (MSA) and bilateral NDAs supported on request.</span>
               </span>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-1.5 font-bold text-[#ff2a38] hover:underline transition-all"
+                className="inline-flex items-center gap-1.5 font-bold text-primary hover:underline transition-all"
               >
                 <span>View Full SLA Contract Terms</span>
                 <ArrowRight className="size-3.5" />

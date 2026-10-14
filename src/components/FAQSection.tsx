@@ -151,7 +151,7 @@ export const DEFAULT_FAQS: FAQItem[] = [
   {
     id: "faq-support-3",
     category: "Support",
-    question: "Can Zenelait train our internal staff to administer the new software?",
+    question: "Can Zenelait InfoTech train our internal staff to administer the new software?",
     answer: "Yes. We conduct hands-on video training walkthroughs, provide recorded administrator screencasts, and create user-friendly SOP manuals tailored for your operations, sales, and management personnel.",
     highlight: "Live video training sessions & custom admin SOP videos.",
   },
@@ -273,14 +273,14 @@ export function FAQSection({
         {/* Header Block */}
         <div className="mx-auto max-w-3xl text-center">
           <Reveal direction="down">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md mb-4 shadow-lg shadow-primary/20">
               <HelpCircle className="size-3.5" />
               <span>{badgeText}</span>
             </div>
           </Reveal>
 
           <Reveal delay={100} direction="up">
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               {headerTitle.includes("Questions") ? (
                 <>
                   {headerTitle.replace("Questions", "")} <span className="text-primary">Questions</span>
@@ -292,7 +292,7 @@ export function FAQSection({
           </Reveal>
 
           <Reveal delay={200} direction="up">
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground text-lg font-medium leading-relaxed">
               {headerSubtitle}
             </p>
           </Reveal>
@@ -333,7 +333,7 @@ export function FAQSection({
                     key={cat}
                     type="button"
                     onClick={() => setSelectedCategory(cat)}
-                    className={`inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                    className={`inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                       isSelected
                         ? "bg-primary text-primary-foreground shadow-md shadow-primary/25 scale-[1.02]"
                         : "bg-surface hover:bg-accent text-muted-foreground hover:text-foreground border border-border/70"
@@ -358,7 +358,7 @@ export function FAQSection({
         </Reveal>
 
         {/* Current Category Note */}
-        <div className="mx-auto mt-6 max-w-4xl px-2 flex items-center justify-between text-xs sm:text-sm text-muted-foreground">
+        <div className="mx-auto mt-6 max-w-4xl px-2 flex items-center justify-between text-xs sm:text-sm text-muted-foreground font-medium">
           <p>
             Showing <strong className="text-foreground">{filteredFAQs.length}</strong> {filteredFAQs.length === 1 ? "answer" : "answers"} in{" "}
             <span className="font-semibold text-primary">{selectedCategory}</span>
@@ -376,8 +376,8 @@ export function FAQSection({
               <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <HelpCircle className="size-7" />
               </div>
-              <h3 className="mt-4 text-lg font-bold text-foreground">No matching questions found</h3>
-              <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
+              <h3 className="mt-4 text-lg font-black text-foreground tracking-tight">No matching questions found</h3>
+              <p className="mt-2 text-xs sm:text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
                 We couldn't find an answer matching "{searchQuery}". Try a different keyword or reach out directly to our engineering advisors.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -387,13 +387,13 @@ export function FAQSection({
                     setSearchQuery("");
                     setSelectedCategory("All");
                   }}
-                  className="rounded-lg border border-border px-4 py-2 text-xs font-bold text-foreground hover:bg-accent transition-colors"
+                  className="rounded-xl border border-border px-4 py-2 text-xs font-bold text-foreground hover:bg-accent transition-colors"
                 >
                   Reset Filters
                 </button>
                 <Link
                   to="/contact"
-                  className="button-shine rounded-lg bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow-sm hover:scale-105 transition-all"
+                  className="button-shine rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow-sm hover:scale-105 transition-all"
                 >
                   Ask Our Team Directly ➔
                 </Link>
@@ -415,7 +415,7 @@ export function FAQSection({
                       value={item.id}
                       className="group overflow-hidden rounded-2xl border border-border/80 bg-card/70 px-5 transition-all duration-300 hover:border-primary/50 hover:bg-card hover:shadow-md data-[state=open]:border-primary/60 data-[state=open]:bg-card data-[state=open]:shadow-lg"
                     >
-                      <AccordionTrigger className="py-5 text-left text-base sm:text-lg font-bold text-foreground hover:text-primary transition-colors hover:no-underline">
+                      <AccordionTrigger className="py-5 text-left text-base sm:text-lg font-black text-foreground hover:text-primary transition-colors hover:no-underline tracking-tight">
                         <div className="flex items-start sm:items-center gap-3 pr-4">
                           <div className="mt-0.5 sm:mt-0 flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary group-data-[state=open]:bg-primary group-data-[state=open]:text-white transition-colors">
                             <Icon className="size-4" />
@@ -423,7 +423,7 @@ export function FAQSection({
                           <div className="flex-1">
                             <span className="leading-snug">{item.question}</span>
                             <div className="mt-1 flex flex-wrap items-center gap-2">
-                              <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground/80">
+                              <span className="text-xs font-semibold tracking-wider uppercase text-muted-foreground/80">
                                 {item.category}
                               </span>
                               {item.popular && (
@@ -436,7 +436,7 @@ export function FAQSection({
                           </div>
                         </div>
                       </AccordionTrigger>
-                      <AccordionContent className="pb-5 pt-1 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      <AccordionContent className="pb-5 pt-1 text-sm sm:text-base text-muted-foreground leading-relaxed font-normal">
                         <div className="border-t border-border/50 pt-3.5 space-y-3">
                           <p>{item.answer}</p>
                           {item.highlight && (
@@ -458,17 +458,17 @@ export function FAQSection({
         {/* Footer Support Callout */}
         {showContactCta && (
           <Reveal delay={300} direction="up" className="mx-auto mt-14 max-w-4xl">
-            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-r from-card via-accent/40 to-card p-6 sm:p-8 shadow-lg">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-r from-card via-accent/40 to-card p-6 sm:p-8 shadow-xl">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4 text-center sm:text-left">
                   <div className="hidden sm:flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-rose-600 text-white shadow-md">
                     <MessageSquare className="size-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
+                    <h3 className="text-lg sm:text-xl font-black text-foreground tracking-tight">
                       Have a specific question about your project?
                     </h3>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-md">
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground font-normal max-w-md leading-relaxed">
                       Speak directly with our senior technology consultants. We provide clear architecture guidance within 24 hours.
                     </p>
                   </div>
@@ -477,10 +477,10 @@ export function FAQSection({
                 <div className="flex w-full sm:w-auto shrink-0 flex-col sm:flex-row items-center gap-3">
                   <Link
                     to="/contact"
-                    className="button-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 py-3 text-sm font-bold text-primary-foreground shadow-md transition-all duration-300 hover:scale-[1.03]"
+                    className="button-shine w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-primary via-red-600 to-rose-600 px-6 sm:px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:scale-[1.02]"
                   >
                     <span>Talk to an Expert</span>
-                    <ArrowRight className="size-4" />
+                    <ArrowRight className="size-4 stroke-[2.5]" />
                   </Link>
                 </div>
               </div>
